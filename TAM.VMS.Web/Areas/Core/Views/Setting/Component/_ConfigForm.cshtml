@@ -1,0 +1,32 @@
+<div id="ConfigModal" class="modal fade bs-modal-lg" data-backdrop="static" abindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="min-width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Manage Config</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <form id="ConfigForm">
+                    <input type="hidden" id="ModuleID"/>
+                    <div class="form-group">
+                        <label>Module</label>
+                        <input type="text" class="form-control" id="ModuleName" name="ModuleName" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Key</label>
+                        <input type="text" class="form-control" id="ConfigText" name="ConfigText" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Config Value<span class="required">*</span></label>
+                        <input type="text" class="form-control" id="ConfigValue" name="ConfigValue" />
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-outline-brand btn-square" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btnSaveConfig">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

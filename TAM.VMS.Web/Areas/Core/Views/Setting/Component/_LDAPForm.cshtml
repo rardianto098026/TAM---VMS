@@ -1,0 +1,52 @@
+﻿@model TAM.VMS.Service.SettingRequest
+
+<form id="LdapSettingForm">
+    <div class="form-group">
+        <div class="mt-checkbox-list">
+            <label class="mt-checkbox">
+                Using LDAP as primary for a member authentication
+                @Html.CheckBoxFor(m => m.Ldap.LdapAsPrimaryAuthentication)
+                <span></span>
+            </label>
+            <label class="mt-checkbox">
+                Using LDAP authentication only. <b>Please, add LDAP admin user to Admins role before</b>
+                @Html.CheckBoxFor(m => m.Ldap.LdapAuthenticationOnly)
+                <span></span>
+            </label>
+            <label class="mt-checkbox">
+                Add members groups as role automatically if it doesn't exists</b>
+                @Html.CheckBoxFor(m => m.Ldap.LdapGroupAsRole)
+                <span></span>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Add Member to Role</label>
+                    @Html.TextBoxFor(m => m.Ldap.LdapDefaultRole, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>LDAP Domain</label>
+                    @Html.TextBoxFor(m => m.Ldap.LdapDomain, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>LDAP Path</label>
+                    @Html.TextBoxFor(m => m.Ldap.LdapPath, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button type="button" class="btn green" id="btnSaveLdapSetting">Save</button>
+    </div>
+</form>

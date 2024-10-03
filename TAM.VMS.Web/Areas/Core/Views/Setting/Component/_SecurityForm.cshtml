@@ -1,0 +1,91 @@
+﻿@model TAM.VMS.Service.SettingRequest
+
+<form id="SecuritySettingForm">
+    <div class="form-group">
+        <label style="font-weight:bold; font-size:16px;">Password Complexity</label>
+        <div class="mt-checkbox-list">
+            <label class="mt-checkbox">
+                Use Default Settings
+                @Html.CheckBoxFor(m => m.Security.PasswordUseDefaultSetting)
+                <span></span>
+            </label>
+            <label class="mt-checkbox">
+                Require Digit
+                @Html.CheckBoxFor(m => m.Security.PasswordRequireDigit)
+                <span></span>
+            </label>
+            <label class="mt-checkbox">
+                Require Uppercase
+                @Html.CheckBoxFor(m => m.Security.PasswordRequireUppercase)
+                <span></span>
+            </label>
+            <label class="mt-checkbox">
+                Require Lowercase
+                @Html.CheckBoxFor(m => m.Security.PasswordRequireLowercase)
+                <span></span>
+            </label>
+            <label class="mt-checkbox">
+                Require Non Alphanumeric
+                @Html.CheckBoxFor(m => m.Security.PasswordRequireNonAplhaNumeric)
+                <span></span>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Password Length</label>
+                    @Html.TextBoxFor(m => m.Security.PasswordMaxLength, new { @class = "form-control", @type = "number" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label style="font-weight:bold; font-size:16px;">User Lockout</label>
+        <div class="mt-checkbox-list">
+            <label class="mt-checkbox">
+                Enable user account locking on failed login attempts
+                @Html.CheckBoxFor(m => m.Security.LockoutEnable)
+                <span></span>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Maximum attempt on failed login</label>
+                    @Html.TextBoxFor(m => m.Security.LockoutMaxAttemp, new { @class = "form-control", @type = "number" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Account locking duration</label>
+                    @Html.TextBoxFor(m => m.Security.LockoutLockingDuration, new { @class = "form-control", @type = "number" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label style="font-weight:bold; font-size:16px;">Two Factor Login</label>
+        <div class="mt-checkbox-list">
+            <label class="mt-checkbox">
+                Enable two factor login
+                @Html.CheckBoxFor(m => m.Security.OtpEnable)
+                <span></span>
+            </label>
+            <label class="mt-checkbox">
+                Enable email verification (OTP)
+                @Html.CheckBoxFor(m => m.Security.OtpEmailVerification)
+                <span></span>
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <button type="button" class="btn green" id="btnSaveSecuritySetting">Save</button>
+    </div>
+</form>

@@ -1,0 +1,41 @@
+
+@(Html.Kendo().TreeList<TAM.VMS.Domain.Permission>()
+    .Name("PermissionList")
+    .Columns(columns =>
+    {
+        columns.Add().Field(e => e.Name).Title("Path").Width(200).Template(
+            "<img src='/Content/img/icon-permission.png'/>  #: data.Name # "
+        );
+        columns.Add().Field(e => e.Description).Title("Description").Width(200);
+        columns.Add().Title("Action").Width(160).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Sortable(false).Filterable(false).Template(
+            @"<div class=""btn-group"">
+                <button type=""button"" class=""btn btn-primary blue k-treelist-edit"" title=""Edit"" data-modal='PermissionModal'>
+                    <i class=""fa fa-edit""></i> </span>
+                </button>
+                <button type=""button"" class=""btn btn-danger red k-treelist-delete"" title=""Delete"" data-id='#:ID#'>
+                    <i class=""fa fa-trash""></i> </span>
+                </button>
+                <button type=""button"" class=""btn btn-primary green k-treelist-add"" title=""Add Child"" data-modal='PermissionModal'>
+                    <i class=""fa fa-plus""></i> </span>
+                </button>
+            </div>"
+        );
+    })
+    .Scrollable(false)
+    .Filterable()
+    .DataSource(dataSource => dataSource
+        .Read(read => read.Url(Url.Content("~/core/permission/read")))
+        //.PageSize(10)
+        //.Sort(sort => sort.Add("CreatedOn").Descending())
+        .Model(m =>
+        {
+            m.Id(f => f.ID);
+            m.ParentId(f => f.ParentID);
+            m.Expanded(true);
+            m.Field(f => f.ID).Nullable(false);
+            m.Field(f => f.ParentID).Nullable(true);
+            m.Field(f => f.Name);
+            m.Field(f => f.Description);
+        })
+    )
+)

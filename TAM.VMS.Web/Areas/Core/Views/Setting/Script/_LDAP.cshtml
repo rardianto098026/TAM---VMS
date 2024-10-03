@@ -1,0 +1,16 @@
+﻿<script type="text/javascript">
+    $("#btnSaveLdapSetting").on("click", function () {
+        var $form = $("#LdapSettingForm");
+
+        if ($form.valid() == false)
+            return;
+
+        var formData = $.helper.form.serializeObject($form);
+
+        $.postv2("@Url.Content("~/Core/Setting/SaveLdapSetting")", formData, function (d) {
+            swal("Info", "Success save LDAP setting", "success", { timer: 2000 });
+        }).fail(function (error) {
+            swal("Error", error.responseJSON.Message, "error");
+        });
+    });
+</script>

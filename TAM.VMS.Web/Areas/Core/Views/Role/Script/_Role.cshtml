@@ -1,0 +1,240 @@
+﻿<script type="text/javascript">
+
+    function onDataBound(e) {
+        ShowOriginalKendoToolTip();
+    }
+
+    function RoleManagement() {
+
+        return {
+
+            InitManagement: function () {
+                this.InitValidation();
+                this.InitHandlers();
+                this.InitTree();
+                onDataBound();
+            },
+
+            InitValidation: function () {
+                $("#RoleForm").validate({
+                    ignore: "",
+                    rules: {
+                        Name: {
+                            required: true
+                        },
+                        Description: {
+                            required: true
+                        }
+                    }
+                });
+            },
+
+            InitHandlers: function () {
+                $("#btnAddRole").on('click', function (e) {
+                    var $modal = $.helper.getJqueryObject('RoleModal'),
+                        $form = $modal.find("form");
+
+                    $.helper.form.clear($form);
+
+                    $('.nav-tabs a[href="#tab_role"]').tab('show');
+                    RoleManagement.ShowTree();
+
+                    $modal.modal("show");
+                });
+
+                $('.k-grid').on('click', '.btnEdit', function (e) {
+                    let $el = $(this),
+					    $tr = $el.closest("tr"),
+					    $grid = $el.closest(".k-grid").data("kendoGrid"),
+                        dataItem = $grid.dataItem($tr),
+					    $modal = $.helper.getJqueryObject($el.data("modal")),
+                        $form = $modal.find("form");
+
+                    $('.nav-tabs a[href="#tab_role"]').tab('show');
+                    RoleManagement.ShowTree(dataItem.ID);
+
+                    $.helper.form.clear($form);
+				    $.helper.form.fill($form, dataItem);
+
+                    $modal.modal("show");
+                });
+
+                $('.k-grid').on('click', '.btnDelete', function (e) {
+                    let id = $(this).data("id");
+
+                    swal({
+					    title: "Confirmation",
+					    text: "Are you sure want to delete data? ",
+					    icon: "warning",
+					    buttons: [
+						    'No',
+						    'Yes'
+					    ],
+					    dangerMode: true
+                    }).then(function (isConfirm) {
+                        if (isConfirm) {
+                            $.postv2("@Url.Content("~/core/role/delete")", { "ID": id }, function (d) {
+                                $.helper.grid.refresh("RoleGrid");
+
+                                swal("Info", "Success delete role", "success");
+                            }).fail(function (error) {
+                                swal("Error", error.responseJSON.Message, "error");
+                            });
+                        }
+                    })
+                });
+
+                $("#btnSaveRole").on('click', function (event) {
+                    var $el = $(this),
+                        isError = false,
+                        $modal = $(this).closest(".modal"),
+                        $form = $modal.find("form");
+
+                    if ($form.valid() == false)
+                        return;
+
+                    var roleData = $.helper.form.serializeObject($form);
+                    var permissionData = $(".tree").jstree(true).get_selected();
+                    if (permissionData.length == 0) {
+                        swal("Error", "Please select at least 1 permission", "error");
+                        return;
+                    }
+                    $el.prop("disabled", true);
+
+                    $.ajax({
+                        url: "@Url.Content("~/Core/Role/SaveRole")",
+                        type: "POST",
+                        data: { roles: roleData, "permissions": permissionData },
+                        dataType: "json",
+                        success: function (d) {
+                            $.helper.grid.refresh("RoleGrid");
+                            $modal.modal("hide");
+                            if (roleData.ID != null && roleData.ID != "")
+                                swal("Info", "Success update role", "success");
+                            else
+                                swal("Info", "Success save role", "success");
+                        },
+                        fail: function (error) {
+                            swal("Error", "Error when save role", "error");
+                        }
+                    });
+                    $el.prop("disabled", false);
+                });
+            },
+
+            InitTree: function () {
+                $(".tree")
+                .on('select_node.jstree', function (e, data) {
+                    if (data.event) {
+                        data.instance.select_node(data.node.children_d);
+                        data.instance.select_node(data.node.parents);
+                    }
+                })
+                .on('deselect_node.jstree', function (e, data) {
+                    if (data.event) {
+                        data.instance.deselect_node(data.node.children_d);
+                    }
+                })
+                .jstree({
+                    "plugins": ["checkbox", "types"],
+                    "checkbox": { "cascade": "", "three_state": false },
+                    "expand_selected_onload": true,
+                    "core": {
+                        "themes": {
+                            "responsive": false
+                        }
+                    },
+                    "types": {
+                        "default": {
+                            "icon": "fa fa-folder icon-state-warning icon-lg"
+                        },
+                        "file": {
+                            "icon": "fa fa-file icon-state-warning icon-lg"
+                        }
+                    }
+                });
+            },
+
+            ShowTree: function (id) {
+                var $tree = $(".tree").jstree(true);
+
+                $.postv2("@Url.Content("~/core/Permission/GetPermissionByRole")", { id: id }, function (d) {
+                    var dataSource = toJsTree(d);
+
+                    $tree.settings.core.data = dataSource;
+                    $tree.refresh();
+                    $tree.refresh();
+                    $(".tree").jstree('open_all');
+                });
+
+                function toJsTree(d) {
+                    var rolePermissions = d.RolePermissions.map(function (el) {
+                        return el.PermissionID;
+                    });
+
+                    var map = $.map(d.Permissions, function (input) {
+                        return { id: input.ID, state: { opened: true, selected: ($.inArray(input.ID.toLowerCase(), rolePermissions) != -1) }, text: input.Description, parentId: input.ParentID };
+                    });
+
+                    var root = $.helper.toHierarchy(map, "id", "parentId", "children");
+
+                    return root;
+                }
+            },
+        };
+    }
+
+    // On document ready
+    $(document).ready(function () {
+	    RoleManagement = new RoleManagement();
+        RoleManagement.InitManagement();
+    });
+
+    function createMultiSelectName(element) {
+        var roles = @Json.Serialize(ViewBag.Roles);
+        var roleNames = roles.map((element) => { return element.Name });
+
+        element.attr("id", "nameMultiSelect");
+        element.removeAttr("data-bind");
+
+        element.kendoMultiSelect({
+            dataSource: roleNames
+        });
+    }
+
+    function nameFilteredClicked(e) {
+        var grid = $("#RoleGrid").data("kendoGrid");
+
+        if (e.field == "Name") {
+            var operatorDropDownList = e.container.find("select:eq(0)").data("kendoDropDownList");
+            setTimeout(function () {
+                operatorDropDownList.wrapper.hide();
+            });
+
+            // Find and configure filter button
+            var filterButton = $(e.container).find('.k-primary');
+            $(filterButton).on("click", function (e) {
+                e.preventDefault();
+                var currentFilters = grid.dataSource.filter();
+                if (!currentFilters) {
+                    currentFilters = { filters: [], logic: "and" }
+                }
+                currentFilters = removeFilter(currentFilters.filters, "Name");
+                currentFilters = clearRootLevelArray(currentFilters);
+                currentFilters = clearInnerLevelArray(currentFilters);
+                var values = $("#nameMultiSelect").data("kendoMultiSelect").value()
+
+                var filter = { logic: "or", filters: [] };
+                $.each(values, function (i, v) {
+                    filter.filters.push({ field: "Name", operator: "eq", value: v });
+                });
+
+                currentFilters.push(filter)
+
+                grid.dataSource.filter(currentFilters);
+
+            })
+        }
+    }
+
+</script>

@@ -1,0 +1,63 @@
+﻿@model TAM.VMS.Domain.LoginViewModel
+@{
+    Layout = "_LoginLayout";
+
+    var passportAppId = ViewBag.passportAppId; //TAM.VMS.Infrastructure.Cache.ApplicationCacheManager.GetConfig<string>("PassportAppId");
+    var passportUrl = ViewBag.passportUrl; // TAM.VMS.Infrastructure.Cache.ApplicationCacheManager.GetConfig<string>("PassportJsUrl");
+    var passportJs = passportUrl + "/tam-sso.js";
+}
+@section scripts {
+    @*<script type="text/javascript" src="~/js/tam-sso.js"></script>*@
+    <script type="text/javascript" src="@passportJs"></script>
+}
+<!-- begin:: Page -->
+<div class="kt-grid kt-grid--ver kt-grid--root kt-page">
+    <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v3 kt-login--signin" id="kt_login">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background-image: url(@Url.Content("~/img/bg-3.jpg"))">
+            <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+                <div class="kt-login__container">
+                    <div class="kt-login__logo">
+                        <a href="#">
+                            <!-- logo placement -->
+                        </a>
+                    </div>
+                   
+                    <div class="kt-login__signin">
+                        <div class="kt-login__head">
+                            <h3 class="kt-login__title">Sign In To Vendor Managements System</h3>
+                        </div>
+                        <form id="loginform" method="post" asp-controller="Account" asp-action="Login"
+                              asp-route-returnurl="@Model.ReturnUrl" class="kt-form">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Username, new { autocomplete = "off", placeholder = "Username", @class = "form-control form-control-solid placeholder-no-fix" })
+                                @Html.ValidationMessageFor(x => x.Username)
+                            </div>
+                            <div class="form-group">
+                                @Html.PasswordFor(x => x.TamUserPwd, new { autocomplete = "off", placeholder = "Password", @class = "form-control form-control-solid placeholder-no-fix" })
+                                @Html.ValidationMessageFor(x => x.TamUserPwd)
+                            </div>
+
+
+                            <div class="row kt-login__extra">
+                                <div class="col">
+                                    <label class="kt-checkbox">
+                                        @Html.EditorFor(model => model.RememberMe) Remember me
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="kt-login__actions pb-3">
+                                <button id="kt_login_signin_submit" style="width: 244px;" type="submit" class="btn btn-brand btn-elevate kt-login__btn-primary">Sign In</button>
+                            </div>
+                            <div class="form-actions text-center" style="border: 0;">
+                                <tam-sso server="@passportUrl" app="@passportAppId" auto-submit="loginform"></tam-sso>
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end:: Page -->

@@ -1,0 +1,45 @@
+﻿@(Html.Kendo().Grid<TAM.VMS.Domain.Role>()
+                    .Name("RoleGrid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(o => o.ID).Title("Action").Sortable(false).Width(60).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
+                        @"<div class=""btn-group"">
+                        <button type=""button"" class=""btn btn-primary blue k-grid-edit btnEdit"" title=""Edit"" data-modal='RoleModal'>
+                            <i class=""fa fa-edit""></i> </span>
+                        </button>
+                        <button type=""button"" class=""btn btn-danger red k-grid-delete btnDelete"" title=""Delete"" data-id='#:ID#'>
+                            <i class=""fa fa-trash""></i> </span>
+                        </button>
+                        </div>"
+                        );
+                        columns.Bound(o => o.Name).Title("Name").Width(150)
+                            .Filterable(ftb => ftb
+                                .UI("createMultiSelectName")
+                            );
+                        columns.Bound(o => o.Description).Title("Description").Width(150);
+                        columns.Bound(o => o.Members).Title("Members").Width(150);
+                    })
+                    .NoRecords(conf => conf.Template("No Role list to display"))
+                    .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
+                    .Filterable(ftb => ftb
+                                .Extra(false)
+                                .Mode(GridFilterMode.Menu)
+                                )
+                    .Events(events=> {
+                        events.FilterMenuInit("nameFilteredClicked");
+                    })
+                    .Sortable(sortable => sortable.SortMode(GridSortMode.SingleColumn))
+                    .Scrollable(s => s.Height("auto"))
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .ServerOperation(true)
+                        .Read(read => read.Url(Url.Content("~/core/role/read")))
+                        .PageSize(10)
+                        .Sort(sort => sort.Add("CreatedOn").Descending())
+                        .Model(model =>
+                        {
+                            model.Id(p => p.ID);
+                            model.Field(p => p.ID).Editable(false);
+                        })
+                    )
+                )

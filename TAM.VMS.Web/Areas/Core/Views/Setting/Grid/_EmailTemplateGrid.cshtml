@@ -1,0 +1,34 @@
+﻿@(Html.Kendo().Grid<TAM.VMS.Domain.EmailTemplate>()
+    .Name("EmailTemplateGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(o => o.ID).Title("Action").Sortable(false).Width(60).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
+@"<div class=""btn-group"">
+        <button type=""button"" class=""btn btn-primary blue k-grid-edit btnEditEmailTemplate"" title=""Edit"" data-modal='EmailTemplateModal'>
+            <i class=""fa fa-edit""></i> </span>
+        </button>
+        </div>"
+);
+        columns.Bound(o => o.MailKey).Title("Key").Width(200);
+        columns.Bound(o => o.Title).Title("Title").Width(200);
+        columns.Bound(o => o.MailFrom).Title("Mail From").Width(200);
+        columns.Bound(o => o.DisplayName).Title("Display Name").Width(200);
+        columns.Bound(o => o.Subject).Title("Subject").Width(200);
+    })
+    .NoRecords(conf => conf.Template("No Email Template to display"))
+    .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
+    .Sortable(sortable => sortable.SortMode(GridSortMode.SingleColumn))
+    .Scrollable(s => s.Height("auto"))
+    .Filterable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Url(Url.Content("~/core/emailtemplate/read")))
+        .PageSize(20)
+        .Sort(sort => sort.Add(x => x.MailKey))
+        .Model(model =>
+        {
+            model.Id(p => p.ID);
+            model.Field(p => p.ID).Editable(false);
+        })
+    )
+)

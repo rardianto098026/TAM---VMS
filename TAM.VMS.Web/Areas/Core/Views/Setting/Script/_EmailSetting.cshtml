@@ -1,0 +1,18 @@
+﻿<script type="text/javascript">
+
+    $("#btnSaveSecuritySetting").on("click", function () {
+        var $form = $("#SecuritySettingForm");
+
+        if ($form.valid() == false)
+            return;
+
+        var formData = $.helper.form.serializeObject($form);
+
+        $.postv2("@Url.Content("~/Core/Setting/SaveSecuritySetting")", formData, function (d) {
+            swal("Info", "Success save security setting", "success", { timer: 2000 });
+        }).fail(function (error) {
+            swal("Error", error.responseJSON.Message, "error");
+        });
+    });
+
+</script>

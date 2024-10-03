@@ -1,0 +1,82 @@
+﻿<script type="text/javascript">
+    function ConfigManager() {
+
+        return {
+            InitManagement: function () {
+                this.InitValidation();
+                this.InitHandlers();
+                onDataBound("configContainerGrid");
+            },
+            InitValidation: function () {
+                $("#ConfigForm").validate({
+                    ignore: "",
+                    rules: {
+                        ConfigValue: {
+                            required: true
+                        }
+                    }
+                });
+            },
+            InitHandlers: function () {
+
+                $(".k-grid").on("click", ".btnEditConfig", function () {
+                    var $el = $(this),
+                        $tr = $el.closest("tr"),
+                        $grid = $el.closest(".k-grid").data("kendoGrid"),
+                        dataItem = $grid.dataItem($tr),
+                        $modal = $.helper.getJqueryObject($el.data("modal")),
+                        $form = $modal.find("form");
+                    $.helper.form.clear($form);
+
+                    $('#ModuleID').val(dataItem.ID)
+                    $('#ModuleName').val(dataItem.Module)
+                    $('#ConfigText').val(dataItem.ConfigText)
+                    $('#ConfigValue').val(dataItem.ConfigValue)
+
+                    $modal.modal("show");
+                });
+
+                $("#btnSaveConfig").on('click', function (event) {
+                    var $el = $(this),
+                        isError = false,
+                        $modal = $(this).closest(".modal"),
+                        $form = $modal.find("form");
+
+                    if ($form.valid() == false)
+                        return;
+                    var configData = {}
+                    configData.ID = $('#ModuleID').val()
+                    configData.ModuleName = $('#ModuleName').val()
+                    configData.ConfigText = $('#ConfigText').val()
+                    configData.ConfigValue = $('#ConfigValue').val()
+
+                    $el.prop("disabled", true);
+
+                    $.postv2("@Url.Content("~/core/config/SaveConfig")", { "config": configData }, function (d) {
+                        $.helper.grid.refresh("configGrid");
+                        var successMessage = "Success updating config";
+                        swal("Info", successMessage, "success");
+                        $modal.modal("hide");
+                    });
+
+                    $el.prop("disabled", false);
+                });
+
+
+                $("#refreshConfigBtn").on("click", function (e) {
+                    e.preventDefault();
+                    $.postv2("@Url.Content("~/Setting/ResetConfigs")", {}, function (d) {
+                        toastr["success"]("", "Success reset setting's cache");
+                    });
+                });
+            },
+        };
+    }
+
+    // On document ready
+    $(document).ready(function () {
+        ConfigManager = new ConfigManager();
+        ConfigManager.InitManagement();
+    });
+
+</script>

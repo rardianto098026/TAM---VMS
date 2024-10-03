@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "_LoginLayout";
+    ViewBag.Title = "Error Message";
+}
+
+<div class="portlet light margin-bottom-0" style="text-align:center; background-image: url(@Url.Content("~/img/bg-3.jpg")); height: 100%;">
+    <div style=" position: fixed; top: 50%; left: 50%; margin-top: -50px; margin-left: -70px;">
+        <h1>@ViewBag.ErrorHeader</h1>
+        <h3>@ViewBag.ErrorMessage</h3>
+        <br />
+        
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@model TAM.VMS.Service.SettingRequest
+
+<form id="EmailSettingForm">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>From Address<span class="required">*</span></label>
+                @Html.TextBoxFor(x => x.Email.FromAddress, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>From Display<span class="required">*</span></label>
+                @Html.TextBoxFor(x => x.Email.FromDisplay, new { @class = "form-control", @maxlength = "128" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>SMTP Host<span class="required">*</span></label>
+                @Html.TextBoxFor(x => x.Email.SmtpHost, new { @class = "form-control", @maxlength = "64" })
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>SMTP Port<span class="required">*</span></label>
+                @Html.TextBoxFor(x => x.Email.SmtpPort, new { @class = "form-control", @maxlength = "5", @type = "number" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>Username<span class="required">*</span></label>
+                @Html.TextBoxFor(x => x.Email.Username, new { @class = "form-control", @maxlength = "128" })
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>Password<span class="required">*</span></label>
+                @Html.TextBoxFor(x => x.Email.Password, new { @class = "form-control", @maxlength = "128", @autocomplete = "off" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="mt-checkbox-list">
+            <label class="mt-checkbox">
+                Enable SSL
+                @Html.CheckBoxFor(m => m.Email.EnableSSL)
+                <span></span>
+            </label>
+            <label class="mt-checkbox">
+                Use Default Credential
+                @Html.CheckBoxFor(m => m.Email.UseDefaultCredential)
+                <span></span>
+            </label>
+        </div>
+    </div>
+
+
+    <h5>Test Email Setting</h5>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <input id="TestEmailAddressInput" type="text" class="form-control" value="">
+        </div>
+        <div class="form-group col-md-2">
+            <button id="SendTestEmailButton" class="btn green-haze" type="button">Send Email Test</button>
+        </div>
+    </div>
+
+    <div>
+        <button type="button" class="btn green" id="btnSaveEmailSetting">Save</button>
+    </div>
+</form>

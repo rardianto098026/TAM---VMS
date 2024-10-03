@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_LoginLayout";
+    ViewBag.Title = "Redirect Message";
+}
+
+<div class="portlet light margin-bottom-0" style="text-align: center; display: flex; align-items: center; justify-content: center; background-image: url( @Url.Content("~/img/bg-3.jpg")  ); height: 100%;">
+    <div style="margin: auto; width: 60%; position:fixed;">
+        <h1>@ViewBag.RedirectHeader</h1>
+        <h3>@ViewBag.RedirectMessage</h3>
+        <br />
+        @*<div class="btn btn-brand btn-elevate">
+            <a href="@Url.Content("~/Core/User")" class="text-light">
+                <h5>Back</h5>
+            </a>
+            <div class="menu-toggler sidebar-toggler">
+            </div>
+        </div>*@
+    </div>
+</div>

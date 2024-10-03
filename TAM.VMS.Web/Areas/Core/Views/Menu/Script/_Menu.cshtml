@@ -1,0 +1,290 @@
+<script type="text/javascript">
+
+function MenuManagement() {
+    return {
+        InitManagement: function () {
+            this.InitValidation();
+            this.InitHandlers();
+            this.InitTree();
+            this.InitControls();
+        },
+
+        InitControls: function() {
+            $("select[name='MenuGroup']")[0].selectedIndex = 0;
+            $("select[name='MenuGroup']").trigger("change");
+        },
+
+        InitValidation: function () {
+            $("#MenuForm").validate({
+                ignore: "",
+                rules: {
+                    Title: {
+                        required: true
+                    }
+                }
+            });
+        },
+
+        InitHandlers: function () {
+            $('.iconpicker').iconpicker({
+                fullClassFormatter: function (val) {
+                    if (val.match(/^fa-/)) {
+                        return 'fa ' + val;
+                    } else {
+                        return 'glyphicon ' + val;
+                    }
+                }
+            });
+
+            $("select[name='MenuGroup']").on("change", function () {
+                var $this = $(this),
+                    value = $this.val();
+                MenuManagement.ShowTree(value);
+            });
+
+            $("#btnSaveMenu").on('click', function (event) {
+                var $el = $(this),
+                    $modal = $(this).closest(".modal"),
+		            $form = $modal.find("form");
+
+                if ($form.valid() == false)
+                    return;
+
+                var formData = $.helper.form.serializeObject($form);
+                console.log(formData)
+                $el.prop("disabled", true);
+
+                $.ajax({
+                    url: "@Url.Content("~/Core/Menu/Save")",
+                    type: "POST",
+                    data: { menu: formData },
+                    //contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (d) {
+                        MenuManagement.ShowTree($("select[name='MenuGroup']").val());
+                        $modal.modal("hide");
+                        swal("Info", "Success save menu", "success", { timer: 2000 });
+                    },
+                    fail: function (error) {
+                        swal("Error", "Error when save menu", "error");
+                    }
+                });
+
+                $el.prop("disabled", false);
+            });
+        },
+
+        InitTree: function () {
+            function getModal() {
+                return $("#MenuModal");
+            }
+
+            function getForm() {
+                return getModal().find("form");
+            }
+
+            $(".tree")
+                .jstree({
+                    "plugins": ["contextmenu", "dnd", "state", "types"],
+                    "core": {
+                        "check_callback": function (o, n, p, i, m) {
+                            return !(m && m.dnd && (m.pos === 'b' || m.pos === 'a') && m.ref.parent == "#");
+                        },
+                        "themes": {
+                            "responsive": false
+                        }
+                    },
+                    "contextmenu": {
+                        "items": function ($node) {
+                            var contextMenu = {
+                                "Create": {
+                                    "label": "Create new menu",
+                                    "action": function (obj) {
+                                        var inst = $.jstree.reference(obj.reference),
+                                            data = inst.get_node(obj.reference),
+                                            id = data.id,
+                                            $form = getForm(),
+                                            menuGroupId = $("select[name='MenuGroup']").val();
+
+                                        $.helper.form.clear($form);
+                                        $form.find("input[name='ParentID']").val(id == "root" ? "" : id);
+                                        //$form.find("select[name='MenuGroupID']").val(menuGroupId);
+                                        //$form.find("select[name='Visible']").val(1);
+
+                                        $("#MenuGroupID").select2({
+                                            width: '100%',
+                                            dropdownParent: $('#MenuModal')
+                                        });
+                                        $("#MenuGroupID").val(menuGroupId).trigger("change");
+
+                                        $("#PermissionID").select2({
+                                            width: '100%',
+                                            dropdownParent: $('#MenuModal')
+                                        });
+
+                                        $("#Visibility").select2({
+                                            width: '100%',
+                                            dropdownParent: $('#MenuModal')
+                                        });
+                                        $("#Visibility").val(1).trigger("change");
+
+                                        getModal().modal("show");
+                                    }
+                                },
+                                "Edit": {
+                                    "label": "Edit",
+                                    "action": function (obj) {
+                                        var id = obj.reference.closest("li").attr("id");
+                                        $.postv2("@Url.Content("~/Core/Menu/Get")", { id: id }, function (d) {
+                                            $.helper.form.fill(getForm(), d);
+                                            getModal().modal("show");
+
+                                            $("#MenuGroupID").select2({
+                                                width: '100%',
+                                                dropdownParent: $('#MenuModal')
+                                            });
+                                            $("#MenuGroupID").val(d.MenuGroupID).trigger("change");
+
+                                            $("#PermissionID").select2({
+                                                width: '100%',
+                                                dropdownParent: $('#MenuModal')
+                                            });
+                                            $("#PermissionID").val(d.PermissionID).trigger("change");
+
+                                            $("#Visibility").select2({
+                                                width: '100%',
+                                                dropdownParent: $('#MenuModal')
+                                            });
+                                            $("#Visibility").val(d.Visible).trigger("change");
+                                        });
+                                    }
+                                },
+                                "Rename": {
+                                    "label": "Rename",
+                                    "action": function (obj) {
+                                        var inst = $.jstree.reference(obj.reference),
+                                            data = inst.get_node(obj.reference),
+                                            id = data.id;
+
+                                        inst.edit(data);
+                                    }
+                                },
+                                "ToggleVisible": {
+                                    "label": "Toggle Visible",
+                                    "action": function (obj) {
+                                        var inst = $.jstree.reference(obj.reference),
+                                            data = inst.get_node(obj.reference),
+                                            id = data.id;
+
+                                        $.postv2("@Url.Content("~/Core/Menu/ToggleVisible")", { id: id }, function (d) {
+                                            MenuManagement.ShowTree($("select[name='MenuGroup']").val());
+                                        });
+                                    }
+                                },
+                                "Remove": {
+                                    "label": "Remove",
+                                    "action": function (obj) {
+
+
+                                        swal({
+                                            title: "Confirmation",
+                                            text: "Are you sure want to delete this menu?",
+                                            icon: "warning",
+                                            buttons: [
+                                              'No',
+                                              'Yes'
+                                            ],
+                                            dangerMode: true,
+                                        }).then(function (isConfirm) {
+                                            if (isConfirm) {
+                                                var id = obj.reference.closest("li").attr("id");
+                                                $.postv2("@Url.Content("~/Core/Menu/DeleteMenu")", { id: id }, function (d) {
+                                                    MenuManagement.ShowTree($("select[name='MenuGroup']").val());
+                                                    swal("Info", "Success delete menu", "success", { timer: 2000 });
+                                                }).fail(function (error) {
+                                                    swal("Error", error.responseJSON.Message, "error");
+                                                });
+                                            }
+                                        })
+                                    }
+                                }
+                            };
+
+                            if ($node.type == 'root') {
+                                delete contextMenu["ToggleVisible"];
+                                delete contextMenu["Rename"];
+                                delete contextMenu["Edit"];
+                                delete contextMenu["Remove"];
+                            }
+
+                            return contextMenu;
+                        }
+                    },
+                    "types": {
+                        "default": {
+                            "valid_children": ["default", "hidden"],
+                            "icon": "fa fa-folder icon-state-warning icon-lg"
+                        },
+                        "hidden": {
+                            "valid_children": ["default", "hidden"],
+                            "icon": "fa fa-folder icon-state-warning icon-lg"
+                        },
+                        "root": {
+                            "valid_children": ["default"],
+                            "icon": "fa fa-folder icon-state-warning icon-lg"
+                        }
+                    }
+                }).on("move_node.jstree rename_node.jstree", function (e, data) {
+                    var type = e.type,
+                        menuGroupID = $("select[name='MenuGroup']").val();
+
+                    if (type == "move_node") {
+                        $.postv2("@Url.Content("~/Core/Menu/UpdateParent")", { ID: data.node.id, ParentID: data.parent == "root" ? null : data.parent, MenuGroupID: menuGroupID, OrderIndex: data.old_position < data.position ? data.position + 1 : data.position }, function (d) {
+                            MenuManagement.ShowTree(menuGroupID);
+                            swal("Info", "Success move menu", "success", { timer: 2000 });
+                        });
+                    } else if (type == "rename_node" && data.text != data.old) {
+                        $.postv2("@Url.Content("~/Core/Menu/Rename")", { ID: data.node.id, Title: data.text }, function (d) {
+                            MenuManagement.ShowTree(menuGroupID);
+                            swal("Info", "Success rename menu", "success", { timer: 2000 });
+                        });
+                    }
+                });
+        },
+
+        ShowTree: function (id) {
+            var $tree = $(".tree").jstree(true);
+
+            $.postv2("@Url.Content("~/Core/Menu/GetsByGroupID")", { GroupID: id }, function (d) {
+                var dataSource = toJsTree(id, d);
+
+                $tree.settings.core.data = dataSource;
+                $tree.refresh();
+            });
+
+            function toJsTree(id, d) {
+                var root = {
+                    "id": "root",
+                    "text": "Pages",
+                    "type": "root",
+                    "state": { opened: true },
+                    "children": []
+                };
+
+                var map = $.map(d, function (input) {
+                    var cssClass = (input.Visible != 1 ? " font-grey" : "");
+
+                    return { id: input.ID, text: input.Title, parentId: input.ParentID, a_attr: { class: cssClass }, icon: (input.IconClass || "icon-folder") + cssClass };
+                });
+
+                var hierarchyData = $.helper.toHierarchy(map, "id", "parentId", "children");
+
+                root.children = hierarchyData;
+
+                return [root];
+            }
+        },
+    }
+}
+
+</script>

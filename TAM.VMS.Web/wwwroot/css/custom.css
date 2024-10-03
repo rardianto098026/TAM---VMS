@@ -1,0 +1,54 @@
+﻿.margin-bottom-0 {
+    margin-bottom: 0px !important;
+}
+
+.ajax-loading {
+    display: none;
+    position: fixed;
+    z-index: 10060;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba( 255, 255, 255, .8 ) url('../img/ajax-loader.gif') 50% 50% no-repeat;
+}
+
+body.loading .ajax-loading {
+    overflow: hidden;
+}
+
+body.loading .ajax-loading {
+    display: block;
+}
+ 
+.k-grid-content-locked {
+    height: auto !important;
+}
+
+.k-grid-content {
+    min-height: 50px !important;
+}
+
+.custom-checkbox-width {
+    width:20px !important;
+}
+@media (min-width: 1360px) {
+    .modal-dialog-xl {
+        width: 1280px !important;
+        margin: 30px auto !important;
+    }
+}
+@media (min-width: 768px) and (max-width: 1359px) {
+    .modal-dialog-xl {
+        width: 600px !important;
+        margin: 30px auto !important;
+    }
+}
+
+.card-header-primary {
+    background-color: #337ab7 !important;
+    color: white !important;
+}
+.fancybox__container {
+    z-index: 1000000 !important;
+}

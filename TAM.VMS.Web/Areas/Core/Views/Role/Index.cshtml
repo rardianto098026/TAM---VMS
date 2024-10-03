@@ -1,0 +1,77 @@
+﻿<style>    
+    .jstree-default.jstree-checkbox-no-clicked .jstree-clicked {
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .jstree-default .jstree-clicked {
+        background: transparent;
+        box-shadow: none;
+    }
+</style>
+@section styles {
+    <link href="~/Content/theme/Metronic/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+}
+@section scripts {
+    <script type="text/javascript" src="~/Content/theme/Metronic/global/plugins/jstree/dist/jstree.min.js"></script>
+    @await Html.PartialAsync("~/Areas/Core/Views/Role/Script/_Role.cshtml")
+}
+
+@section modals {
+    @await Html.PartialAsync("~/Areas/Core/Views/Role/Component/_RoleForm.cshtml")
+}
+
+<div class="portlet light margin-bottom-0">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>Role</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div id="customTab">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#Role" data-toggle="tab" aria-expanded="false">Role</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="Role">
+            <div class="row">
+                <div class="col-xs-6">
+                    @*<div class="page-head">
+                        <div class="page-title">
+                            <h1>
+                            </h1>
+                        </div>
+                    </div>*@
+                </div>
+                <div class="col-xs-6 text-right">
+                    <a href="#" class="btn btn-success btn-sm" id="btnAddRole">
+                        <i class="fa fa-plus"></i>Add
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-md-12" id="containerGrid">
+                    @await Html.PartialAsync("~/Areas/Core/Views/Role/Grid/_RoleGrid.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

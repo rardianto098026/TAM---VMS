@@ -1,0 +1,76 @@
+@model TAM.VMS.Domain.Menu
+<div id="MenuModal" class="modal fade bs-modal-lg" data-backdrop="static" abindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Manage Menu</h4>
+            </div>
+            <div class="modal-body">
+                <form id="MenuForm">
+                    @Html.HiddenFor(x => x.ID)
+                    @Html.HiddenFor(x => x.ParentID)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Title</label>
+                                @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                                <span class="field-validation-valid" data-valmsg-for="Title"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Url</label>
+                                @Html.TextBoxFor(x => x.Url, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Menu Group</label>
+                                @Html.DropDownListFor(x => x.MenuGroupID, new SelectList(ViewBag.MenuGroups, "ID", "Name"), new { @class = "form-control", @id = "MenuGroupID" })
+                                <span class="field-validation-valid" data-valmsg-for="MenuGroupID"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Icon Class</label>
+                                @Html.TextBoxFor(x => x.IconClass, new { @class = "form-control iconpicker" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Visibility</label>
+                                <select name="Visible" class="form-control" id="Visibility">
+                                    <option value="0">Hidden</option>
+                                    <option value="1">Visible</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Permission</label>
+                                @Html.DropDownListFor(x => x.PermissionID, new SelectList(ViewBag.MenuPermissions, "ID", "Name"), new { @class = "form-control", @id = "PermissionID" })
+                                <span class="field-validation-valid" data-valmsg-for="PermissionID"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Description</label>
+                                @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+                                <span class="field-validation-valid" data-valmsg-for="Description"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn green" id="btnSaveMenu">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

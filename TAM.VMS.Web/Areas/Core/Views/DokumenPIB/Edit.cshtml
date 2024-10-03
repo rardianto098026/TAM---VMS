@@ -1,0 +1,116 @@
+﻿@section modals {
+    @await Html.PartialAsync("~/Areas/Core/Views/Setting/Component/_ConfigForm.cshtml")
+    @await Html.PartialAsync("~/Areas/Core/Views/Setting/Component/_EmailTemplateForm.cshtml")
+}
+@section scripts{
+    @await Html.PartialAsync("~/Areas/Core/Views/Setting/Script/_Config.cshtml")
+    @await Html.PartialAsync("~/Areas/Core/Views/Setting/Script/_Security.cshtml")
+    @await Html.PartialAsync("~/Areas/Core/Views/Setting/Script/_EmailSetting.cshtml")
+    @await Html.PartialAsync("~/Areas/Core/Views/Setting/Script/_LDAP.cshtml")
+    @await Html.PartialAsync("~/Areas/Core/Views/Setting/Script/_EmailTemplate.cshtml")
+}
+
+
+<div class="portlet light margin-bottom-0">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>BC 2.0 - PEMBERITAHUAN IMPOR BARANG</span><small></small>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="customTab">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#tab_header" data-toggle="tab" aria-expanded="false">Header</a>
+                    </li>
+                    <li>
+                        <a href="#tab_entitas" data-toggle="tab" aria-expanded="false">Entitas</a>
+                    </li>
+                    <li>
+                        <a href="#tab_dokumen" data-toggle="tab" aria-expanded="false">Dokumen</a>
+                    </li>
+                    @*<li>
+                        <a href="#tab_security" data-toggle="tab" aria-expanded="false">Security</a>
+                    </li>*@
+                    @*<li>
+                        <a href="#tab_ldap" data-toggle="tab">LDAP</a>
+                    </li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content ">
+        <div class="tab-pane active" id="tab_header">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="page-head">
+                        <div class="page-title">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12" id="tab_header">
+                        @await Html.PartialAsync("~/Areas/Core/Views/DokumenPIB/Component/_HeaderForm.cshtml")
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab_entitas">
+            <div class="row">
+                <div class="col-xs-6">
+                </div>
+            </div>
+            <br />
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12" id="entitasContainerGrid">
+                        @await Html.PartialAsync("~/Areas/Core/Views/Setting/Grid/_ConfigGrid.cshtml")
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab_dokumen">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="page-head">
+                        <div class="page-title">
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-xs-6 text-right">
+                    <a href="#" class="btn btn-success btn-sm" id="btnAddEmailTemplate">
+                        <i class="fa fa-plus"></i>Add
+                    </a>
+                </div>*@
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12" id="dokumenContainerGrid">
+                        @await Html.PartialAsync("~/Areas/Core/Views/Setting/Grid/_EmailTemplateGrid.cshtml")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    function onDataBound(e) {
+        ShowKendoToolTip(e);
+    }
+</script>

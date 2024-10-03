@@ -1,0 +1,79 @@
+﻿@model TAM.VMS.Domain.User
+
+<form id="EmailSettingForm">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="portlet light margin-bottom-0">
+                <div class="row" style="margin-bottom:20px;">
+                    <div class="col-xs-6">
+                        <div class="page-head">
+                            <div class="page-title">
+                                <h1>
+                                    <span>Pengajuan</span><small></small>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nomor Pengajuan</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", maxlength = 150 })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="portlet light margin-bottom-0">
+                <div class="row" style="margin-bottom:20px;">
+                    <div class="col-xs-6">
+                        <div class="page-head">
+                            <div class="page-title">
+                                <h1>
+                                    <span>Kantor Pabean</span><small></small>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Pelabuhan Tujuan</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", maxlength = 150 })
+                </div>
+                <div class="form-group">
+                    <label>Kantor Pabean</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", maxlength = 150 })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="portlet light margin-bottom-0">
+                <div class="row" style="margin-bottom:20px;">
+                    <div class="col-xs-6">
+                        <div class="page-head">
+                            <div class="page-title">
+                                <h1>
+                                    <span>Keterangan Lain</span><small></small>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Jenis PIB</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", maxlength = 150 })
+                </div>
+                <div class="form-group">
+                    <label>Jenis Import</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", maxlength = 150 })
+                </div>
+                <div class="form-group">
+                    <label>Cara Bayar</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", maxlength = 150 })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-right" style="margin-top:20px;">
+        <button type="button" class="btn green" id="btnSaveEmailSetting">Selanjutnya</button>
+    </div>
+</form>

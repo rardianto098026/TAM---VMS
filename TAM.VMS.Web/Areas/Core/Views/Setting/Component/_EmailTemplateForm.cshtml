@@ -1,0 +1,72 @@
+﻿<div id="EmailTemplateModal" class="modal fade bs-modal-lg" data-backdrop="static" abindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="min-width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Email Template</h4>
+                <button type="button" class="close btnCloseEmailTemplate" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <form id="EmailTemplateForm">
+                    <input type="hidden" id="EmailTemplateID" />
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Module<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="Module" name="Module" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Mail Key<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="MailKey" name="MailKey" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Title<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="Title" name="Title" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Display Name<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="DisplayName" name="DisplayName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Subject<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="Subject" name="Subject" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Mail From<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="MailFrom" name="MailFrom" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Mail Content<span class="required">*</span></label>
+                                <textarea style="height:300px"  class="form-control" id="MailContent" name="MailContent"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-outline-brand btn-square btnCloseEmailTemplate">Close</button>
+                    <button type="button" class="btn btn-info btn-sm" id="btnSaveEmailTemplate">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,63 @@
+﻿
+@section scripts {
+    @await Html.PartialAsync("~/Areas/Core/Views/DokumenPIB/Script/_DokumenPIB.cshtml")
+}
+
+@* @section modals {
+    @await Html.PartialAsync("~/Areas/Core/Views/DokumenPIB/Component/_UserForm.cshtml")
+} *@
+
+<div class="portlet light margin-bottom-0">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>Daftar Dokumen</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="customTab">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#UserAccess" data-toggle="tab" aria-expanded="false">Daftar Dokumen</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content ">
+        <div class="tab-pane active" id="UserAccess">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="page-head">
+                        <div class="page-title">
+                            <h1>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <a href="#" class="btn btn-success btn-sm" id="btnAddUser">
+                        <i class="fa fa-plus"></i>Muat Ulang
+                    </a>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12" id="containerGrid">
+                        @await Html.PartialAsync("~/Areas/Core/Views/DokumenPIB/Grid/_DokumenPIBGrid.cshtml")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

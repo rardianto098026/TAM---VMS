@@ -1,0 +1,72 @@
+﻿<script type="text/javascript">
+    $("#EmailSettingForm").validate({
+        ignore: "",
+        rules: {
+            "Email.FromAddress": {
+                required: true
+            },
+            "Email.FromDisplay": {
+                required: true
+            },
+            "Email.SmtpHost": {
+                required: true
+            },
+            "Email.SmtpPort": {
+                required: true
+            },
+            "Email.Username": {
+                required: true
+            },
+            "Email.Password": {
+                required: true
+            },
+        }
+    });
+
+    $("#btnSaveEmailSetting").on("click", function () {
+        var $el = $(this),
+            $form = $("#EmailSettingForm");
+
+        if ($form.valid() == false)
+            return;
+
+        var formData = $.helper.form.serializeObject($form);
+
+        $el.prop("disabled", true);
+
+        $.postv2("@Url.Content("~/Core/Setting/SaveEmailSetting")", formData, function (d) {
+            swal("Info", "Success Updating Email (SMTP)", "success", { timer: 2000 });
+            $el.prop("disabled", false);
+        }).fail(function (error) {
+            swal("Error", error.responseJSON.Message, "error");
+        });
+    });
+
+    $("#SendTestEmailButton").on('click', function (e) {
+        var $el = $(this),
+            $form = $("#EmailSettingForm");
+
+        if ($form.valid() == false)
+            return;
+
+        var formData = $.helper.form.serializeObject($form);
+        var toEmail = $("#TestEmailAddressInput").val();
+
+        if (!toEmail) {
+            swal("Warning", "Please fill email target saddress", "warning");
+            return;
+        }
+
+        //$el.prop("disabled", true);
+
+        $.postv2("@Url.Content("~/Core/Setting/SendTestEmail")", { "emailSetting": formData, "toEmail": toEmail }, function (d) {
+            swal("Info", "Success send email", "success", { timer: 2000 });
+        }).fail(function (error) {
+            swal("Error", error.responseJSON.Message, "error");
+        }).complete(function (data) {
+            $el.prop("disabled", false);
+            $("#TestEmailAddressInput").val('');
+        });
+    });
+
+</script>

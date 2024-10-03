@@ -1,0 +1,126 @@
+﻿<script type="text/javascript">
+    function EmailTemplateManager() {
+
+        return {
+            InitManagement: function () {
+                this.InitValidation();
+                this.InitHandlers();
+                onDataBound("EmailTemplateContainerGrid");
+            },
+            InitValidation: function () {
+                $("#EmailTemplateForm").validate({
+                    ignore: "",
+                    rules: {
+                        Module: {
+                            required: true
+                        },
+                        MailKey: {
+                            required: true
+                        },
+                        Title: {
+                            required: true
+                        },
+                        DisplayName: {
+                            required: true
+                        },
+                        Subject: {
+                            required: true
+                        },
+                        MailFrom: {
+                            required: true
+                        },
+                        MailContent: {
+                            required: true
+                        },
+                    }
+                });
+            },
+            InitHandlers: function () {
+
+                $("#MailContent").kendoEditor();
+                $("#btnAddEmailTemplate").on('click', function (e) {
+                    var $modal = $.helper.getJqueryObject('EmailTemplateModal'),
+                        $form = $modal.find("form");
+                    $.helper.form.clear($form);
+
+                    $modal.modal("show");
+                });
+
+                $(".k-grid").on("click", ".btnEditEmailTemplate", function () {
+                    var $el = $(this),
+                        $tr = $el.closest("tr"),
+                        $grid = $el.closest(".k-grid").data("kendoGrid"),
+                        dataItem = $grid.dataItem($tr),
+                        $modal = $.helper.getJqueryObject($el.data("modal")),
+                        $form = $modal.find("form");
+                    $.helper.form.clear($form);
+
+                    $('#EmailTemplateID').val(dataItem.ID)
+                    $('#Module').val(dataItem.Module)
+                    $('#MailKey').val(dataItem.MailKey)
+                    $('#Title').val(dataItem.Title)
+                    $('#DisplayName').val(dataItem.DisplayName)
+                    $('#Subject').val(dataItem.Subject)
+                    $('#MailFrom').val(dataItem.MailFrom)
+                    $('#MailContent').data("kendoEditor").value(dataItem.MailContent)
+
+                    $modal.modal("show");
+                });
+                $(".btnCloseEmailTemplate").on('click', function (event) {
+                    swal({
+                        title: "Confirmation",
+                        text: "Are you sure want to close form?",
+                        icon: "warning",
+                        buttons: [
+                            'No',
+                            'Yes'
+                        ],
+                        dangerMode: true,
+                    }).then(function (isConfirm) {
+                        if (isConfirm) {
+                            var $modal = $("#EmailTemplateModal");
+                            $modal.modal("hide");
+                        }
+                    })
+                });
+                $("#btnSaveEmailTemplate").on('click', function (event) {
+                    var $el = $(this),
+                        isError = false,
+                        $modal = $(this).closest(".modal"),
+                        $form = $modal.find("form");
+
+                    if ($form.valid() == false)
+                        return;
+                    var EmailTemplateData = {}
+                    EmailTemplateData.ID = $('#EmailTemplateID').val()
+                    EmailTemplateData.Module = $('#Module').val()
+                    EmailTemplateData.MailKey = $('#MailKey').val()
+                    EmailTemplateData.Title = $('#Title').val()
+                    EmailTemplateData.DisplayName = $('#DisplayName').val()
+                    EmailTemplateData.Subject = $('#Subject').val()
+                    EmailTemplateData.MailFrom = $('#MailFrom').val()
+                    EmailTemplateData.MailContent = $('#MailContent').data("kendoEditor").value()
+
+                    $el.prop("disabled", true);
+
+                    $.postv2("@Url.Content("~/core/emailtemplate/SaveEmailTemplate")", { "emailTemplate": EmailTemplateData}, function (d) {
+                        $.helper.grid.refresh("EmailTemplateGrid");
+                        var successMessage = "Success updating email template";
+                        swal("Info", successMessage, "success");
+                        $modal.modal("hide");
+                    }).fail(function () {
+                        swal("Error", "Something went wrong when saving email template", "error");
+                    });
+                    $el.prop("disabled", false);
+                });
+            },
+        };
+    }
+
+    // On document ready
+    $(document).ready(function () {
+        EmailTemplateManager = new EmailTemplateManager();
+        EmailTemplateManager.InitManagement();
+    });
+
+</script>

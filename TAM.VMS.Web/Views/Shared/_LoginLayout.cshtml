@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- begin::Head -->
+<head>
+    <!--begin::Base Path (base relative path for assets of this page) -->
+    <meta charset="utf-8" />
+
+    <title>VMS Monitoring</title>
+    <meta name="description" content="Login">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @*<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">*@
+    <!--end:: Global Optional Vendors -->
+    <!--begin:: Global Optional Vendors -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link href="~/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end:: Global Optional Vendors -->
+
+    @RenderSection("scripts", false)
+</head>
+<!-- end::Head -->
+<!-- begin::Body -->
+<body class="kt-page--loading-enabled kt-page--loading kt-header--fixed kt-header--minimize-topbar kt-header-mobile--fixed kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+    <!-- begin::Page loader -->
+    @RenderBody()
+    <!-- end::Page Loader -->
+</body>
+<!-- end::Body -->
+
+</html>

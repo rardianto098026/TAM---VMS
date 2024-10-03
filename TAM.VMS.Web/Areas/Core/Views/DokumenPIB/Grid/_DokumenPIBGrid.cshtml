@@ -1,0 +1,50 @@
+﻿@(Html.Kendo().Grid<TAM.VMS.Domain.UserRoleView>()
+                    .Name("UserGrid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(o => o.Username).Title("Nomor").Width(150);
+                        columns.Bound(o => o.Name).Title("Dokumen").Width(150);
+                        columns.Bound(o => o.Surname).Title("Nomor Pengajuan").Width(150);
+                        columns.Bound(o => o.Email).Title("Nomor / Tanggal Pendaftaran").Width(150);
+                        columns.Bound(o => o.Email).Title("Status Dokumen").Width(150);
+                        columns.Bound(o => o.Role).Title("Tanggal Respon").Width(150);
+                        columns.Bound(o => o.RowStatus).Title("Jalur").Hidden().Width(150);
+                        columns.Bound(o => o.RowStatus).Title("Kantor Pabean").Hidden().Width(150);
+                        columns.Bound(o => o.ID).Title("Action").Sortable(false).Width(150).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
+                        @"<div class=""btn-group"">
+                        <button type=""button"" class=""btn btn-primary blue k-grid-reset-pw btnResetPw"" title=""Reset Password"" data-modal='ResetPWModal'>
+                            <i class=""fa fa-download""></i> </span>
+                        </button>
+                        <button type=""button"" class=""btn btn-success green k-grid-edit btnEdit"" title=""Edit"" data-modal='UserModal'>
+                            <i class=""fa fa-edit""></i> </span>
+                        </button>
+                        <button type=""button"" class=""btn btn-danger red k-grid-delete btnDelete"" title=""Delete"" data-id='#:ID#'>
+                            <i class=""fa fa-trash""></i> </span>
+                        </button>
+                        <button type=""button"" class=""btn btn-success green k-grid-edit btnSubmit"" title=""Submit"" data-modal='UserModal'>
+                            Submit
+                        </button>
+                        </div>"
+                        );
+                    })
+                    .NoRecords(conf => conf.Template("No User list to display"))
+                    .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
+                    .Filterable(ftb => ftb
+                                .Extra(false)
+                                .Mode(GridFilterMode.Menu)
+                                )
+                    .Sortable(sortable => sortable.SortMode(GridSortMode.SingleColumn))
+                    .Scrollable(s => s.Height("auto"))
+                    .DataSource(dataSource => dataSource
+                        .Ajax()                        
+                        .ServerOperation(true)
+                        .Read(read => read.Url(Url.Content("~/core/user/read")))
+                        .PageSize(10)
+                        .Sort(sort => sort.Add("CreatedOn").Descending())
+                        .Model(model =>
+                        {
+                            model.Id(p => p.ID);
+                            model.Field(p => p.ID).Editable(false);
+                        })
+                    )
+                )

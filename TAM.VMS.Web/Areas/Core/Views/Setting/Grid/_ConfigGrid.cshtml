@@ -1,0 +1,38 @@
+﻿@(Html.Kendo().Grid<TAM.VMS.Domain.Config>()
+    .Name("configGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(o => o.ID).Title("Action").Sortable(false).Width(60).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
+@"<div class=""btn-group"">
+        <button type=""button"" class=""btn btn-primary blue k-grid-edit btnEditConfig"" title=""Edit"" data-modal='ConfigModal'>
+            <i class=""fa fa-edit""></i> </span>
+        </button>
+        </div>"
+);
+        columns.Bound(o => o.ConfigText).Width(300).Title("Key");
+        columns.Bound(o => o.ConfigValue).Title("Value").ClientTemplate(@"
+            <a # if (ConfigDataType == 'select' || ConfigDataType == 'date' || ConfigDataType == 'bool') { # data-value='#:ConfigValue#' # } # data-name='#: ConfigKey #' data-mode='inline' # if (ConfigText != null || ConfigDataType == 'bool') { # data-source='#= ConfigDataType == 'bool' ? '[""True"", ""False""]' : ConfigText #' # } # class='editable' data-type='#: ConfigDataType == 'bool' ? 'select' : ConfigDataType #' data-pk='#:ID#'>#if (ConfigDataType == 'wysihtml5') { ##=ConfigValue## } else { ##:ConfigValue## }# #if (ConfigDataType == 'percent') {#%#} #</a>
+        ").Width(300);
+    })
+    .NoRecords(conf => conf.Template("No General Setting to display"))
+    .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
+    .Scrollable(s => s.Height("auto"))
+    .Sortable(sortable => sortable.SortMode(GridSortMode.SingleColumn))
+    .Filterable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Url(Url.Content("~/core/config/read")))
+    
+        .PageSize(100)
+        .Sort(sort => sort.Add(x => x.ConfigKey))
+        .Model(model =>
+        {
+            model.Id(p => p.ID);
+            model.Field(p => p.ID).Editable(false);
+        })
+    .Group(group =>
+    {
+        group.Add(x => x.Module);
+    })
+    )
+)

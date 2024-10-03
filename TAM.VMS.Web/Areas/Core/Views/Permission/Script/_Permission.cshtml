@@ -1,0 +1,156 @@
+<script type="text/javascript">
+
+    function onDataBound(e) {
+        ShowKendoToolTip(e);
+    }
+    function PermissionManager() {
+
+        return {
+
+            Init: function () {
+                onDataBound("PermissionContainerGrid");
+                this.InitValidation();
+                this.InitHandler();
+            },
+            InitValidation: function () {
+                $("#PermissionForm").validate({
+                    rules: {
+                        Name: {
+                            required: true
+                        },
+                        Description: {
+                            required: true
+                        }
+                    }
+                });
+            },
+
+            InitHandler: function () {
+
+                $(".k-treelist").on("click", ".k-treelist-add", function () {
+                    var $el = $(this),
+                        $tr = $el.closest("tr"),
+                        $treelist = $el.closest(".k-treelist").data("kendoTreeList"),
+                        dataItem = $treelist.dataItem($tr);
+
+                    $modal = $.helper.getJqueryObject($el.data("modal"));
+                    $form = $modal.find("form");
+
+                    $.helper.form.clear($form);
+                    $.helper.form.fill($form, { "ParentID": dataItem.ID, "Prefix": dataItem.Name });
+
+                    var dataParent = $treelist.dataSource.data().map(function (el) {
+                        return { id: el.ID, text: el.Name };
+                    });
+
+                    $("#ParentID").select2({
+                        data: dataParent,
+                        width: 'resolve',
+                        dropdownParent: $('#PermissionModal')
+                    });
+                    $("#ParentID").val(dataItem.ID).trigger("change");
+
+                    $modal.modal("show");
+                });
+
+                $(".k-treelist").on("click", ".k-treelist-edit", function () {
+                    var $el = $(this),
+                        $tr = $el.closest("tr"),
+                        $treelist = $el.closest(".k-treelist").data("kendoTreeList"),
+                        dataItem = $treelist.dataItem($tr),
+                        $modal = $.helper.getJqueryObject($el.data("modal")),
+                        $form = $modal.find("form");
+
+                    $.helper.form.clear($form);
+                    $.helper.form.fill($form, dataItem);
+                    var dataParent = $treelist.dataSource.data().map(function (el) {
+                        return { id: el.ID, text: el.Name };
+                    });
+
+                    $("#ParentID").select2({
+                        data: dataParent,
+                        width: 'resolve',
+                        dropdownParent: $('#PermissionModal')
+                    });
+                    $("#ParentID").val(dataItem.ParentID).trigger("change");
+
+                    $modal.modal("show");
+                });
+
+                $("#btnSavePermission").on('click', function (event) {
+                    var $el = $(this),
+                        $modal = $(this).closest(".modal"),
+                        $form = $modal.find("form");
+
+                    if ($form.valid() == false)
+                        return;
+
+                    var formData = $.helper.form.serializeObject($form);
+                    formData.ParentID = $("#ParentID").val();
+
+                    if(!formData.ID)
+                        formData.Name = $("#ParentID :selected").text() + "." + formData.Name;
+
+                    $el.prop("disabled", true);
+
+                    $.postv2("@Url.Content("~/core/permission/save")", { "permission": formData }, function (d) {
+                        if (d == "") {
+                            $.helper.treeList.refresh("PermissionList");
+                            if (formData.ID != null && formData.ID != "")
+                                swal("Info", "Success update Permission", "success");
+                            else
+                                swal("Info", "Success save Permission", "success");
+                            $modal.modal("hide");
+                        } else {
+                            swal("Error", d, "error");
+                        }
+                    }).fail(function () {
+                        swal("Error", "Something went wrong when saving Permission", "error");
+                    });
+
+                    $el.prop("disabled", false);
+                });
+
+                $(".k-treelist").on("click", ".k-treelist-delete", function () {
+                    var $el = $(this)
+                    var id = $el.data("id");
+                    var formData = { "id": id };
+                    
+                    swal({
+                        title: "Confirmation",
+                        text: "Are you sure want to delete data?",
+                        icon: "warning",
+                        buttons: [
+                          'No',
+                          'Yes'
+                        ],
+                        dangerMode: true,
+                    }).then(function(isConfirm) {
+                        if (isConfirm) {
+                            $.postv2("@Url.Content("~/Core/permission/delete")", formData, function (d) {
+                                if (d == "") {
+                                    $.helper.treeList.refresh("PermissionList");
+                                    swal("Info", "Permission deleted successfully", "success");
+                                } else {
+                                    swal("Error", d, "error");
+                                }
+
+                            }).fail(function (error) {
+                                console.error(error);
+                                /* swal("Error", "Something went wrong when deleting Permission", "error");*/
+                                swal("Error", error.responseJSON.Message, "error");
+                            });
+                        }
+                    })
+                });
+            },
+        };
+    }
+
+    // On document ready
+    $(document).ready(function () {
+        PermissionManager = new PermissionManager();
+        PermissionManager.Init();
+    });
+
+</script>
