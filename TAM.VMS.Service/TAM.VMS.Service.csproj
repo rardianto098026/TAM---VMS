@@ -17,4 +17,9 @@
     <ProjectReference Include="..\TAM.VMS.Infrastructure\TAM.VMS.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modules\VendorDatabase\Response\" />
+    <Folder Include="Modules\VendorDatabase\Request\" />
+  </ItemGroup>
+
 </Project>

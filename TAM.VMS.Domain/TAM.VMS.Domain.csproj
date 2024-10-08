@@ -13,4 +13,10 @@
     <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2023.1.117" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modules\VendorDatabase\Model\" />
+    <Folder Include="Modules\VendorDatabase\ViewModel\" />
+    <Folder Include="Modules\VendorDatabase\Repository\" />
+  </ItemGroup>
+
 </Project>
