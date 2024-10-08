@@ -21,4 +21,8 @@
     <ProjectReference Include="..\TAM.VMS.Service\TAM.VMS.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
+  </ItemGroup>
+
 </Project>

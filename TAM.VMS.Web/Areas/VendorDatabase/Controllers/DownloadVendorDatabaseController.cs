@@ -9,15 +9,16 @@ using Microsoft.AspNetCore.Mvc;
 using Kendo.Mvc.UI;
 using TAM.VMS.Infrastructure.Session;
 using TAM.VMS.Service.Modules.VendorDatabase;
+using TAM.VMS.Service.Modules.VendorDatabase.Service;
 
 namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
 {
     [Area("VendorDatabase")]
     [Authorize]
-    [AppAuthorize("App.VendorDatabase.VendorDatabase")]
-    public class VendorDatabaseController : WebController
+    [AppAuthorize("App.VendorDatabase.DownloadVendorDatabase")]
+    public class DownloadVendorDatabaseController : WebController
     {
-        public IActionResult Index() 
+        public IActionResult Index()
         {
             var roles = Service<RoleService>().GetRoles();
 
@@ -35,7 +36,7 @@ namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
         [HttpPost]
         public IActionResult SaveUser(User user, IEnumerable<string> roles)
         {
-            var result = Service<DownloadVendorDatabaseService>().Save(user, roles);
+            var result = Service<VendorDatabaseService>().Save(user, roles);
 
             return Ok(result);
         }
@@ -52,7 +53,7 @@ namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
             }
             else
             {
-                result = Service<DownloadVendorDatabaseService>().ResetPassword(user);
+                result = Service<VendorDatabaseService>().ResetPassword(user);
             }
 
             return Ok(result);
@@ -61,7 +62,7 @@ namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
         [HttpPost]
         public IActionResult ChangePasswordUser(ChangePassword user)
         {
-            var dataUser = Service<DownloadVendorDatabaseService>().GetUserByUsername(SessionManager.Current);
+            var dataUser = Service<VendorDatabaseService>().GetUserByUsername(SessionManager.Current);
             user.Id = dataUser.ID;
             string exsPW = dataUser.Password;
             user.CurrentPW = MD5Helper.Encode(user.CurrentPW);
@@ -78,7 +79,7 @@ namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
             }
             else
             {
-                result = Service<DownloadVendorDatabaseService>().ChangePassword(user);
+                result = Service<VendorDatabaseService>().ChangePassword(user);
             }
 
             return Ok(result);
@@ -87,7 +88,7 @@ namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
         [HttpPost]
         public IActionResult DeleteUser(Guid id)
         {
-            Service<DownloadVendorDatabaseService>().Delete(id);
+            Service<VendorDatabaseService>().Delete(id);
             return Ok();
         }
     }

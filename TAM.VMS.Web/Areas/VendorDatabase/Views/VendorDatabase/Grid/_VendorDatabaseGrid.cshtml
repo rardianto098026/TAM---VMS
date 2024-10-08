@@ -63,7 +63,7 @@
                         columns.Bound(o => o.RowStatus).Title("Approval Status").Width(150);
                         columns.Bound(o => o.RowStatus).Title("Modified By").Width(150);
                         columns.Bound(o => o.RowStatus).Title("Modified Date").Width(150);
-                        columns.Bound(o => o.ID).Sortable(false).Title("No").Width(110).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
+                        columns.Bound(o => o.ID).Sortable(false).Title(" ").Width(110).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
                         @"<div class=""btn-group"">
                         <button type=""button"" class=""btn btn-primary blue k-grid-edit btnEdit"" title=""Edit"" data-modal='UserModal'>
                             View <i class=""fa fa-search""></i> </span>
