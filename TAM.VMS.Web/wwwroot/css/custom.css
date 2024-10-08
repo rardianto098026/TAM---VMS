@@ -52,3 +52,31 @@ body.loading .ajax-loading {
 .fancybox__container {
     z-index: 1000000 !important;
 }
+
+.div-title-menu {
+    background-color: #03BFD7;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.text-title-menu {
+    color: white;
+    font-family: 'SF Pro Display', sans-serif;
+    font-weight: 1000;
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.custom-button {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 4px 8px;
+    background-color: #ececec;
+    color: black;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.custom-button:hover {
+    background-color: #f0f0f0;
+}
