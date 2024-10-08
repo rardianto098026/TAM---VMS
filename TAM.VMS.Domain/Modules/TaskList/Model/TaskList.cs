@@ -9,5 +9,7 @@ namespace TAM.VMS.Domain
         [Key]
         public Guid ID { get; set; }
         public Guid TaskID { get; set; }
+
+        public string TaskName { get; set; }
     }
 }
