@@ -17,4 +17,13 @@
     <ProjectReference Include="..\TAM.VMS.Infrastructure\TAM.VMS.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modules\RequestList\Service\" />
+    <Folder Include="Modules\RequestList\Response\" />
+    <Folder Include="Modules\RequestList\Request\" />
+	<Folder Include="Modules\TaskList\Service\" />
+    <Folder Include="Modules\TaskList\Response\" />
+    <Folder Include="Modules\TaskList\Request\" />
+  </ItemGroup>
+
 </Project>
