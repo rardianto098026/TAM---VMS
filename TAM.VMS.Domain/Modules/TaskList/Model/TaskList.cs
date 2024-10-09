@@ -7,8 +7,9 @@ namespace TAM.VMS.Domain
     public partial class TaskList
     {
         [Key]
-        //public Guid ID { get; set; }
-        //public string TaskID { get; set; }
-        public string ModuleName { get; set; }
+        public Guid ID { get; set; }
+        public Guid TaskID { get; set; }
+
+        public string TaskName { get; set; }
     }
 }

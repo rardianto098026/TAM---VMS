@@ -1,9 +1,9 @@
 ﻿@(
-Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
+Html.Kendo().Grid<TAM.VMS.Domain.TaskView>()
     .Name("TaskListGrid")
     .Columns(Column =>
     {
-        /*Column.Bound(o => o.ID).Title("tes").Sortable(false).Width(30).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
+        Column.Bound(o => o.ID).Title("tes").Sortable(false).Width(30).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
         @"<div class=""btn-group"">
             <button type=""button"" class=""btn btn-primary blue k-grid-edit btnEdit"" title=""Edit"" data-modal='UserModal'>
                 <i class=""fa fa-edit""></i> </span>
@@ -16,15 +16,15 @@ Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
                  <i class=""fa fa-key""></i> </span>
             </button>#}#
         </div>"
-        );*/
+        );
         Column.Bound(o => o.ModuleName).Title("Module Name").Width(70);
-        //Column.Bound(o => o.VendorName).Title("Vendor Name").Width(70);
-        //Column.Bound(o => o.Complience).Title("Complience").Width(70);
-        //Column.Bound(o => o.TransactionCategory).Title("Transaction Category").Width(70);
-        //Column.Bound(o => o.ModifiedBy).Title("Modified By").Width(70);
-        //Column.Bound(o => o.ModifiedDate).Title("Modified Date").Width(70);
-        //Column.Bound(o => o.Status).Title("Status").Width(70);
-        //Column.Bound(o => o.Status).Title("Action").Width(70);
+        Column.Bound(o => o.VendorName).Title("Vendor Name").Width(70);
+        Column.Bound(o => o.Complience).Title("Complience").Width(70);
+        Column.Bound(o => o.TransactionCategory).Title("Transaction Category").Width(70);
+        Column.Bound(o => o.ModifiedBy).Title("Modified By").Width(70);
+        Column.Bound(o => o.ModifiedDate).Title("Modified Date").Width(70);
+        Column.Bound(o => o.Status).Title("Status").Width(70);
+        Column.Bound(o => o.Status).Title("Action").Width(70);
     })
     .NoRecords(conf => conf.Template("No User list to display"))
     .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
@@ -39,11 +39,11 @@ Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
         .ServerOperation(true)
         .Read(read => read.Url(Url.Content("~/tasklist/tasklist/read")))
         .PageSize(10)
-        //.Sort(sort => sort.Add("ModifiedDate").Descending())
+        .Sort(sort => sort.Add("ModifiedDate").Descending())
         .Model(model =>
         {
-            model.Id(p => p.ModuleName);
-            model.Field(p => p.ModuleName).Editable(false);
+            model.Id(p => p.ID);
+            model.Field(p => p.ID).Editable(false);
         })
     )
 )
