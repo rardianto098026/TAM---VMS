@@ -18,7 +18,17 @@ namespace TAM.VMS.Web.Areas.TaskList.Controllers
     {
         public IActionResult Index()
         {
+            var task = Service<TaskListService>().GetTask();
+
+            ViewBag.Task = task;
+
             return View();
+        }
+
+        public IActionResult Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var result = Service<TaskListService>().GetDataSourceResult(request);
+            return Ok(result);
         }
 
         public IActionResult ViewTask()
