@@ -19,6 +19,8 @@ namespace TAM.VMS.Infrastructure.Session
         }
 
         public static string Current { get { return UserSession.Current; } }
+        public static string Department { get { return UserSession.Department; } }
+        public static string DepartmentID { get { return UserSession.DepartmentID; } }
         public static string Name { get { return UserSession.Name; } }
         public static string Username { get { return UserSession.Username; } }
         public static string RoleStr { get { return string.Empty; }  }
