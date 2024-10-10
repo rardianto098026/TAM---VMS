@@ -339,6 +339,126 @@
         setInterval(updateDateTime, 60000);
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var coll = document.getElementsByClassName("collapsible");
+            for (var i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+            }
+        });
+    </script>
+
+       <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var coll = document.querySelectorAll(".collapsible");
+
+                coll.forEach(function(button) {
+                    button.addEventListener("click", function() {
+                        this.classList.toggle("active");
+
+                        var content = this.nextElementSibling;
+
+                        // Check if content is already visible
+                        if (content.style.maxHeight) {
+                            // If visible, close it
+                            content.style.maxHeight = null;
+                        } else {
+                            // If hidden, open it
+                            content.style.maxHeight = content.scrollHeight + "px";
+                        }
+
+                        var icon = this.querySelector(".toggle-icon");
+                        if (icon.classList.contains("fa-chevron-down")) {
+                            icon.classList.remove("fa-chevron-down");
+                            icon.classList.add("fa-chevron-up");
+                        } else {
+                            icon.classList.remove("fa-chevron-up");
+                            icon.classList.add("fa-chevron-down");
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Event listener untuk menambahkan baris pada setiap tabel yang memiliki class 'dynamic-table'
+        document.querySelectorAll('.add-row-btn').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var tableId = this.getAttribute('data-table-id'); // Ambil ID tabel dari data attribute
+                var table = document.getElementById(tableId);
+                var tbody = table.querySelector('tbody');
+                var rowCount = tbody.rows.length + 1;
+
+                // Ambil jumlah kolom dari tabel yang bersangkutan
+                var columnCount = table.querySelectorAll('thead tr th').length;
+
+                // Buat baris baru
+                var newRow = document.createElement('tr');
+
+                // Tambahkan kolom secara dinamis berdasarkan jumlah kolom
+                for (var i = 0; i < columnCount - 1; i++) { // -1 karena kolom terakhir untuk tombol delete
+                    var newCell = document.createElement('td');
+                    if (i === 0) { // Kolom pertama untuk nomor baris
+                        newCell.innerText = rowCount;
+                    } else {
+                        newCell.innerHTML = '<input type="text">';
+                    }
+                    newRow.appendChild(newCell);
+                }
+
+                // Tambahkan tombol delete di kolom terakhir
+                var deleteCell = document.createElement('td');
+                deleteCell.innerHTML = `
+                    <button class="delete-row-btn" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                `;
+                newRow.appendChild(deleteCell);
+
+                // Tambahkan baris baru ke tbody
+                tbody.appendChild(newRow);
+
+                // Tambahkan event listener ke tombol delete yang baru
+                addDeleteRowFunctionality(newRow.querySelector('.delete-row-btn'));
+            });
+        });
+
+        // Fungsi untuk menambahkan event listener ke semua tombol delete
+        function addDeleteRowFunctionality(deleteButton) {
+            deleteButton.addEventListener('click', function() {
+                var row = this.closest('tr');
+                row.remove();
+                updateRowNumbers();
+            });
+        }
+
+        // Tambahkan event listener ke tombol delete pada baris yang sudah ada
+        document.querySelectorAll('.delete-row-btn').forEach(function(button) {
+            addDeleteRowFunctionality(button);
+        });
+
+        // Fungsi untuk memperbarui nomor baris setelah penghapusan
+        function updateRowNumbers() {
+            document.querySelectorAll('.dynamic-table tbody').forEach(function(tbody) {
+                tbody.querySelectorAll('tr').forEach(function(row, index) {
+                    row.querySelector('td').innerText = index + 1;
+                });
+            });
+        }
+    });
+</script>
+
+
+
     <!-- begin::Scrolltop -->
     <!-- end::Scrolltop -->
     @*<script>

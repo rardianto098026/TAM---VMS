@@ -25,6 +25,15 @@ namespace TAM.VMS.Web.Areas.VendorRegistration.Controllers
             return View();
         }
 
+        public IActionResult CreateVendor()
+        {
+            var roles = Service<RoleService>().GetRoles();
+
+            ViewBag.Roles = roles;
+
+            return View();
+        }
+
         public IActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
             var result = Service<VendorRegistrationService>().GetDataSourceResult(request);

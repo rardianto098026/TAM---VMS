@@ -1,0 +1,692 @@
+﻿@section scripts {
+    @await Html.PartialAsync("~/Areas/VendorRegistration/Views/VendorRegistration/Script/_VendorRegistration.cshtml")
+}
+
+@section modals {
+    @await Html.PartialAsync("~/Areas/VendorRegistration/Views/VendorRegistration/Component/_VendorRegistrationForm.cshtml")
+}
+
+<div class= "container-fluid">
+    <div class="div-title-menu">
+        <div class="page-head">
+            <div class="text-title-menu">
+                Vendor Registration Form
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12" style="margin-top: 10px">
+            <button type="button" class="collapsible col-12">
+                General Information 
+                <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
+            </button>
+            <div class="content">
+                <div class="vendor-registration-form">
+                    <div class="vendor-info">
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="vendor-code" style="width: 250px;">Vendor Code</label>
+                                <input type="text" id="vendor-code" style="flex-grow: 1;">
+                            </div>
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="vendor-rating" style="width: 150px;">Vendor Rating</label>
+                                <span id="vendor-rating">0/4 ★</span>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="transaction-category" style="width: 173px;">Transaction Category</label>
+                                <div>
+                                    <input type="checkbox" id="trade" name="transaction-category" value="Trade">
+                                    <label for="trade" style="margin-right: 50px">Trade</label>
+                                    <input type="checkbox" id="non-trade" name="transaction-category" value="Non Trade">
+                                    <label for="non-trade">Non Trade</label>
+                                </div>
+                            </div>
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="vendor-evaluation" style="width: 200px;">Vendor Evaluation</label>
+                                <input type="text" id="vendor-evaluation">
+                            </div>
+                        </div>
+
+                        <div class="row" style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="pic-vendor" style="flex: 410px;">PIC Vendor Management</label>
+                                <input type="text" id="pic-vendor" style="flex-grow: 1;">
+                                <input type="text" id="pic-vendor-2" style="flex-grow: 1;">
+                            </div>
+                        </div>
+
+                        <div class="row" style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="vendor-code" style="width: 200px;">Business Area</label>
+                                <input type="text" id="" style="flex-grow: 1;">
+                            </div>
+                        </div>
+
+                        <div class="row" style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="sap-status" style="width: 400px;">SAP Status</label>
+                                <input type="text" id="" style="flex-grow: 1;">
+                                <input type="text" id="" style="flex-grow: 1;">
+                            </div>
+                        </div>
+
+                        <div class="row" style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="vms-status" style="width: 400px;">VMS Status</label>
+                                <input type="text" id="" style="flex-grow: 1;">
+                                <input type="text" id="" style="flex-grow: 1;">
+                            </div>
+                        </div>
+
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="vendor-type" style="width: 170px;">Type</label>
+                                <div>
+                                    <input type="radio" id="company" name="vendor-type" value="Company">
+                                    <label for="company" style="margin-right: 50px;">Company</label>
+                                    <input type="radio" id="professional" name="vendor-type" value="Professional">
+                                    <label for="professional">Professional / Individual</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Fields -->
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="vendor-name" style="width: 200px;">Vendor Name</label>
+                                <input type="text" id="vendor-name" value="PT.">
+                            </div>                          
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="trading-name" style="width: 200px;">Trading Name</label>
+                                <input type="text" id="trading-name" style="width: 300px;">
+
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
+                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
+                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="special-vendor" style="width: 200px;">Special Vendor</label>
+                                <select id="special-vendor">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                         </div>
+                    </div>
+
+                    <div class="contact-person-pic">
+                        <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 10px;">CONTACT PERSON / PIC</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Phone Number</th>
+                                    <th>Email Address</th>
+                                    <th>NIK</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="company-phone-number-1" style="width: 200px;">Company Phone Number 1</label>
+                                <input type="text" id="company-phone-number-1" style="width: 300px;" value="62">
+
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
+                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
+                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="company-phone-number-2" style="width: 200px;">Company Phone Number 2</label>
+                                <input type="text" id="company-phone-number-2" style="width: 300px;" value="62">
+
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
+                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
+                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="business-category">
+                        <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 10px;">BUSINESS CATEGORY</h4>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="scope-of-work" style="width: 200px;">Scope Of Work</label>
+                                <input type="text" id="scope-of-work" style="width: 400px;">
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
+                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
+                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="detail-scope-of-work" style="width: 200px;">Detail Scope Of Work</label>
+                                <input type="text" id="detail-scope-of-work" style="width: 400px;">
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
+                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
+                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="vendor-type" style="width: 200px;">Due Diligence Type</label>
+                                <div>
+                                    <input type="radio" id="inscope" name="inscope" value="inscope">
+                                    <label for="inscope" style="margin-right: 50px;">Inscope Due Diligence</label>
+                                    <input type="radio" id="outscope" name="outscope" value="Outscope">
+                                    <label for="outscope">Outscope Due Diligence</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="compliance-flow" style="width: 200px;">Compliance Flow</label>
+                                <div>
+                                    <input type="radio" id="sdl" name="compliance-flow" value="SDL">
+                                    <label for="sdl" style="margin-right: 50px;">SDL</label>
+                                    <input type="radio" id="non-sdl" name="compliance-flow" value="Non SDL">
+                                    <label for="non-sdl">Non SDL</label>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="business-table" class="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Business Classification</th>
+                                    <th>Business Category</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;"><i class="fa-solid fa-trash"></i></button></td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                        <button class="add-row-btn" data-table-id="business-table" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                            <i class="fa-solid fa-plus"></i> Add Row
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12" style="margin-top: 10px">
+            <button type="button" class="collapsible col-12">
+                Company Legality Documents 
+                <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
+            </button>
+            <div class="content">
+               <div class="business-category">
+                        <h4 style="text-align: center; background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 10px; width: 600px">COMPANY DOMICILE</h4>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="address" style="width: 200px;">Address</label>
+                                <input type="text" id="address" style="width: 400px;">
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="city" style="width: 200px;">City</label>
+                                <input type="text" id="city" style="width: 400px;">
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="country" style="width: 200px;">Country</label>
+                                <select id="country" style="width: 400px;">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="postalcode" style="width: 200px;">Postal Code</label>
+                                <input type="text" id="postalcode" style="width: 400px;">
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center; flex-grow: 1;">
+                                FUNCTIONARY OF COMPANY
+                            </h4>
+                            <button data-table-id="functionary-company-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        <table id="functionary-company-table" class="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Email Address</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="remarks" style="width: 200px;">Remarks</label>
+                                <input type="text" id="remarks" style="width: 400px;">
+                            </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center; flex-grow: 1;">
+                                SUPPORTING DOCUMENT
+                            </h4>
+                            <button data-table-id="sup-doc-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        <table id="supp-doc-table" class="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Company Document</th>
+                                    <th>Document Number & Remarks</th>
+                                    <th>Validity Date</th>
+                                    <th>File (Attachment)</th>
+                                    <th>Check List</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Akta Pendirian</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Akta UUPT</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Akta & SK Keputusan RUPS Terakhir - Susunan Direksi</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Nomor Induk Berusaha / Perizinan Berbasis Resiko (RBA)</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Izin Usaha / Perizinan Berbasis Resiko (RBA) </td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Sertifikat Standart (RBA)</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Surat Keterangan Domisili (SKD) / Izin Lokasi / Perizinan Berbasis Resiko (RBA)</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Pakta Integritas</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Pakta Kerahasiaan</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Company Profile</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12" style="margin-top: 10px">
+            <button type="button" class="collapsible col-12">
+                Tax Information 
+                <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
+            </button>
+            <div class="content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12" style="margin-top: 10px">
+            <button type="button" class="collapsible col-12">
+                Payment Information
+                <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
+            </button>
+            <div class="content">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center; flex-grow: 1;">
+                        BANK ACCOUNT
+                    </h4>
+                    <button data-table-id="bank-account-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+
+                <table id="bank-account-table" class="dynamic-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Bank Name</th>
+                            <th>Branch</th>
+                            <th>Currency</th>
+                            <th>Account Number</th>
+                            <th>Account Name</th>
+                            <th>Header Rekening Koran</th>
+                            <th>Bank Account Information Letter</th>
+                            <th>Active/ Not Active</th>
+                            <th>Finance Confirmation</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td>
+                                <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12" style="margin-top: 10px">
+            <button type="button" class="collapsible col-12">
+                Vendor Category 
+                <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
+            </button>
+            <div class="content">
+                <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center;">VENDOR CATEGORY</h4>
+                    <p style="font-family: 'SF Pro Display', sans-serif; font-size: 16px;"><strong>Trade</strong></p>
+
+                    <table id="trade-vendor-table" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Vendor Category</th>
+                                <th>Description</th>
+                                <th>GL Account</th>
+                                <th>Grouping</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td>GL Account</td>
+                                <td><input type="text"></td>
+                                <td><button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;"><i class="fa-solid fa-trash"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Tombol tambah baris di bawah tabel -->
+                    <button class="add-row-btn" data-table-id="trade-vendor-table" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                        <i class="fa-solid fa-plus"></i> Add Row
+                    </button>
+
+                    <p style="font-family: 'SF Pro Display', sans-serif; font-size: 16px;   "><strong>Non Trade</strong></p>
+
+                    <table id="non-trade-vendor-table" class="dynamic-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Vendor Category</th>
+                                <th>Description</th>
+                                <th>GL Account</th>
+                                <th>Grouping</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td>GL Account</td>
+                                <td><input type="text"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Tombol tambah baris di bawah tabel -->
+                    <button class="add-row-btn" data-table-id="non-trade-vendor-table" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                        <i class="fa-solid fa-plus"></i> Add Row
+                    </button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12" style="margin-top: 10px">
+            <button type="button" class="collapsible col-12">
+                Compliance Enhancements 
+                <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
+            </button>
+            <div class="content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+    </div>
+        <div class="row" style="margin-top: 100px; margin-bottom: 50px">
+        <div class="col-12 d-flex justify-content-between align-items-center mt-2">
+            <div class="col-sm-auto">
+                <a href="~/VendorRegistration/VendorRegistration">
+                    <button class="me-2" style="border: none; border-radius: 8px; width: 100px; font-size: 12px; background-color: #ECECEC; color: black; cursor: pointer; padding: 4px 8px; font-family: 'SF Pro Display', sans-serif; font-weight: 700;"> 
+                        Back
+                    </button>
+                </a>
+            </div>
+
+            <div class="d-flex ml-auto"> 
+                <div class="col-sm-auto me-2">
+                    <button class="btn-validation" style="width: 100px; margin-right: 10px; border: 1px solid black; border-radius: 8px; font-size: 12px; background-color: #03D774; cursor: pointer; color: white; padding: 4px 8px; font-family: 'SF Pro Display', sans-serif; font-weight: 700;"> 
+                        Submit 
+                    </button>
+                </div>
+                <div class="col-sm-auto me-2">
+                    <button class="btn-validation" style="width: 100px; margin-right: 10px; border: 1px solid black; border-radius: 8px; font-size: 12px; background-color: #5C5C5C; cursor: pointer; color: white; padding: 4px 8px; font-family: 'SF Pro Display', sans-serif; font-weight: 700;"> 
+                        Save as Draft
+                    </button>
+                </div>
+                <div class="col-sm-auto">
+                    <button class="btn-validation" style="width: 100px; border: 1px solid black; border-radius: 8px; font-size: 12px; background-color: #DB5858; cursor: pointer; color: white; padding: 4px 8px; font-family: 'SF Pro Display', sans-serif; font-weight: 700;"> 
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
