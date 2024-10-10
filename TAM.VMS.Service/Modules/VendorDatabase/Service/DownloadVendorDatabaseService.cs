@@ -10,12 +10,13 @@ using System.Data;
 using TAM.VMS.Domain.Object;
 using TAM.VMS.Infrastructure.General;
 using Microsoft.Data.SqlClient;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 
 namespace TAM.VMS.Service
 {
-    public class UserService : DbService
+    public class DownloadVendorDatabaseService : DbService
     {
-        public UserService(IDbHelper db) : base(db)
+        public DownloadVendorDatabaseService(IDbHelper db) : base(db)
         {
         }
 
@@ -24,11 +25,11 @@ namespace TAM.VMS.Service
             var result = new ObjectResult<APIUserAuthenticatedResponse>();
             try
             {
-                if ((!string.IsNullOrEmpty(model.Username) && !string.IsNullOrEmpty(model.Password) && !isLoginSSO) || isLoginSSO)
+                if (!string.IsNullOrEmpty(model.Username) && !string.IsNullOrEmpty(model.Password) && !isLoginSSO || isLoginSSO)
                 {
                     var USERNAME = model.Username;
                     var password = model.Password;
-                    var user = new Domain.User();
+                    var user = new User();
                     if (isLoginSSO)
                         user = GetUserByNoReg(model.NoReg);
                     else
@@ -91,7 +92,7 @@ namespace TAM.VMS.Service
         public DataSourceResult GetDataSourceResult(DataSourceRequest request)
         {
             var genericDataTableQuery = new GenericDataSourceQuery(Db.Connection, request);
-            var result = genericDataTableQuery.GetData<UserRoleView>("SELECT * FROM VW_UserRole");
+            var result = genericDataTableQuery.GetData<DownloadVendorDBView>("SELECT * FROM [VW_DownloadVendorDB]");
             return result;
         }
 
@@ -116,26 +117,6 @@ namespace TAM.VMS.Service
             }
 
             return results;
-        }
-        public UserRoleView GetUserViewByUsername(string username)
-        {
-            UserRoleView result = null;
-
-            try
-            {
-                using (var sqlConnection = new SqlConnection(Db.Connection.ConnectionString))
-                {
-                    sqlConnection.Open();
-                    var sql = "SELECT TOP 1 * FROM [VW_UserRole] WHERE Username = @Username";
-                    result = sqlConnection.Query<UserRoleView>(sql, new { Username = username }).FirstOrDefault();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while retrieving the user role view.", ex);
-            }
-
-            return result;
         }
 
         public User GetUserByUsername(string username)
@@ -187,73 +168,101 @@ namespace TAM.VMS.Service
         }
 
 
-        public string Save(User user, IEnumerable<string> roles)
-        {
-            //var result = true;
-            string result = string.Empty;
+        //public string Save(User user, IEnumerable<string> roles)
+        //{
+        //    //var result = true;
+        //    string result = string.Empty;
 
-            var getUsers = GetUser().Where(x => x.Username.ToLower() == user.Username.ToLower() && x.RowStatus == true).FirstOrDefault();
-            var editAble = GetUser().Where(x => x.Username.ToLower() == user.Username.ToLower() && x.ID == user.ID && x.RowStatus == true).FirstOrDefault();
+        //    var getUsers = GetUser().Where(x => x.Username.ToLower() == user.Username.ToLower() && x.RowStatus == true).FirstOrDefault();
+        //    var editAble = GetUser().Where(x => x.Username.ToLower() == user.Username.ToLower() && x.ID == user.ID && x.RowStatus == true).FirstOrDefault();
+
+        //    using (DbHelper db = new DbHelper(true))
+        //    {
+        //        if (getUsers == null || editAble != null)
+        //        {
+        //            if (user.ID == default)
+        //            {
+        //                var password = "123"; //ApplicationCacheManager.GetConfig<string>("DefaultPassword");
+
+        //                user.Password = MD5Helper.Encode(password);
+        //                user.Username = user.Username.ToLower();
+
+        //                user.CreatedBy = SessionManager.Current;
+        //                user.CreatedOn = DateTime.Now;
+        //                user.RowStatus = true;
+        //                user = db.UserRepository.Add(user, new string[] {
+        //                "Username",
+        //                "Password",
+        //                "Name",
+        //                "Surname",
+        //                "Email",
+        //                "NIP",
+        //                "CreatedOn",
+        //                "CreatedBy",
+        //                "RowStatus"
+        //            });
+        //            }
+        //            else
+        //            {
+        //                user.ModifiedBy = SessionManager.Current;
+        //                user.ModifiedOn = DateTime.Now;
+
+        //                db.UserRepository.Update(user, new string[] {
+        //                "Username",
+        //                "Name",
+        //                "Surname",
+        //                "Email",
+        //                "NIP",
+        //                "ModifiedOn",
+        //                "ModifiedBy"
+        //            });
+        //            }
+
+        //            // UPDATE ROLES
+        //            var parametersRole = new DynamicParameters();
+        //            parametersRole.Add("@UserID", user.ID);
+        //            parametersRole.Add("@RoleID", roles == null ? "" : string.Join(",", roles));
+        //            parametersRole.Add("@By", SessionManager.Current);
+        //            db.Connection.Execute("usp_Core_UpdateUserRole", parametersRole, db.Transaction, commandType: System.Data.CommandType.StoredProcedure);
+
+        //            db.Commit();
+        //        }
+        //        else
+        //        {
+        //            result = user.Username + " is already exist.";
+        //        }
+
+        //    }
+        //    return result;
+        //}
+
+        public string AddRequest(DownloadVendorDatabase vendorDB)
+        {
+            string result = string.Empty;
 
             using (DbHelper db = new DbHelper(true))
             {
-                if (getUsers == null || editAble != null)
+                vendorDB.FileName = "Database Vendor " + SessionManager.Department;
+                vendorDB.ReqDate = DateTime.Now;
+                vendorDB.DepartmentId = SessionManager.DepartmentID;
+                vendorDB.StatusId = "1"; // 1 = "Requested"
+                vendorDB.CreatedBy = SessionManager.Current;
+                vendorDB.CreatedOn = DateTime.Now;
+
+                vendorDB = db.DownloadVendorDatabaseRepository.Add(vendorDB, new string[]
                 {
-                    if (user.ID == default(Guid))
-                    {
-                        var password = "123"; //ApplicationCacheManager.GetConfig<string>("DefaultPassword");
-
-                        user.Password = MD5Helper.Encode(password);
-                        user.Username = user.Username.ToLower();
-
-                        user.CreatedBy = SessionManager.Current;
-                        user.CreatedOn = DateTime.Now;
-                        user.RowStatus = true;
-                        user = db.UserRepository.Add(user, new string[] {
-                        "Username",
-                        "Password",
-                        "Name",
-                        "Surname",
-                        "Email",
-                        "NIP",
-                        "CreatedOn",
-                        "CreatedBy",
-                        "RowStatus"
-                    });
-                    }
-                    else
-                    {
-                        user.ModifiedBy = SessionManager.Current;
-                        user.ModifiedOn = DateTime.Now;
-
-                        db.UserRepository.Update(user, new string[] {
-                        "Username",
-                        "Name",
-                        "Surname",
-                        "Email",
-                        "NIP",
-                        "ModifiedOn",
-                        "ModifiedBy"
-                    });
-                    }
-
-                    // UPDATE ROLES
-                    var parametersRole = new DynamicParameters();
-                    parametersRole.Add("@UserID", user.ID);
-                    parametersRole.Add("@RoleID", roles == null ? "" : string.Join(",", roles));
-                    parametersRole.Add("@By", SessionManager.Current);
-                    db.Connection.Execute("usp_Core_UpdateUserRole", parametersRole, db.Transaction, commandType: System.Data.CommandType.StoredProcedure);
-                  
-                    db.Commit();
-                }
-                else
-                {
-                    result = user.Username + " is already exist.";
-                }
-
+                    "FileName",
+                    "ReqDate",
+                    "DepartmentId",
+                    "StatusId",
+                    "CreatedOn",
+                    "CreatedBy",
+                });
+                db.Commit();
             }
             return result;
         }
+
 
         public void Delete(Guid id)
         {
@@ -303,7 +312,7 @@ namespace TAM.VMS.Service
 
         public Claim[] Authenticate(LoginViewModel model)
         {
-            if(string.IsNullOrEmpty(model.Username))
+            if (string.IsNullOrEmpty(model.Username))
                 throw new ModelException("Username", "Username not found");
             var username = model.Username;
             var password = model.TamUserPwd;
@@ -360,17 +369,6 @@ namespace TAM.VMS.Service
             };
 
             return claims;
-        }
-    }
-
-    public class ModelException : Exception
-    {
-        public string Title { get; }
-        public ModelException(string title, string message)
-            : base(message)
-        {
-            Title = title;
-            this.Data.Add("Title", title);
         }
     }
 }

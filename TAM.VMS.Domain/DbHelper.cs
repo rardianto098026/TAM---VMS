@@ -23,8 +23,12 @@ namespace TAM.VMS.Domain
         IGeneralCategoryRepository GeneralCategoryRepository { get; } 
         IConfigRepository ConfigRepository { get; }
         IEmailTemplateRepository EmailTemplateRepository { get; }
+<<<<<<< HEAD
 
         ITaskListRepository TaskListRepository { get; }
+=======
+        IDownloadVendorDatabaseRepository DownloadVendorDatabaseRepository { get; }
+>>>>>>> ba26ac9fcf7fb7a9a78a101c79044fcb70e0ff6b
     }
     public class DbHelper : DbContext, IDbHelper
     {
@@ -60,7 +64,11 @@ namespace TAM.VMS.Domain
         private IEmailTemplateRepository _EmailTemplateRepository;
         private IGeneralCategoryRepository _GeneralCategoryRepository;
         private IRolePermissionRepository _RolePermissionRepository;
+<<<<<<< HEAD
         private ITaskListRepository _TaskListRepository;
+=======
+        private IDownloadVendorDatabaseRepository _DownloadVendorDatabaseRepository;
+>>>>>>> ba26ac9fcf7fb7a9a78a101c79044fcb70e0ff6b
 
         public IUserRepository UserRepository
         {
@@ -108,9 +116,15 @@ namespace TAM.VMS.Domain
             get { return _PermissionRepository ?? (_PermissionRepository = new PermissionRepository(_connection, _transaction)); }
         }
 
+<<<<<<< HEAD
         public ITaskListRepository TaskListRepository
         {
             get { return _TaskListRepository ?? (_TaskListRepository = new TaskListRepository(_connection, _transaction)); }
+=======
+        public IDownloadVendorDatabaseRepository DownloadVendorDatabaseRepository
+        {
+            get { return _DownloadVendorDatabaseRepository ?? (_DownloadVendorDatabaseRepository = new DownloadVendorDatabaseRepository(_connection, _transaction)); }
+>>>>>>> ba26ac9fcf7fb7a9a78a101c79044fcb70e0ff6b
         }
 
         public override void resetRepositories()
@@ -126,7 +140,12 @@ namespace TAM.VMS.Domain
             _MenuGroupRepository = null;
             _PermissionRepository = null;
             _MenuRepository = null;
+<<<<<<< HEAD
             _TaskListRepository = null;
+=======
+            _DownloadVendorDatabaseRepository = null;
+
+>>>>>>> ba26ac9fcf7fb7a9a78a101c79044fcb70e0ff6b
         }
     }
 }

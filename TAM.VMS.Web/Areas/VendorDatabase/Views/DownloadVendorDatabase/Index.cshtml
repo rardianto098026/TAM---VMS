@@ -1,0 +1,38 @@
+﻿
+@section scripts {
+    @await Html.PartialAsync("~/Areas/VendorDatabase/Views/DownloadVendorDatabase/Script/_DownloadVendorDatabase.cshtml")
+}
+
+@section modals {
+    @await Html.PartialAsync("~/Areas/VendorDatabase/Views/DownloadVendorDatabase/Component/_DownloadVendorDatabaseForm.cshtml")
+}
+
+<div class="portlet light margin-bottom-0">
+    <div class="div-title-menu">
+        <div class="page-head">
+            <div class="text-title-menu">
+                Download Vendor Database
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="downloadVendorDB">
+            <div class="portlet-body">
+                <div class="row mb-3">
+                    <div class="col-md-12" id="containerGrid">
+                        @await Html.PartialAsync("~/Areas/VendorDatabase/Views/DownloadVendorDatabase/Grid/_DownloadVendorDatabaseGrid.cshtml")
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 text-right" style="margin-top: 20px;">
+                        <a href="#" class="btn btn-success btn-sm" style="border-radius: 8px;font-size:12px; width: 200px" id="btnRequest">
+                            Request
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

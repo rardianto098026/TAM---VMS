@@ -11,6 +11,8 @@ namespace TAM.VMS.Infrastructure.Session
         public string Username { get; set; }
         public string RoleStr { get; set; }
         public string NoReg { get; set; }
+        public string Department { get; set; }
+        public string DepartmentID { get; set; }
         public string[] Roles { get { return RoleStr.Split(','); } }
         public bool IsUseMasterPassword { get; set; }
     }

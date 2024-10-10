@@ -11,11 +11,11 @@ using TAM.VMS.Domain.Object;
 using TAM.VMS.Infrastructure.General;
 using Microsoft.Data.SqlClient;
 
-namespace TAM.VMS.Service
+namespace TAM.VMS.Service.Modules.VendorDatabase.Service
 {
-    public class UserService : DbService
+    public class VendorDatabaseService : DbService
     {
-        public UserService(IDbHelper db) : base(db)
+        public VendorDatabaseService(IDbHelper db) : base(db)
         {
         }
 
@@ -24,11 +24,11 @@ namespace TAM.VMS.Service
             var result = new ObjectResult<APIUserAuthenticatedResponse>();
             try
             {
-                if ((!string.IsNullOrEmpty(model.Username) && !string.IsNullOrEmpty(model.Password) && !isLoginSSO) || isLoginSSO)
+                if (!string.IsNullOrEmpty(model.Username) && !string.IsNullOrEmpty(model.Password) && !isLoginSSO || isLoginSSO)
                 {
                     var USERNAME = model.Username;
                     var password = model.Password;
-                    var user = new Domain.User();
+                    var user = new User();
                     if (isLoginSSO)
                         user = GetUserByNoReg(model.NoReg);
                     else
@@ -117,26 +117,6 @@ namespace TAM.VMS.Service
 
             return results;
         }
-        public UserRoleView GetUserViewByUsername(string username)
-        {
-            UserRoleView result = null;
-
-            try
-            {
-                using (var sqlConnection = new SqlConnection(Db.Connection.ConnectionString))
-                {
-                    sqlConnection.Open();
-                    var sql = "SELECT TOP 1 * FROM [VW_UserRole] WHERE Username = @Username";
-                    result = sqlConnection.Query<UserRoleView>(sql, new { Username = username }).FirstOrDefault();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while retrieving the user role view.", ex);
-            }
-
-            return result;
-        }
 
         public User GetUserByUsername(string username)
         {
@@ -199,7 +179,7 @@ namespace TAM.VMS.Service
             {
                 if (getUsers == null || editAble != null)
                 {
-                    if (user.ID == default(Guid))
+                    if (user.ID == default)
                     {
                         var password = "123"; //ApplicationCacheManager.GetConfig<string>("DefaultPassword");
 
@@ -243,7 +223,7 @@ namespace TAM.VMS.Service
                     parametersRole.Add("@RoleID", roles == null ? "" : string.Join(",", roles));
                     parametersRole.Add("@By", SessionManager.Current);
                     db.Connection.Execute("usp_Core_UpdateUserRole", parametersRole, db.Transaction, commandType: System.Data.CommandType.StoredProcedure);
-                  
+
                     db.Commit();
                 }
                 else
@@ -303,7 +283,7 @@ namespace TAM.VMS.Service
 
         public Claim[] Authenticate(LoginViewModel model)
         {
-            if(string.IsNullOrEmpty(model.Username))
+            if (string.IsNullOrEmpty(model.Username))
                 throw new ModelException("Username", "Username not found");
             var username = model.Username;
             var password = model.TamUserPwd;
@@ -360,17 +340,6 @@ namespace TAM.VMS.Service
             };
 
             return claims;
-        }
-    }
-
-    public class ModelException : Exception
-    {
-        public string Title { get; }
-        public ModelException(string title, string message)
-            : base(message)
-        {
-            Title = title;
-            this.Data.Add("Title", title);
         }
     }
 }

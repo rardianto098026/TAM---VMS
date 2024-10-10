@@ -18,12 +18,17 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Folder Include="Modules\RequestList\Service\" />
     <Folder Include="Modules\RequestList\Response\" />
     <Folder Include="Modules\RequestList\Request\" />
 	<Folder Include="Modules\TaskList\Service\" />
     <Folder Include="Modules\TaskList\Response\" />
     <Folder Include="Modules\TaskList\Request\" />
+=======
+    <Folder Include="Modules\VendorDatabase\Response\" />
+    <Folder Include="Modules\VendorDatabase\Request\" />
+>>>>>>> ba26ac9fcf7fb7a9a78a101c79044fcb70e0ff6b
   </ItemGroup>
 
 </Project>
