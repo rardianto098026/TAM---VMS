@@ -1,40 +1,49 @@
-﻿@(Html.Kendo().Grid<TAM.VMS.Domain.DownloadVendorDatabase>()
-                    .Name("UserGrid")
-                    .Columns(columns =>
-                    {
-                        columns.Template("<span class='row-number'></span>").Title("No").Width(50).HtmlAttributes(new { @class = "text-center" });
-                        columns.Bound(o => o.FileName).Title("File Name").Width(150);
-                        columns.Bound(o => o.ReqDate).Title("Request Date").Width(150).Format("{0:dd/MM/yyyy HH:mm}");
-                        columns.Bound(o => o.ApprovalDate).Title("Approval Date").Width(150);
-                        columns.Bound(o => o.FileDate).Title("File Date").Width(150);
-                        columns.Bound(o => o.ID).Sortable(false).Title("Action").Width(110).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
-                        @"<div class=""btn-group"">
-                        <button type=""button"" class=""btn btn-primary green k-grid-edit"" title=""Download"" data-modal='UserModal'>
-                            Download
-                        </button>
-                        </div>"
-                        );
-                        columns.Bound(o => o.DeptId).Title("Department").Width(150);
-                        columns.Bound(o => o.Status).Title("Status").Width(150);
-                    })
-                    .NoRecords(conf => conf.Template("No User list to display"))
-                    .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
-                    .Filterable(ftb => ftb
-                                .Extra(false)
-                                .Mode(GridFilterMode.Menu)
-                                )
-                    .Sortable(sortable => sortable.SortMode(GridSortMode.SingleColumn))
-                    .Scrollable(s => s.Height("auto"))
-                    .DataSource(dataSource => dataSource
-                        .Ajax()
-                        .ServerOperation(true)
-                        .Read(read => read.Url(Url.Content("~/vendordatabase/downloadvendordatabase/read")))
-                        .PageSize(10)
-                        .Sort(sort => sort.Add("CreatedOn").Descending())
-                        .Model(model =>
-                        {
-                            model.Id(p => p.ID);
-                            model.Field(p => p.ID).Editable(false);
-                        })
-                    )
-                )
+﻿@(Html.Kendo().Grid<TAM.VMS.Domain.DownloadVendorDBView>()
+    .Name("vendorDBGrid")
+    .Columns(columns =>
+    {
+        columns.Template("<span class='row-number'></span>").Title("No").Width(50).HtmlAttributes(new { @class = "text-center" });
+        columns.Bound(o => o.FileName).Title("File Name").Width(150);
+        columns.Bound(o => o.ReqDate).Title("Request Date").Width(120).Format("{0:dd/MM/yyyy HH:mm}");
+        columns.Bound(o => o.ApprovalDate).Title("Approval Date").Width(120).Format("{0:dd/MM/yyyy HH:mm}");
+        columns.Bound(o => o.FileDate).Title("File Date").Width(120).Format("{0:dd/MM/yyyy}");
+
+        columns.Bound(o => o.ID).Sortable(false).Title("Action").Width(110)
+            .HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" })
+            .Filterable(false)
+            .ClientTemplate(
+                @"<div class=""btn-group"">
+                    <button type=""button""
+                            class=""btn #= StatusID == 2 ? 'green btn-primary' : 'btn-disabled' #""
+                            title=""Download""
+                            data-modal='RequestModal'
+                            #= StatusID == 2 ? '' : 'disabled' #>
+                        Download
+                    </button>
+                </div>"
+            );
+
+        columns.Bound(o => o.DepartmentName).Title("Department").Width(150);
+        columns.Bound(o => o.Status).Title("Status").Width(150);
+    })
+    .NoRecords(conf => conf.Template("No User list to display"))
+    .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
+    .Filterable(ftb => ftb
+        .Extra(false)
+        .Mode(GridFilterMode.Row)
+    )
+    .Sortable(sortable => sortable.SortMode(GridSortMode.SingleColumn))
+    .Scrollable(s => s.Height("auto"))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(true)
+        .Read(read => read.Url(Url.Content("~/vendordatabase/downloadvendordatabase/read")))
+        .PageSize(10)
+        .Sort(sort => sort.Add("ReqDate").Ascending())
+        .Model(model =>
+        {
+            model.Id(p => p.ID);
+            model.Field(p => p.ID).Editable(false);
+        })
+    )
+)

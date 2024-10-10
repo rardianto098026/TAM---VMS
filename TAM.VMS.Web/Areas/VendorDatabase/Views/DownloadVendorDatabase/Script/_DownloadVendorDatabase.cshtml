@@ -18,7 +18,7 @@
                 onDataBound();
             },
             InitHandlers: function () {
-                $("#btnAddUser").on('click', function (e) {
+                $("#btnRequest").on('click', function (e) {
                     var $modal = $.helper.getJqueryObject('RequestModal'),
                         $form = $modal.find("form");
 
@@ -86,7 +86,7 @@
                     }).then(function (isConfirm) {
                         if (isConfirm) {
                             $.postv2("@Url.Content("~/core/user/deleteuser")", { "ID": id }, function (d) {
-                                $.helper.grid.refresh("UserGrid");
+                                $.helper.grid.refresh("vendorDBGrid");
 
                                 swal("Info", "Success delete user", "success");
                             }).fail(function (error) {
@@ -96,76 +96,40 @@
                     })
                 });
 
-                $("#btnSaveUser").on('click', function (event) {
+                $("#btnRequestPositive").on('click', function (event) {
                     var $el = $(this),
                         isError = false,
                         $modal = $(this).closest(".modal"),
                         $form = $modal.find("form");
-
+                    
                     var formData = $.helper.form.serializeObject($form);
-                    var roles = $.helper.getCheckedValues("#UserRoleGrid tbody")
+                    debugger;
 
                     errMsg = "";
-                    if (roles.length == 0)
-                        errMsg += "Please select at least 1 role. \n";
-
-                    if ($form.valid() == false || errMsg != "") {
-                        if (errMsg != "")
-                            swal("Error", errMsg, "error");
-                        return;
-
-                    }
 
                     $el.prop("disabled", true);
 
-                    $.postv2("@Url.Content("~/Core/User/SaveUser")", { user: formData, roles: roles }, function (d) {
+                    $.postv2("@Url.Content("~/VendorDatabase/DownloadVendorDatabase/AddRequest")", { user: formData }, function (d) {
                         if (d == "") {
-                            $.helper.grid.refresh("UserGrid");
+                            $.helper.grid.refresh("vendorDBGrid");
                             $modal.modal("hide");
                             swal("Info", "Success update user", "success");
                         } else {
                             swal("Error", d, "error");
                         }
                     }).fail(function () {
-                        swal("Error", "Error when save user", "error");
+                        swal("Error", "Error when requesting Vendor Database", "error");
                     });
 
                     $el.prop("disabled", false);
                 });
-
-                $("#btnSaveResetPW").on('click', function (event) {
-                    var $el = $(this),
-                        isError = false,
-                        $modal = $(this).closest(".modal"),
-                        $form = $modal.find("form");
-
-                    var formData = $.helper.form.serializeObject($form);
-
-
-                    $el.prop("disabled", true);
-
-                    $.postv2("@Url.Content("~/Core/User/ResetPasswordUser")", { user: formData }, function (d) {
-                        if (d == "") {
-                            $.helper.grid.refresh("UserGrid");
-                            $modal.modal("hide");
-                            swal("Info", "Success update password", "success");
-                        } else {
-                            swal("Error", d, "error");
-                        }
-                    }).fail(function () {
-                        swal("Error", "Error when reset password", "error");
-                    });
-
-                    $el.prop("disabled", false);
-                });
-
 
                 $('.cball').change(function (e) {
                     var table = $(e.target).closest('table');
                     $('td input:checkbox', table).prop('checked', this.checked);
                 });
 
-                var grid = $("#UserGrid").data("kendoGrid");
+                var grid = $("#vendorDBGrid").data("kendoGrid");
 
                 grid.bind("dataBound", function () {
                     var items = grid.items();

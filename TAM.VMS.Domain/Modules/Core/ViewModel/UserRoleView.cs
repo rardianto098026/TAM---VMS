@@ -25,6 +25,8 @@ namespace TAM.VMS.Domain
         public string ModifiedBy { get; set; }
         public bool RowStatus { get; set; }
         public bool IsUserPassport { get; set; }
+        public string Department { get; set; }
+        public string DepartmentID { get; set; }
 
     }
 }

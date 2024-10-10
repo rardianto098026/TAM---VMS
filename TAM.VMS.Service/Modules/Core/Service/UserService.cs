@@ -117,6 +117,26 @@ namespace TAM.VMS.Service
 
             return results;
         }
+        public UserRoleView GetUserViewByUsername(string username)
+        {
+            UserRoleView result = null;
+
+            try
+            {
+                using (var sqlConnection = new SqlConnection(Db.Connection.ConnectionString))
+                {
+                    sqlConnection.Open();
+                    var sql = "SELECT TOP 1 * FROM [VW_UserRole] WHERE Username = @Username";
+                    result = sqlConnection.Query<UserRoleView>(sql, new { Username = username }).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while retrieving the user role view.", ex);
+            }
+
+            return result;
+        }
 
         public User GetUserByUsername(string username)
         {

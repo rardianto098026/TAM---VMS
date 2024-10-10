@@ -198,6 +198,7 @@ namespace TAM.VMS.Web.Areas.Core.Controllers
 
                     if (claims != null)
                     {
+                        var userRole = userService.GetUserViewByUsername(model.Username);
                         var user = userService.GetUserByUsername(model.Username);
                         var roles = userService.GetRolesByUsername(model.Username);
                         var userData = userService.GetAllUser().Where(x => x.Username == model.Username).FirstOrDefault();
@@ -209,6 +210,8 @@ namespace TAM.VMS.Web.Areas.Core.Controllers
                             Current = user.Username,
                             Name = user.Name,
                             Username = user.Username,
+                            DepartmentID = userRole.DepartmentID,
+                            Department = userRole.Department,
                             RoleStr = string.Join(",", roles),
                             IsUseMasterPassword = isUsedMasterPassword,
                             //NoReg = user.NoReg

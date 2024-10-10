@@ -10,6 +10,7 @@ using System.Data;
 using TAM.VMS.Domain.Object;
 using TAM.VMS.Infrastructure.General;
 using Microsoft.Data.SqlClient;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 
 namespace TAM.VMS.Service
 {
@@ -91,7 +92,7 @@ namespace TAM.VMS.Service
         public DataSourceResult GetDataSourceResult(DataSourceRequest request)
         {
             var genericDataTableQuery = new GenericDataSourceQuery(Db.Connection, request);
-            var result = genericDataTableQuery.GetData<DownloadVendorDatabase>("SELECT * FROM TB_R_DownloadVendorDB");
+            var result = genericDataTableQuery.GetData<DownloadVendorDBView>("SELECT * FROM [VW_DownloadVendorDB]");
             return result;
         }
 
@@ -167,73 +168,101 @@ namespace TAM.VMS.Service
         }
 
 
-        public string Save(User user, IEnumerable<string> roles)
-        {
-            //var result = true;
-            string result = string.Empty;
+        //public string Save(User user, IEnumerable<string> roles)
+        //{
+        //    //var result = true;
+        //    string result = string.Empty;
 
-            var getUsers = GetUser().Where(x => x.Username.ToLower() == user.Username.ToLower() && x.RowStatus == true).FirstOrDefault();
-            var editAble = GetUser().Where(x => x.Username.ToLower() == user.Username.ToLower() && x.ID == user.ID && x.RowStatus == true).FirstOrDefault();
+        //    var getUsers = GetUser().Where(x => x.Username.ToLower() == user.Username.ToLower() && x.RowStatus == true).FirstOrDefault();
+        //    var editAble = GetUser().Where(x => x.Username.ToLower() == user.Username.ToLower() && x.ID == user.ID && x.RowStatus == true).FirstOrDefault();
+
+        //    using (DbHelper db = new DbHelper(true))
+        //    {
+        //        if (getUsers == null || editAble != null)
+        //        {
+        //            if (user.ID == default)
+        //            {
+        //                var password = "123"; //ApplicationCacheManager.GetConfig<string>("DefaultPassword");
+
+        //                user.Password = MD5Helper.Encode(password);
+        //                user.Username = user.Username.ToLower();
+
+        //                user.CreatedBy = SessionManager.Current;
+        //                user.CreatedOn = DateTime.Now;
+        //                user.RowStatus = true;
+        //                user = db.UserRepository.Add(user, new string[] {
+        //                "Username",
+        //                "Password",
+        //                "Name",
+        //                "Surname",
+        //                "Email",
+        //                "NIP",
+        //                "CreatedOn",
+        //                "CreatedBy",
+        //                "RowStatus"
+        //            });
+        //            }
+        //            else
+        //            {
+        //                user.ModifiedBy = SessionManager.Current;
+        //                user.ModifiedOn = DateTime.Now;
+
+        //                db.UserRepository.Update(user, new string[] {
+        //                "Username",
+        //                "Name",
+        //                "Surname",
+        //                "Email",
+        //                "NIP",
+        //                "ModifiedOn",
+        //                "ModifiedBy"
+        //            });
+        //            }
+
+        //            // UPDATE ROLES
+        //            var parametersRole = new DynamicParameters();
+        //            parametersRole.Add("@UserID", user.ID);
+        //            parametersRole.Add("@RoleID", roles == null ? "" : string.Join(",", roles));
+        //            parametersRole.Add("@By", SessionManager.Current);
+        //            db.Connection.Execute("usp_Core_UpdateUserRole", parametersRole, db.Transaction, commandType: System.Data.CommandType.StoredProcedure);
+
+        //            db.Commit();
+        //        }
+        //        else
+        //        {
+        //            result = user.Username + " is already exist.";
+        //        }
+
+        //    }
+        //    return result;
+        //}
+
+        public string AddRequest(DownloadVendorDatabase vendorDB)
+        {
+            string result = string.Empty;
 
             using (DbHelper db = new DbHelper(true))
             {
-                if (getUsers == null || editAble != null)
+                vendorDB.FileName = "Database Vendor " + SessionManager.Department;
+                vendorDB.ReqDate = DateTime.Now;
+                vendorDB.DepartmentId = SessionManager.DepartmentID;
+                vendorDB.StatusId = "1"; // 1 = "Requested"
+                vendorDB.CreatedBy = SessionManager.Current;
+                vendorDB.CreatedOn = DateTime.Now;
+
+                vendorDB = db.DownloadVendorDatabaseRepository.Add(vendorDB, new string[]
                 {
-                    if (user.ID == default)
-                    {
-                        var password = "123"; //ApplicationCacheManager.GetConfig<string>("DefaultPassword");
-
-                        user.Password = MD5Helper.Encode(password);
-                        user.Username = user.Username.ToLower();
-
-                        user.CreatedBy = SessionManager.Current;
-                        user.CreatedOn = DateTime.Now;
-                        user.RowStatus = true;
-                        user = db.UserRepository.Add(user, new string[] {
-                        "Username",
-                        "Password",
-                        "Name",
-                        "Surname",
-                        "Email",
-                        "NIP",
-                        "CreatedOn",
-                        "CreatedBy",
-                        "RowStatus"
-                    });
-                    }
-                    else
-                    {
-                        user.ModifiedBy = SessionManager.Current;
-                        user.ModifiedOn = DateTime.Now;
-
-                        db.UserRepository.Update(user, new string[] {
-                        "Username",
-                        "Name",
-                        "Surname",
-                        "Email",
-                        "NIP",
-                        "ModifiedOn",
-                        "ModifiedBy"
-                    });
-                    }
-
-                    // UPDATE ROLES
-                    var parametersRole = new DynamicParameters();
-                    parametersRole.Add("@UserID", user.ID);
-                    parametersRole.Add("@RoleID", roles == null ? "" : string.Join(",", roles));
-                    parametersRole.Add("@By", SessionManager.Current);
-                    db.Connection.Execute("usp_Core_UpdateUserRole", parametersRole, db.Transaction, commandType: System.Data.CommandType.StoredProcedure);
-
-                    db.Commit();
-                }
-                else
-                {
-                    result = user.Username + " is already exist.";
-                }
-
+                    "FileName",
+                    "ReqDate",
+                    "DepartmentId",
+                    "StatusId",
+                    "CreatedOn",
+                    "CreatedBy",
+                });
+                db.Commit();
             }
             return result;
         }
+
 
         public void Delete(Guid id)
         {

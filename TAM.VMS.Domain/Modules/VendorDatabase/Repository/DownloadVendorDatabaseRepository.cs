@@ -2,11 +2,11 @@
 
 namespace TAM.VMS.Domain
 {
-    public partial interface IUserRepository : IRepository<User>
+    public partial interface IDownloadVendorDatabaseRepository : IRepository<DownloadVendorDatabase>
     {
     }
 
-    public partial class DownloadVendorDatabaseRepository : Repository<User>, IUserRepository
+    public partial class DownloadVendorDatabaseRepository : Repository<DownloadVendorDatabase>, IDownloadVendorDatabaseRepository
     {
         public DownloadVendorDatabaseRepository(IDbConnection connection, IDbTransaction transaction)
             : base(connection, transaction)

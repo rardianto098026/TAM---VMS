@@ -34,56 +34,38 @@ namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
         }
 
         [HttpPost]
-        public IActionResult SaveUser(User user, IEnumerable<string> roles)
+        public IActionResult AddRequest(DownloadVendorDatabase vendorDB)
         {
-            var result = Service<VendorDatabaseService>().Save(user, roles);
+            var result = Service<DownloadVendorDatabaseService>().AddRequest(vendorDB);
 
             return Ok(result);
         }
 
-        [HttpPost]
-        public IActionResult ResetPasswordUser(ResetPassword user)
-        {
-            user.ResetNewPW = MD5Helper.Encode(user.ResetNewPW);
-            user.ResetConfirmNewPW = MD5Helper.Encode(user.ResetConfirmNewPW);
-            string result = string.Empty;
-            if (user.ResetNewPW != user.ResetConfirmNewPW)
-            {
-                result = "New password and Confirm password doesn't matched";
-            }
-            else
-            {
-                result = Service<VendorDatabaseService>().ResetPassword(user);
-            }
+        //[HttpPost]
+        //public IActionResult ChangePasswordUser(ChangePassword user)
+        //{
+        //    var dataUser = Service<VendorDatabaseService>().GetUserByUsername(SessionManager.Current);
+        //    user.Id = dataUser.ID;
+        //    string exsPW = dataUser.Password;
+        //    user.CurrentPW = MD5Helper.Encode(user.CurrentPW);
+        //    user.NewPW = MD5Helper.Encode(user.NewPW);
+        //    user.ConfirmNewPW = MD5Helper.Encode(user.ConfirmNewPW);
+        //    string result = string.Empty;
+        //    if (user.CurrentPW != exsPW)
+        //    {
+        //        result = "Current password is wrong";
+        //    }
+        //    else if (user.NewPW != user.ConfirmNewPW)
+        //    {
+        //        result = "New password and Confirm password doesn't matched";
+        //    }
+        //    else
+        //    {
+        //        result = Service<VendorDatabaseService>().ChangePassword(user);
+        //    }
 
-            return Ok(result);
-        }
-
-        [HttpPost]
-        public IActionResult ChangePasswordUser(ChangePassword user)
-        {
-            var dataUser = Service<VendorDatabaseService>().GetUserByUsername(SessionManager.Current);
-            user.Id = dataUser.ID;
-            string exsPW = dataUser.Password;
-            user.CurrentPW = MD5Helper.Encode(user.CurrentPW);
-            user.NewPW = MD5Helper.Encode(user.NewPW);
-            user.ConfirmNewPW = MD5Helper.Encode(user.ConfirmNewPW);
-            string result = string.Empty;
-            if (user.CurrentPW != exsPW)
-            {
-                result = "Current password is wrong";
-            }
-            else if (user.NewPW != user.ConfirmNewPW)
-            {
-                result = "New password and Confirm password doesn't matched";
-            }
-            else
-            {
-                result = Service<VendorDatabaseService>().ChangePassword(user);
-            }
-
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
         [HttpPost]
         public IActionResult DeleteUser(Guid id)
