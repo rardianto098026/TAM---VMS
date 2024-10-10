@@ -23,6 +23,10 @@ namespace TAM.VMS.Domain
         IGeneralCategoryRepository GeneralCategoryRepository { get; } 
         IConfigRepository ConfigRepository { get; }
         IEmailTemplateRepository EmailTemplateRepository { get; }
+
+
+        ITaskListRepository TaskListRepository { get; }
+
         IDownloadVendorDatabaseRepository DownloadVendorDatabaseRepository { get; }
     }
     public class DbHelper : DbContext, IDbHelper
@@ -59,6 +63,7 @@ namespace TAM.VMS.Domain
         private IEmailTemplateRepository _EmailTemplateRepository;
         private IGeneralCategoryRepository _GeneralCategoryRepository;
         private IRolePermissionRepository _RolePermissionRepository;
+        private ITaskListRepository _TaskListRepository;
         private IDownloadVendorDatabaseRepository _DownloadVendorDatabaseRepository;
 
         public IUserRepository UserRepository
@@ -107,9 +112,14 @@ namespace TAM.VMS.Domain
             get { return _PermissionRepository ?? (_PermissionRepository = new PermissionRepository(_connection, _transaction)); }
         }
 
+        public ITaskListRepository TaskListRepository
+        {
+            get { return _TaskListRepository ?? (_TaskListRepository = new TaskListRepository(_connection, _transaction)); }
+        }
         public IDownloadVendorDatabaseRepository DownloadVendorDatabaseRepository
         {
             get { return _DownloadVendorDatabaseRepository ?? (_DownloadVendorDatabaseRepository = new DownloadVendorDatabaseRepository(_connection, _transaction)); }
+
         }
 
         public override void resetRepositories()
@@ -125,9 +135,8 @@ namespace TAM.VMS.Domain
             _MenuGroupRepository = null;
             _PermissionRepository = null;
             _MenuRepository = null;
+            _TaskListRepository = null;
             _DownloadVendorDatabaseRepository = null;
-
         }
-
     }
 }

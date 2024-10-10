@@ -1,0 +1,208 @@
+﻿<style type="text/css">
+    .select2-container {
+        z-index: 1000000000;
+    }
+</style>
+<script type="text/javascript">
+
+    function onDataBound(e) {
+        ShowOriginalKendoToolTip();
+    }
+
+    function UserManager() {
+
+        return {
+
+            InitManagement: function () {
+                this.InitHandlers();
+                this.InitValidation();
+                onDataBound();
+            },
+            InitValidation: function () {
+                $("#UserForm").validate({
+                    ignore :"",
+                    rules: {
+                        Username: {
+                            required: true
+                        },
+                        Email: {
+                            required: true
+                        },
+                        Name: {
+                            required: true
+                        },
+                        NIP: {
+                            required: true
+                        },
+                    }
+                });
+            },
+            InitHandlers: function () {
+                $("#btnAddUser").on('click', function (e) {
+                    var $modal = $.helper.getJqueryObject('UserModal'),
+                        $form = $modal.find("form");
+
+                    $('.nav-tabs a[href="#tab_user"]').tab('show');
+                    $.helper.form.clear($form);
+
+                    $modal.modal("show");
+                    $(".form-select2").select2();
+                });
+
+                $('.k-grid').on('click', '.btnEdit', function (e) {
+                    let $el = $(this),
+					    $tr = $el.closest("tr"),
+					    $grid = $el.closest(".k-grid").data("kendoGrid"),
+                        dataItem = $grid.dataItem($tr),
+					    $modal = $.helper.getJqueryObject($el.data("modal")),
+                        $form = $modal.find("form");
+                    dataItem.RoleID = dataItem.RoleID != null ? dataItem.RoleID.toLowerCase() : null;
+
+                    $('.nav-tabs a[href="#tab_user"]').tab('show');
+                    $.helper.form.clear($form);
+                    $.helper.form.fill($form, dataItem);
+
+
+                    if (dataItem.RoleID) {
+                        rolesid = dataItem.RoleID.split(',');
+                        for (i = 0; i < rolesid.length; i++) {
+                            $('#UserRoleGrid tbody tr td input[type="checkbox"][value="' + rolesid[i].toLowerCase() + '"]').prop('checked', true);
+                        }
+                    }
+
+                    $modal.modal("show");
+                    $(".form-select2").select2();
+
+                });
+
+
+                $('.k-grid').on('click', '.btnResetPw', function (e) {
+                    let $el = $(this),
+                        $tr = $el.closest("tr"),
+                        $grid = $el.closest(".k-grid").data("kendoGrid"),
+                        dataItem = $grid.dataItem($tr),
+                        $modal = $.helper.getJqueryObject($el.data("modal")),
+                        $form = $modal.find("form");
+
+                    $.helper.form.clear($form);
+                    $("#IdResetPW").val(dataItem.ID);
+
+                    $modal.modal("show");
+
+                });
+
+                $('.k-grid').on('click', '.btnDelete', function (e) {
+                    let id = $(this).data("id");
+
+                    swal({
+					    title: "Confirmation",
+					    text: "Are you sure want to delete data? ",
+					    icon: "warning",
+					    buttons: [
+						    'No',
+						    'Yes'
+					    ],
+					    dangerMode: true
+                    }).then(function (isConfirm) {
+                        if (isConfirm) {
+                            $.postv2("@Url.Content("~/core/user/deleteuser")", { "ID": id }, function (d) {
+                                $.helper.grid.refresh("TaskListGrid");
+
+                                swal("Info", "Success delete user", "success");
+                            }).fail(function (error) {
+                                swal("Error", error.responseJSON.Message, "error");
+                            });
+                        }
+                    })
+                });
+
+                $("#btnSaveUser").on('click', function (event) {
+                    var $el = $(this),
+                        isError = false,
+                        $modal = $(this).closest(".modal"),
+                        $form = $modal.find("form");
+
+                    var formData = $.helper.form.serializeObject($form);
+                    var roles = $.helper.getCheckedValues("#UserRoleGrid tbody")
+
+                    errMsg = "";
+                    if (roles.length == 0)
+                        errMsg += "Please select at least 1 role. \n";
+
+                    if ($form.valid() == false || errMsg != "") {
+                        if (errMsg != "")
+                            swal("Error", errMsg, "error");
+                        return;
+
+                    }
+
+                    $el.prop("disabled", true);
+
+                    $.postv2("@Url.Content("~/Core/User/SaveUser")", { user: formData, roles: roles }, function (d) {
+                        if (d == "") {
+                            $.helper.grid.refresh("TaskListGrid");
+                            $modal.modal("hide");
+                            swal("Info", "Success update user", "success");
+                        } else {
+                            swal("Error", d, "error");
+                        }
+                    }).fail(function () {
+                        swal("Error", "Error when save user", "error");
+                    });
+
+                    $el.prop("disabled", false);
+                });
+
+                $("#btnSaveResetPW").on('click', function (event) {
+                    var $el = $(this),
+                        isError = false,
+                        $modal = $(this).closest(".modal"),
+                        $form = $modal.find("form");
+
+                    var formData = $.helper.form.serializeObject($form);
+
+
+                    $el.prop("disabled", true);
+
+                    $.postv2("@Url.Content("~/Core/User/ResetPasswordUser")", { user: formData }, function (d) {
+                        if (d == "") {
+                            $.helper.grid.refresh("TaskListGrid");
+                            $modal.modal("hide");
+                            swal("Info", "Success update password", "success");
+                        } else {
+                            swal("Error", d, "error");
+                        }
+                    }).fail(function () {
+                        swal("Error", "Error when reset password", "error");
+                    });
+
+                    $el.prop("disabled", false);
+                });
+
+
+                $('.cball').change(function (e) {
+                    var table = $(e.target).closest('table');
+                    $('td input:checkbox', table).prop('checked', this.checked);
+                });
+
+                var grid = $("#TaskListGrid").data("kendoGrid");
+
+                grid.bind("dataBound", function () {
+                    var items = grid.items();
+                    var rowNumber = grid.dataSource.page() * grid.dataSource.pageSize() - grid.dataSource.pageSize() + 1;
+
+                    items.each(function () {
+                        $(this).find("td:nth-child(1)").html(rowNumber++); // Update the row number cell
+                    });
+                });
+            },
+        };
+    }
+
+    // On document ready
+    $(document).ready(function () {
+	    UserManager = new UserManager();
+        UserManager.InitManagement();
+    });
+
+</script>

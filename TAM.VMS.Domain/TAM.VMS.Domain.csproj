@@ -13,4 +13,13 @@
     <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2023.1.117" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modules\RequestList\Model\" />
+    <Folder Include="Modules\RequestList\ViewModel\" />
+    <Folder Include="Modules\RequestList\Repository\" />
+    <Folder Include="Modules\TaskList\Model\" />
+	<Folder Include="Modules\TaskList\ViewModel\" />
+	<Folder Include="Modules\TaskList\Repository\" />
+  </ItemGroup>
+
 </Project>
