@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <Content Update="Areas\TaskList\Views\TaskList\Component\_TaskListForm.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -39,9 +38,7 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-=======
     <Folder Include="wwwroot\fonts\" />
->>>>>>> ba26ac9fcf7fb7a9a78a101c79044fcb70e0ff6b
   </ItemGroup>
 
 </Project>

@@ -18,9 +18,9 @@ namespace TAM.VMS.Web.Areas.TaskList.Controllers
     {
         public IActionResult Index()
         {
-            var task = Service<TaskListService>().GetTask();
+            var roles = Service<RoleService>().GetRoles();
 
-            ViewBag.Task = task;
+            ViewBag.Roles = roles;
 
             return View();
         }

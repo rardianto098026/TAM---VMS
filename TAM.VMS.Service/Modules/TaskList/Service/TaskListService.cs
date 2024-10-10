@@ -19,7 +19,7 @@ namespace TAM.VMS.Service
         public DataSourceResult GetDataSourceResult(DataSourceRequest request)
         {
             var genericDataTableQuery = new GenericDataSourceQuery(Db.Connection, request);
-            var result = genericDataTableQuery.GetData<UserRoleView>("SELECT * FROM TB_M_TaskList");
+            var result = genericDataTableQuery.GetData<TaskList>("SELECT * FROM [TB_M_TaskList]");
             return result;
         }
     }
