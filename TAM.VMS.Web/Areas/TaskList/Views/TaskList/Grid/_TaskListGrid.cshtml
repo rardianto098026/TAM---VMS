@@ -9,7 +9,7 @@ Html.Kendo().Grid<TAM.VMS.Domain.TaskView>()
         Column.Bound(o => o.Complience).Title("Complience").Width(150);
         Column.Bound(o => o.TransactionCategory).Title("Transaction Category").Width(150);
         Column.Bound(o => o.ModifiedBy).Title("Modified By").Width(150);
-        Column.Bound(o => o.ModifiedDate).Title("Modified Date").Width(150);
+        Column.Bound(o => o.ModifiedDate).Title("Modified Date").Width(150).Format("{0:dd/MM/yyyy HH:mm}");
         Column.Bound(o => o.ID).Sortable(false).Title("Action").Width(110)
             .HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" })
             .Filterable(false)
