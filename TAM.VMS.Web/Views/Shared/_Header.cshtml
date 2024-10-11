@@ -1,5 +1,5 @@
 ﻿@*@inject TAM.VMS.Service.NotificationService notification
-    @inject TAM.VMS.Service.DocumentApprovalService task*@
+    @inject TAM.VMS.Service.DocumentApprovalService task*@ 
 @inject TAM.VMS.Service.RoleService role
 @inject TAM.VMS.Service.UserService usersvc
 @{
@@ -8,123 +8,60 @@
     var roles = role.GetUserRoles();
     var isUseMasterPassword = usersvc.IsUseMasterPassword();
 }
-<div class="page-header navbar navbar-fixed-top" style="background: #01579b;background-image: url(@Url.Content("~/img/bg.png")); background-size: cover;">
+<div class="page-header navbar navbar-fixed-top" style="background: linear-gradient(to bottom, #03BFD7, #75c4f0 ,#DEDEDE);">
     <div class="page-header-inner">
         <div class="page-logo">
             <a href="@Url.Content("~/Core/User")">
                 @*<img src="~/img/icons8-booking-96.png" alt="logo" style="margin-top:20px;" class="logo-default" />*@
-                @*<img src="~/img/dome_red.png" alt="logo" style="margin-top:6px; height:60px" class="logo-default"/>*@
-                <h3 class="font-white bold" style="margin-top: 10px !important;">VMS</h3>
-                <label id="lblSubtitle" class="font-white">Vendor Management System</label>
+                @*<img src="~/img/dome_red.png" alt="logo" style="margin-top:6px; height:60px" class="logo-default"/>*@ 
+                <h3 class="font-white bold" style="margin-top: 10px !important;">VMS Logo</h3>
             </a>
             <br />
             <br />
             <div class="menu-toggler sidebar-toggler" style="display: block; margin-left:17px; margin-top:-7px">
             </div>
-            @*<div class="menu-toggler sidebar-toggler">*@
-
         </div>
+
+        <div class="navbar-center" style="position: absolute; left: 50%; transform: translateX(-50%);">
+        <h2 class="text-white" style="
+            font-family: 'Poppins', sans-serif;
+            font-weight: 30;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 15px;">
+            TAM Vendor Management System
+        </h2>
+    </div>
+
+
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
 
         <div class="page-top">
             <div class="top-menu">
                 <ul class="nav navbar-nav pull-right">
-                    <li class="dropdown dropdown-extended notification-wrapper" title="Notifications" data-badge-class="badge-danger">
-                        <!--<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <i class="fas fa-bell font-white" style="font-size: 20px"></i>-->
-                        @*<span class="badge badge-danger notification-count"> @notifications.Count() </span>*@
-                        <!--</a>-->
-                        <ul class="dropdown-menu">
-                            @*<li class="external">
-                                    <h3><span class="bold">@notifications.Count() Tables</span></h3>
-                                    <a href="@Url.Content("~/Core/Notification")">view all</a>
-                                </li>
-                                <li>
-                                    <ul class="dropdown-menu-list scroller list-notifications" style="height: 250px; overflow: auto; width: auto;" data-handle-color="#637283" data-initialized="1">
-                                        @foreach (var notif in notifications)
-                                        {
-                                            <li>
-                                                <a href="@Url.Content(notif.Url + "?tab=" + notif.Tab)">
-                                                    <span class="details">
-                                                        @notif.Count Records <b>@notif.Name</b>
-                                                    </span>
-                                                    <br />*@
-                            @*<b>@String.Format("{0:yyyy-MM-dd}", notif.CreatedOn)</b>*@
-                            @*<b>
-                                                    @(notif.ModifiedOn != null ? notif.ModifiedOn.Value.ToString("yyyy-MM-dd hh:mm:ss tt") : notif.CreatedOn.Value.ToString("yyyy-MM-dd hh:mm:ss tt"))
-                                                    </b>
-
-                                                </a>
-
-                                                    </li>
-                                        }
-                                    </ul>
-                                </li>*@
-                        </ul>
+                    <li style="font-family: 'SF Pro Display', sans-serif; font-style: italic; font-weight: 400;">
+                        <p id="current-date" style="color: whitesmoke; margin-bottom: 0; margin-right: 2"></p> 
+                        <p id="current-time" style="color: whitesmoke; margin-top: 0; margin-right:2"></p> 
+                    </li>
+                    <li>
+                        <a href="#" class="icon-notification" style="color: white; margin-right: 15px;">
+                            <i class="fas fa-bell mt-4" style="font-size: 18px; margin-top: 15px; vertical-align: top;"></i> 
+                        </a>
                     </li>
                     <li class="dropdown dropdown-extended notification-wrapper" title="Tasks" data-template="_taskTpl" data-badge-class="badge-danger">
-                        @*<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <i class="fas icon-calendar font-white" style="font-size: 20px"></i>
-                                @if(tasks.Count() > 0){
-                                <span class="badge badge-danger notification-count">@tasks.Count()</span>
-                                }
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="external">
-                                    <h3><span>@tasks.Count() pending tasks</span></h3>
-                                    <a href="@Url.Content("~/Core/Task")">view all</a>
-
-                                </li>
-                                <li>
-                                    <ul class="dropdown-menu-list scroller" style="height: 250px; overflow: auto; width: auto;" data-handle-color="#637283" data-initialized="1">
-                                        <li>
-                                            <ul class="dropdown-menu-list scroller list-notifications" style="height: 250px; overflow: auto; width: auto;" data-handle-color="#637283" data-initialized="1">
-                                                @if (tasks.Count() == 0)
-                                                {
-                                                <li>
-                                                    <a style="pointer-events: none;">
-                                                        <span class="details"> No pending tasks</span>
-                                                    </a>
-                                                </li>
-                                                } else
-                                                {
-                                                    foreach(var pending in tasks)
-                                                    {
-                                                    <li>
-                                                        <a href="@Url.Content("~/Core/Form/RedirectTo?formKey=" + pending.FormKey + "&actionTypeCode=view&id="+ pending.ID)">
-                                                            <span class="task">
-                                                                <span class="desc">
-                                                                    @pending.Title
-                                                                </span>
-                                                                <span class="percent">@pending.Progress%</span>
-                                                                <span class="progress">
-                                                                    <span style="width: @pending.Progress%;" class="progress-bar progress-bar-success" aria-valuenow="@(pending.Progress)" aria-valuemin="0" aria-valuemax="100"></span>
-                                                                </span>
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                    }
-                                                }
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>*@
                     </li>
                     <li class="dropdown dropdown-user dropdown-dark">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" style=" height:99%">
-                            <span class="username username-hide-on-mobile" style="color:whitesmoke; vertical-align: top; margin-top:-7%; text-align:right; font-size:13px"> @(User.GetClaim("Name") ?? "Guest") <br /> @foreach (var role in roles)
-                            {@role.Name} </span>
                             <img alt="Default Profile Picture" class="img-circle" src="~/Content/img/avatar-3.png" />
-                            @*<i class="icon-user" style="width:50px"></i>*@
+                            <span class="username username-hide-on-mobile" style="color:whitesmoke; vertical-align: top; margin-top:-7%; text-align:right; font-size:13px">
+                                @(User.GetClaim("Name") ?? "Guest") <br /> 
+                                @foreach (var role in roles)
+                                {
+                                    @role.Name
+                                }
+                            </span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
-                            @*<li>
-                                    <a href="~/Home/Profile">
-                                        <i class="icon-user"></i> My Profile
-                                    </a>
-                                </li>*@
-                            @*<li class="divider"></li>*@
                             @if (!isUseMasterPassword)
                             {
                                 <li>
