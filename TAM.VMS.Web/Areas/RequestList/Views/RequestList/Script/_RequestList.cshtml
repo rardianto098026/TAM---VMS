@@ -106,7 +106,7 @@
                     }).then(function (isConfirm) {
                         if (isConfirm) {
                             $.postv2("@Url.Content("~/core/user/deleteuser")", { "ID": id }, function (d) {
-                                $.helper.grid.refresh("TaskListGrid");
+                                $.helper.grid.refresh("RequestListGrid");
 
                                 swal("Info", "Success delete user", "success");
                             }).fail(function (error) {
@@ -140,7 +140,7 @@
 
                     $.postv2("@Url.Content("~/Core/User/SaveUser")", { user: formData, roles: roles }, function (d) {
                         if (d == "") {
-                            $.helper.grid.refresh("TaskListGrid");
+                            $.helper.grid.refresh("RequestListGrid");
                             $modal.modal("hide");
                             swal("Info", "Success update user", "success");
                         } else {
@@ -166,7 +166,7 @@
 
                     $.postv2("@Url.Content("~/Core/User/ResetPasswordUser")", { user: formData }, function (d) {
                         if (d == "") {
-                            $.helper.grid.refresh("TaskListGrid");
+                            $.helper.grid.refresh("RequestListGrid");
                             $modal.modal("hide");
                             swal("Info", "Success update password", "success");
                         } else {
@@ -185,14 +185,14 @@
                     $('td input:checkbox', table).prop('checked', this.checked);
                 });
 
-                var grid = $("#TaskListGrid").data("kendoGrid");
+                var grid = $("#RequestListGrid").data("kendoGrid");
 
                 grid.bind("dataBound", function () {
                     var items = grid.items();
                     var rowNumber = grid.dataSource.page() * grid.dataSource.pageSize() - grid.dataSource.pageSize() + 1;
 
                     items.each(function () {
-                        $(this).find("td:nth-child(2)").html(rowNumber++); // Update the row number cell
+                        $(this).find("td:nth-child(1)").html(rowNumber++); // Update the row number cell
                     });
                 });
             },
