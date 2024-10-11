@@ -20,6 +20,9 @@ namespace TAM.VMS.Domain
         public string CreatedBy { get; set; }
         public DateTime? ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
+        public string Level { get; set; }
+        public string RoleName { get; set; }
+        public string RoleDesc { get; set; }
     }
 
 }

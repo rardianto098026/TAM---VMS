@@ -119,6 +119,29 @@ namespace TAM.VMS.Domain
 
             return new DataSourceResult { Data = data, Total = totalCount };
         }
+        public DataSourceResult GetData<T>(string query, DynamicParameters parameters = null)
+        {
+            int displayLength = DataTableRequest.PageSize == 0 ? int.MaxValue : DataTableRequest.PageSize;
+            int displayStart = (DataTableRequest.Page - 1) * displayLength + 1;
+
+            string filterQuery = DataTableRequest.Filters != null ? BuildFilter(DataTableRequest.Filters.ToList(), "AND") : "1=1";
+            string sortQuery = BuildSort<T>();
+
+            // Assuming FetchQuery is still applicable; adjust as needed
+            string sqlQuery = string.Format(FetchQuery, displayLength, query, TABLE_ALIAS, filterQuery, sortQuery, displayStart);
+            IEnumerable<T> data;
+
+            // Use the provided parameters for the query
+            data = Connection.Query<T>(
+                    sqlQuery,
+                    param: parameters ?? new DynamicParameters(), // Handle case where parameters are null
+                    commandTimeout: 0
+                ).ToList();
+            int totalCount = data.Count();
+
+            return new DataSourceResult { Data = data, Total = totalCount };
+        }
+
         protected virtual int GetTotalCount(string query, string filterQuery)
         {
             var sqlString = string.Format("SELECT COUNT(*) FROM ({0}) AS {1} WHERE ({2})", query, TABLE_ALIAS, string.IsNullOrEmpty(filterQuery) ? "1=1" : filterQuery);

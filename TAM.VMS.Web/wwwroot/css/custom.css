@@ -65,8 +65,6 @@ body.loading .ajax-loading {
     font-weight: 1000;
     font-size: 2rem;
     font-style: italic;
-<<<<<<< HEAD
-=======
 }
 
 .k-header {
@@ -75,5 +73,9 @@ body.loading .ajax-loading {
 
 .k-state-selected {
     background-color: #03BFD7 !important;
->>>>>>> ba26ac9fcf7fb7a9a78a101c79044fcb70e0ff6b
+}
+
+.wrap-text {
+    white-space: normal !important;
+    word-wrap: break-word !important;
 }

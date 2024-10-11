@@ -40,38 +40,5 @@ namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
 
             return Ok(result);
         }
-
-        //[HttpPost]
-        //public IActionResult ChangePasswordUser(ChangePassword user)
-        //{
-        //    var dataUser = Service<VendorDatabaseService>().GetUserByUsername(SessionManager.Current);
-        //    user.Id = dataUser.ID;
-        //    string exsPW = dataUser.Password;
-        //    user.CurrentPW = MD5Helper.Encode(user.CurrentPW);
-        //    user.NewPW = MD5Helper.Encode(user.NewPW);
-        //    user.ConfirmNewPW = MD5Helper.Encode(user.ConfirmNewPW);
-        //    string result = string.Empty;
-        //    if (user.CurrentPW != exsPW)
-        //    {
-        //        result = "Current password is wrong";
-        //    }
-        //    else if (user.NewPW != user.ConfirmNewPW)
-        //    {
-        //        result = "New password and Confirm password doesn't matched";
-        //    }
-        //    else
-        //    {
-        //        result = Service<VendorDatabaseService>().ChangePassword(user);
-        //    }
-
-        //    return Ok(result);
-        //}
-
-        [HttpPost]
-        public IActionResult DeleteUser(Guid id)
-        {
-            Service<VendorDatabaseService>().Delete(id);
-            return Ok();
-        }
     }
 }

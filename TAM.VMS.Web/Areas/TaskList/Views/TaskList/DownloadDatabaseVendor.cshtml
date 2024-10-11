@@ -1,0 +1,34 @@
+﻿@section scripts {
+    @await Html.PartialAsync("~/Areas/TaskList/Views/TaskList/Script/_DownloadDatabaseVendor.cshtml")
+}
+
+@section modals {
+    @await Html.PartialAsync("~/Areas/TaskList/Views/TaskList/Component/_DownloadDatabaseVendorForm.cshtml")
+}
+
+<div class="portlet light margin-bottom-0">
+    <div class="div-title-menu">
+        <div class="page-head">
+            <div class="text-title-menu">
+                @{
+                    // Attempt to cast ViewBag.Roles to a List<string>
+                    var roleFix = ViewBag.roleFix as String;
+                }
+
+                My Task List - @(roleFix != null && roleFix != "" ? roleFix : "No Role") - Download Database Vendor - Detail
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="UserAccess">
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12" id="containerGrid">
+                        @await Html.PartialAsync("~/Areas/TaskList/Views/TaskList/Grid/_DownloadDatabaseVendorGrid.cshtml")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

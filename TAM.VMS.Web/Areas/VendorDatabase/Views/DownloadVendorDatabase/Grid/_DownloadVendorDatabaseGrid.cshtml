@@ -2,19 +2,43 @@
     .Name("vendorDBGrid")
     .Columns(columns =>
     {
-        columns.Template("<span class='row-number'></span>").Title("No").Width(50).HtmlAttributes(new { @class = "text-center" });
-        columns.Bound(o => o.FileName).Title("File Name").Width(150);
-        columns.Bound(o => o.ReqDate).Title("Request Date").Width(120).Format("{0:dd/MM/yyyy HH:mm}");
-        columns.Bound(o => o.ApprovalDate).Title("Approval Date").Width(120).Format("{0:dd/MM/yyyy HH:mm}");
-        columns.Bound(o => o.FileDate).Title("File Date").Width(120).Format("{0:dd/MM/yyyy}");
+        columns.Template("<span class='row-number'></span>")
+            .Title("No")
+            .Width(50)
+            .HtmlAttributes(new { @class = "text-center" });
 
-        columns.Bound(o => o.ID).Sortable(false).Title("Action").Width(110)
+        columns.Bound(o => o.FileName)
+            .Title("File Name")
+            .Width(150);
+
+        columns.Bound(o => o.ReqDate)
+            .Title("Request Date")
+            .Width(120)
+            .Format("{0:dd/MM/yyyy HH:mm}")
+            .HtmlAttributes(new { @class = "text-center" });
+
+        columns.Bound(o => o.ApprovalDate)
+            .Title("Approval Date")
+            .Width(120)
+            .Format("{0:dd/MM/yyyy HH:mm}")
+            .HtmlAttributes(new { @class = "text-center" });
+
+        columns.Bound(o => o.FileDate)
+            .Title("File Date")
+            .Width(120)
+            .Format("{0:dd/MM/yyyy}")
+            .HtmlAttributes(new { @class = "text-center" });
+
+        columns.Bound(o => o.ID)
+            .Sortable(false)
+            .Title("Action")
+            .Width(110)
             .HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" })
             .Filterable(false)
             .ClientTemplate(
                 @"<div class=""btn-group"">
                     <button type=""button""
-                            class=""btn #= StatusID == 2 ? 'green btn-primary' : 'btn-disabled' #""
+                            class=""btn #= StatusID == 2 ? 'green btn-primary' : 'btn-grey' #""
                             title=""Download""
                             data-modal='RequestModal'
                             #= StatusID == 2 ? '' : 'disabled' #>
@@ -23,10 +47,17 @@
                 </div>"
             );
 
-        columns.Bound(o => o.DepartmentName).Title("Department").Width(150);
-        columns.Bound(o => o.Status).Title("Status").Width(150);
+        columns.Bound(o => o.DepartmentName)
+            .Title("Department")
+            .Width(150)
+            .HtmlAttributes(new { @class = "text-center" });
+
+        columns.Bound(o => o.Status)
+            .Title("Status")
+            .Width(150)
+            .HtmlAttributes(new { @class = "text-center" });
     })
-    .NoRecords(conf => conf.Template("No User list to display"))
+    .NoRecords(conf => conf.Template("No Request Download Database Vendor list to display"))
     .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
     .Filterable(ftb => ftb
         .Extra(false)
