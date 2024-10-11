@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\RequestList\Service\" />
+	<Folder Include="Modules\RequestList\Service\" />
     <Folder Include="Modules\RequestList\Response\" />
     <Folder Include="Modules\RequestList\Request\" />
 	<Folder Include="Modules\TaskList\Service\" />

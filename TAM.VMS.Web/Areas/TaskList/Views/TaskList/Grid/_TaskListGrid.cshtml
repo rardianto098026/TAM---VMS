@@ -1,16 +1,55 @@
 ﻿@(
-Html.Kendo().Grid<TAM.VMS.Domain.TaskView>()
+Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
     .Name("TaskListGrid")
     .Columns(Column =>
     {
-        Column.Template("<span class='row-number'></span>").Title("No").Width(50).HtmlAttributes(new { @class = "text-center" });
-        Column.Bound(o => o.ModuleName).Title("Module Name").Width(150);
-        Column.Bound(o => o.VendorName).Title("Vendor Name").Width(150);
-        Column.Bound(o => o.Complience).Title("Complience").Width(150);
-        Column.Bound(o => o.TransactionCategory).Title("Transaction Category").Width(150);
-        Column.Bound(o => o.ModifiedBy).Title("Modified By").Width(150);
-        Column.Bound(o => o.ModifiedDate).Title("Modified Date").Width(150);
-        Column.Bound(o => o.ID).Sortable(false).Title("Action").Width(110)
+        Column.Bound(o => o.ID)
+            .Sortable(false)
+            .Title("<div class='text-center'><input id='allcbrole' class='cball' type='checkbox'/></div>")
+            .Width(50)
+            .HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" })
+            .Filterable(false)
+            .ClientTemplate(
+                @"<div class=""text-center"">
+                    <input type=""checkbox"" id=""#= ID #"" value=""#= ID #"" name=""RoleID"" />
+                </div>"
+            );
+
+        Column.Template("<span class='row-number'></span>")
+            .Title("No")
+            .Width(50)
+            .HtmlAttributes(new { @class = "text-center" });
+
+
+        Column.Bound(o => o.ModuleName)
+            .Title("Module Name")
+            .Width(150);
+
+        Column.Bound(o => o.VendorName)
+            .Title("Vendor Name")
+            .Width(150);
+
+        Column.Bound(o => o.Complience)
+            .Title("Complience")
+            .Width(150);
+
+        Column.Bound(o => o.TransactionCategory)
+            .Title("Transaction Category")
+            .Width(150);
+
+        Column.Bound(o => o.ModifiedBy)
+            .Title("Modified By")
+            .Width(150);
+
+        Column.Bound(o => o.ModifiedDate)
+            .Title("Modified Date")
+            .Width(150)
+            .Format("{0:dd/MM/yyyy HH:mm}");
+
+        Column.Bound(o => o.ID)
+            .Sortable(false)
+            .Title("Action")
+            .Width(110)
             .HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" })
             .Filterable(false)
             .ClientTemplate(
