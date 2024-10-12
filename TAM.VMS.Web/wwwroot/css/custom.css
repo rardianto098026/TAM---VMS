@@ -245,3 +245,13 @@ button {
     white-space: normal !important;
     word-wrap: break-word !important;
 }
+
+.btn-standard-shape {
+    border-radius: 8px !important;
+    font-size: 12px;
+    width: 150px;
+}
+
+.k-header{
+    text-align: center !important;
+}

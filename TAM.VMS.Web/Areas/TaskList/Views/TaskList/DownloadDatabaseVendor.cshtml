@@ -27,6 +27,16 @@
                     <div class="col-md-12" id="containerGrid">
                         @await Html.PartialAsync("~/Areas/TaskList/Views/TaskList/Grid/_DownloadDatabaseVendorGrid.cshtml")
                     </div>
+
+                    <div>
+                        <div class="col-md-6" style="margin-top:15px">
+                            <button class="btn btn-grey btn-standard-shape" id="backButton">Back</button>
+                        </div>
+                        <div class="col-md-6 text-right" style="margin-top:15px">
+                            <button class="btn btn-success btn-standard-shape" id="approveButton" style="margin-right:20px">Approve</button>
+                            <button class="btn btn-danger btn-standard-shape" id="reviseButton">Revise</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

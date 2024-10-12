@@ -46,7 +46,7 @@ Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
             .Width(150)
             .Format("{0:dd/MM/yyyy HH:mm}");
 
-        Column.Bound(o => o.ID)
+        Column.Bound(o => o.IdDataByModule)
             .Sortable(false)
             .Title("Action")
             .Width(110)
@@ -54,7 +54,7 @@ Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
             .Filterable(false)
             .ClientTemplate(
                 @"<div class=""btn-group"">
-                    <button type=""button"" class=""btn green btn-primary"" onclick=""viewTask(#= ID #)"">
+                    <button type=""button"" class=""btn green btn-primary"" onclick=""viewTask('#= IdDataByModule #')"">
                         View
                     </button>
                 </div>"

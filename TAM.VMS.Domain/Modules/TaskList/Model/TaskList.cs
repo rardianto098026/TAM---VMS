@@ -20,5 +20,7 @@ namespace TAM.VMS.Domain
         public string ModifiedBy { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
+        public Guid IdModule { get; set; }
+        public Guid IdDataByModule { get; set; }
     }
 }
