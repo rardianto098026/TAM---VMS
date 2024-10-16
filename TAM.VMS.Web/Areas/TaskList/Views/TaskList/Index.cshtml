@@ -1,4 +1,7 @@
-﻿
+﻿@{
+    string userRole = ViewBag.UserRole as string;
+}
+
 @section scripts {
     @await Html.PartialAsync("~/Areas/TaskList/Views/TaskList/Script/_TaskList.cshtml")
 }
@@ -11,7 +14,7 @@
     <div class="div-title-menu">
         <div class="page-head">
             <div class="text-title-menu">
-                My Task list
+                My Task list - @(string.IsNullOrEmpty(userRole) ? "Default Role" : userRole)
             </div>
         </div>
     </div>
@@ -22,6 +25,14 @@
                 <div class="row">
                     <div class="col-md-12" id="containerGrid">
                         @await Html.PartialAsync("~/Areas/TaskList/Views/TaskList/Grid/_TaskListGrid.cshtml")
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 text-right" style="margin-top: 20px;">
+                        <a href="#" class="btn green btn-success btn-sm" style="border-radius: 8px;font-size:12px; width: 100px; background-color: #03d774" id="btnRequest">
+                            Approve
+                        </a>
                     </div>
                 </div>
             </div>

@@ -179,6 +179,89 @@
                     $el.prop("disabled", false);
                 });
 
+                document.getElementById("backButton").onclick = function () {
+                    window.location.href = `/TaskList/TaskList`;
+                };
+
+                // Approve button click event
+                $("#btnRequestPositive").on("click", function () {
+                    $('#ApproveModal').modal("hide");
+                    var id = $("#idReq").val();
+
+                    var task = {
+                        ID: id,
+                        Action: 2 // Approve
+                    };
+
+                    $.post("@Url.Content("~/TaskList/TaskList/SaveTask")", task, function (d) {
+                        if (d === "") {
+                            const $modal = $('#ApproveSuccessModal');
+                            const $form = $modal.find("form");
+
+                            $('.nav-tabs a[href="#tab_user"]').tab('show');
+                            $.helper.form.clear($form);
+                            $modal.modal("show");
+
+                            $modal.on('hidden.bs.modal', function () {
+                                window.location.href = `/TaskList/TaskList`;
+                            });
+                        } else {
+                            swal("Error", d, "error");
+                        }
+                    }).fail(function () {
+                        swal("Error", "Error when approving", "error");
+                    });
+                });
+
+                // Revise button click event
+                $("#btnRequestNegative").on("click", function () {
+                    $('#RejectModal').modal("hide");
+                    var id = $("#idReq").val();
+
+                    var task = {
+                        ID: id,
+                        Action: 3 // Reject
+                    };
+
+                    $.post("@Url.Content("~/TaskList/TaskList/SaveTask")", task, function (d) {
+                        if (d === "") {
+                            const $modal = $('#RejectSuccessModal');
+                            const $form = $modal.find("form");
+
+                            $('.nav-tabs a[href="#tab_user"]').tab('show');
+                            $.helper.form.clear($form);
+                            $modal.modal("show");
+
+                            $modal.on('hidden.bs.modal', function () {
+                                window.location.href = `/TaskList/TaskList`;
+                            });
+                        } else {
+                            swal("Error", d, "error");
+                        }
+                    }).fail(function () {
+                        swal("Error", "Error when rejecting", "error");
+                    });
+                });
+
+                $(document).on('click', '#approveButton', function () {
+                    const $modal = $.helper.getJqueryObject('ApproveModal'),
+                        $form = $modal.find("form");
+
+                    $('.nav-tabs a[href="#tab_user"]').tab('show');
+                    $.helper.form.clear($form);
+                    $modal.modal("show");
+                    $(".form-select2").select2();
+                });
+
+                $(document).on('click', '#reviseButton', function () {
+                    const $modal = $.helper.getJqueryObject('RejectModal'),
+                        $form = $modal.find("form");
+
+                    $('.nav-tabs a[href="#tab_user"]').tab('show');
+                    $.helper.form.clear($form);
+                    $modal.modal("show");
+                    $(".form-select2").select2();
+                });
 
                 $('.cball').change(function (e) {
                     var table = $(e.target).closest('table');

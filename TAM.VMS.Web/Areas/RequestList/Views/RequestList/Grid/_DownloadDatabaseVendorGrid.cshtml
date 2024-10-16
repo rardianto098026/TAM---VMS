@@ -1,0 +1,40 @@
+﻿@(Html.Kendo().Grid<TAM.VMS.Domain.DownloadVendorDBView>()
+    .Name("DownloadDatabaseVendorGrid")
+    .Columns(column =>
+    {
+        column.Template("<span class='row-number'></span>").Title("No").Width(50).HtmlAttributes(new { @class = "text-center" });
+        column.Bound(o => o.FileName).Title("File Name").Width(150);
+        column.Bound(o => o.CreatedBy).Title("Request By").Width(150)
+            .HtmlAttributes(new { @class = "text-center" });
+        column.Bound(o => o.ReqDate).Title("Request Date").Width(150)
+            .Format("{0:dd/MM/yyyy HH:mm}")
+            .HtmlAttributes(new { @class = "text-center" });
+        column.Bound(o => o.ApprovalDate)
+            .Title("Approve Date")
+            .ClientTemplate("#= ApprovalDate ? kendo.toString(ApprovalDate, 'dd/MM/yyyy HH:mm') : '-' #")
+            .HtmlAttributes(new { @class = "text-center" })
+            .Width(150);
+        column.Bound(o => o.DepartmentName).Title("Department").Width(150)
+            .HtmlAttributes(new { @class = "text-center" });
+        column.Bound(o => o.RoleDesc)
+            .Title("Status")
+            .HtmlAttributes(new { @class = "text-center wrap-text" }) 
+            .ClientTemplate("Download Database Vendor - Waiting for Approval by #= RoleDesc #")
+            .Width(150);
+    })
+    .NoRecords(conf => conf.Template("No Request Download Database Vendor list to display"))
+    .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
+    .Filterable(ftb => ftb
+        .Extra(false)
+        .Mode(GridFilterMode.Row)
+    )
+    .Sortable(sortable => sortable.SortMode(GridSortMode.SingleColumn))
+    .Scrollable(s => s.Height("auto"))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(true)
+        .Read(read => read.Url(Url.Content("~/tasklist/tasklist/LoadDownloadVendorDb")))
+        .PageSize(10)
+        .Sort(sort => sort.Add("ID").Descending())
+    )
+)

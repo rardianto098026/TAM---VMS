@@ -1,0 +1,40 @@
+﻿@section scripts {
+    @await Html.PartialAsync("~/Areas/RequestList/Views/RequestList/Script/_DownloadDatabaseVendor.cshtml")
+}
+
+@section modals {
+}
+
+<div class="portlet light margin-bottom-0">
+    <div class="div-title-menu">
+        <div class="page-head">
+            <div class="text-title-menu">
+                @{
+                    // Attempt to cast ViewBag.Roles to a List<string>
+                    var roleFix = ViewBag.roleFix as String;
+                }
+
+                My Request List - @(roleFix != null && roleFix != "" ? roleFix : "No Role") - Download Database Vendor - Detail
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="UserAccess">
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12" id="containerGrid">
+                        @await Html.PartialAsync("~/Areas/RequestList/Views/RequestList/Grid/_DownloadDatabaseVendorGrid.cshtml")
+                    </div>
+
+                    <div>
+                        <input type="hidden" id="idReq" value="@ViewBag.idReq" />
+                        <div class="col-md-6" style="margin-top:15px">
+                            <button class="btn btn-grey btn-standard-shape" id="backButton">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

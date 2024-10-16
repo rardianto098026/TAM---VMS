@@ -33,6 +33,7 @@
     <link href="~/vendors/general/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" asp-append-version="true" />
     <link href="~/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@30&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     @*<link href="~/vendors/general/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />*@
     @*<link href="~/vendors/general/animate.css/animate.css" rel="stylesheet" type="text/css" />*@
     @*<link href="~/vendors/general/toastr/build/toastr.css" rel="stylesheet" type="text/css" />*@
@@ -341,119 +342,165 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var coll = document.getElementsByClassName("collapsible");
-            for (var i = 0; i < coll.length; i++) {
-                coll[i].addEventListener("click", function() {
+            // Event listener untuk collapsible
+            var coll = document.querySelectorAll(".collapsible");
+
+            coll.forEach(function(button) {
+                button.addEventListener("click", function() {
                     this.classList.toggle("active");
                     var content = this.nextElementSibling;
-                    if (content.style.display === "block") {
-                        content.style.display = "none";
+
+                    // Check if content is already visible (using maxHeight)
+                    if (content.style.maxHeight) {
+                        // If visible, close it
+                        content.style.maxHeight = null;
                     } else {
-                        content.style.display = "block";
+                        // If hidden, open it and adjust to its scroll height
+                        content.style.maxHeight = content.scrollHeight + "px";
                     }
+
+                    // Toggle icon direction
+                    var icon = this.querySelector(".toggle-icon");
+                    if (icon.classList.contains("fa-chevron-down")) {
+                        icon.classList.remove("fa-chevron-down");
+                        icon.classList.add("fa-chevron-up");
+                    } else {
+                        icon.classList.remove("fa-chevron-up");
+                        icon.classList.add("fa-chevron-down");
+                    }
+                });
+            });
+
+            // Event listener untuk tombol "Add Row"
+            document.querySelectorAll('.add-row-btn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var tableId = this.getAttribute('data-table-id');
+                    var table = document.getElementById(tableId);
+                    var tbody = table.querySelector('tbody');
+                    var rowCount = tbody.rows.length + 1;
+                    var columnCount = table.querySelectorAll('thead tr th').length;
+
+                    // Buat baris baru
+                    var newRow = document.createElement('tr');
+                    for (var i = 0; i < columnCount - 1; i++) {
+                        var newCell = document.createElement('td');
+                        if (i === 0) {
+                            newCell.innerText = rowCount;
+                        } else {
+                            newCell.innerHTML = '<input type="text">';
+                        }
+                        newRow.appendChild(newCell);
+                    }
+
+                    // Tambahkan tombol delete pada baris
+                    var deleteCell = document.createElement('td');
+                    deleteCell.innerHTML = `
+                        <button class="delete-row-btn" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    `;
+                    newRow.appendChild(deleteCell);
+                    tbody.appendChild(newRow);
+
+                    // Tambahkan event listener ke tombol delete yang baru
+                    addDeleteRowFunctionality(newRow.querySelector('.delete-row-btn'));
+
+                    // Update tinggi collapsible setelah menambahkan baris
+                    updateCollapsibleHeight(this.closest('.content'));
+                });
+            });
+
+            // Fungsi untuk memperbarui tinggi collapsible
+            function updateCollapsibleHeight(content) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+
+            // Fungsi untuk menambahkan event listener delete
+            function addDeleteRowFunctionality(deleteButton) {
+                deleteButton.addEventListener('click', function() {
+                    var row = this.closest('tr');
+                    row.remove();
+                    updateRowNumbers();
+                    // Update tinggi collapsible setelah baris dihapus
+                    updateCollapsibleHeight(this.closest('.content'));
+                });
+            }
+
+            // Perbarui nomor baris setelah penghapusan
+            function updateRowNumbers() {
+                document.querySelectorAll('.dynamic-table tbody').forEach(function(tbody) {
+                    tbody.querySelectorAll('tr').forEach(function(row, index) {
+                        row.querySelector('td').innerText = index + 1;
+                    });
                 });
             }
         });
     </script>
 
-       <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var coll = document.querySelectorAll(".collapsible");
-
-                coll.forEach(function(button) {
-                    button.addEventListener("click", function() {
-                        this.classList.toggle("active");
-
-                        var content = this.nextElementSibling;
-
-                        // Check if content is already visible
-                        if (content.style.maxHeight) {
-                            // If visible, close it
-                            content.style.maxHeight = null;
-                        } else {
-                            // If hidden, open it
-                            content.style.maxHeight = content.scrollHeight + "px";
-                        }
-
-                        var icon = this.querySelector(".toggle-icon");
-                        if (icon.classList.contains("fa-chevron-down")) {
-                            icon.classList.remove("fa-chevron-down");
-                            icon.classList.add("fa-chevron-up");
-                        } else {
-                            icon.classList.remove("fa-chevron-up");
-                            icon.classList.add("fa-chevron-down");
-                        }
-                    });
-                });
-            });
-        </script>
-
-        <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Event listener untuk menambahkan baris pada setiap tabel yang memiliki class 'dynamic-table'
-        document.querySelectorAll('.add-row-btn').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var tableId = this.getAttribute('data-table-id'); // Ambil ID tabel dari data attribute
-                var table = document.getElementById(tableId);
-                var tbody = table.querySelector('tbody');
-                var rowCount = tbody.rows.length + 1;
-
-                // Ambil jumlah kolom dari tabel yang bersangkutan
-                var columnCount = table.querySelectorAll('thead tr th').length;
-
-                // Buat baris baru
-                var newRow = document.createElement('tr');
-
-                // Tambahkan kolom secara dinamis berdasarkan jumlah kolom
-                for (var i = 0; i < columnCount - 1; i++) { // -1 karena kolom terakhir untuk tombol delete
-                    var newCell = document.createElement('td');
-                    if (i === 0) { // Kolom pertama untuk nomor baris
-                        newCell.innerText = rowCount;
-                    } else {
-                        newCell.innerHTML = '<input type="text">';
-                    }
-                    newRow.appendChild(newCell);
-                }
-
-                // Tambahkan tombol delete di kolom terakhir
-                var deleteCell = document.createElement('td');
-                deleteCell.innerHTML = `
-                    <button class="delete-row-btn" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                `;
-                newRow.appendChild(deleteCell);
-
-                // Tambahkan baris baru ke tbody
-                tbody.appendChild(newRow);
-
-                // Tambahkan event listener ke tombol delete yang baru
-                addDeleteRowFunctionality(newRow.querySelector('.delete-row-btn'));
-            });
+    <script>
+        document.getElementById('npwp-upload').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            document.getElementById('npwp-filename').textContent = fileName;
         });
 
-        // Fungsi untuk menambahkan event listener ke semua tombol delete
-        function addDeleteRowFunctionality(deleteButton) {
-            deleteButton.addEventListener('click', function() {
-                var row = this.closest('tr');
-                row.remove();
-                updateRowNumbers();
-            });
-        }
-
-        // Tambahkan event listener ke tombol delete pada baris yang sudah ada
-        document.querySelectorAll('.delete-row-btn').forEach(function(button) {
-            addDeleteRowFunctionality(button);
+        document.getElementById('skt-upload').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            document.getElementById('skt-filename').textContent = fileName;
         });
+        document.getElementById('sppkp-upload').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            document.getElementById('sppkp-filename').textContent = fileName;
+        });
+        document.getElementById('evidence-upload').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            document.getElementById('evidence-filename').textContent = fileName;
+        });
+        document.getElementById('skbDoc-upload').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            document.getElementById('skbDoc-filename').textContent = fileName;
+        });
+    </script>
 
-        // Fungsi untuk memperbarui nomor baris setelah penghapusan
-        function updateRowNumbers() {
-            document.querySelectorAll('.dynamic-table tbody').forEach(function(tbody) {
-                tbody.querySelectorAll('tr').forEach(function(row, index) {
-                    row.querySelector('td').innerText = index + 1;
-                });
-            });
+    <script>
+    document.getElementById('npwpNum').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Menghapus karakter non-digit
+        let formattedValue = '';
+
+        if (value.length > 0) {
+            formattedValue += value.substring(0, 2); // Dua digit pertama
         }
+        if (value.length >= 3) {
+            formattedValue += '.' + value.substring(2, 5); // Tambahkan titik setelah digit ke-2
+        }
+        if (value.length >= 6) {
+            formattedValue += '.' + value.substring(5, 8); // Tambahkan titik setelah digit ke-5
+        }
+        if (value.length >= 9) {
+            formattedValue += '.' + value.substring(8, 9); // Tambahkan titik setelah digit ke-8
+        }
+        if (value.length >= 10) {
+            formattedValue += '-' + value.substring(9, 12); // Tambahkan tanda "-" setelah digit ke-9
+        }
+        if (value.length >= 13) {
+            formattedValue += '.' + value.substring(12, 15); // Tambahkan titik setelah digit ke-12
+        }
+
+        e.target.value = formattedValue; // Memperbarui nilai input dengan format
+    });
+</script>
+
+<script>
+    const fileUploads = document.querySelectorAll('.file-upload input[type="file"]');
+
+    fileUploads.forEach(input => {
+        input.addEventListener('change', function() {
+            const filename = this.nextElementSibling.querySelector('span');
+            if (this.files.length > 0) {
+                filename.textContent = this.files[0].name;
+            } else {
+                filename.textContent = 'Upload Attachment';
+            }
+        });
     });
 </script>
 

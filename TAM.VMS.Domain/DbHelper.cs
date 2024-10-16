@@ -26,8 +26,16 @@ namespace TAM.VMS.Domain
 
 
         ITaskListRepository TaskListRepository { get; }
-
+        ITaskViewRepository TaskViewRepository { get; }
+        IRequestViewRepository RequestViewRepository { get; }
         IDownloadVendorDatabaseRepository DownloadVendorDatabaseRepository { get; }
+
+        IMasterModuleRepository MasterModuleRepository { get; }
+        IMasterLevelModuleProcessRepository MasterLevelModuleProcessRepository { get; }
+        IMasterBusinessCategoriesRepository MasterBusinessCategoriesRepository { get; }
+        IBusinessCategoryDisplayViewRepository BusinessCategoryDisplayViewRepository { get; }
+        IMasterDepartmentRepository MasterDepartmentRepository { get; }
+
     }
     public class DbHelper : DbContext, IDbHelper
     {
@@ -64,7 +72,14 @@ namespace TAM.VMS.Domain
         private IGeneralCategoryRepository _GeneralCategoryRepository;
         private IRolePermissionRepository _RolePermissionRepository;
         private ITaskListRepository _TaskListRepository;
+        private ITaskViewRepository _TaskViewRepository;
+        private IRequestViewRepository _RequestViewRepository;
         private IDownloadVendorDatabaseRepository _DownloadVendorDatabaseRepository;
+        private IMasterModuleRepository _MasterModuleRepository;
+        private IMasterLevelModuleProcessRepository _MasterLevelModuleProcessRepository;
+        private IMasterBusinessCategoriesRepository _MasterBusinessCategoriesRepository;
+        private IBusinessCategoryDisplayViewRepository _BusinessCategoryDisplayViewRepository;
+        private IMasterDepartmentRepository _MasterDepartmentRepository;
 
         public IUserRepository UserRepository
         {
@@ -116,11 +131,40 @@ namespace TAM.VMS.Domain
         {
             get { return _TaskListRepository ?? (_TaskListRepository = new TaskListRepository(_connection, _transaction)); }
         }
+        public ITaskViewRepository TaskViewRepository
+        {
+            get { return _TaskViewRepository ?? (_TaskViewRepository = new TaskViewRepository(_connection, _transaction)); }
+        }
+        public IRequestViewRepository RequestViewRepository
+        {
+            get { return _RequestViewRepository ?? (_RequestViewRepository = new RequestViewRepository(_connection, _transaction)); }
+        }
         public IDownloadVendorDatabaseRepository DownloadVendorDatabaseRepository
         {
             get { return _DownloadVendorDatabaseRepository ?? (_DownloadVendorDatabaseRepository = new DownloadVendorDatabaseRepository(_connection, _transaction)); }
 
         }
+        public IMasterModuleRepository MasterModuleRepository
+        {
+            get { return _MasterModuleRepository ?? (_MasterModuleRepository = new MasterModuleRepository(_connection, _transaction)); }
+        }
+        public IMasterLevelModuleProcessRepository MasterLevelModuleProcessRepository
+        {
+            get { return _MasterLevelModuleProcessRepository ?? (_MasterLevelModuleProcessRepository = new MasterLevelModuleProcessRepository(_connection, _transaction)); }
+        }
+        public IMasterBusinessCategoriesRepository MasterBusinessCategoriesRepository
+        {
+            get { return _MasterBusinessCategoriesRepository ?? (_MasterBusinessCategoriesRepository = new MasterBusinessCategoriesRepository(_connection, _transaction)); }
+        }
+        public IBusinessCategoryDisplayViewRepository BusinessCategoryDisplayViewRepository
+        {
+            get { return _BusinessCategoryDisplayViewRepository ?? (_BusinessCategoryDisplayViewRepository = new BusinessCategoryDisplayViewRepository(_connection, _transaction)); }
+        }
+        public IMasterDepartmentRepository MasterDepartmentRepository
+        {
+            get { return _MasterDepartmentRepository ?? (_MasterDepartmentRepository = new MasterDepartmentRepository(_connection, _transaction)); }
+        }
+
 
         public override void resetRepositories()
         {
@@ -136,7 +180,13 @@ namespace TAM.VMS.Domain
             _PermissionRepository = null;
             _MenuRepository = null;
             _TaskListRepository = null;
+            _TaskViewRepository = null;
+            _RequestViewRepository = null;
             _DownloadVendorDatabaseRepository = null;
+            _MasterModuleRepository = null;
+            _MasterBusinessCategoriesRepository = null;
+            _BusinessCategoryDisplayViewRepository = null;
+            _MasterDepartmentRepository = null;
         }
     }
 }

@@ -9,6 +9,12 @@
         ShowOriginalKendoToolTip();
     }
 
+    function downloadFile(id) {
+        // Manually build the URL with the slash
+        var url = '@Url.Action("DownloadVendorDatabase", "VendorDatabase")' + '/DownloadFile?id=' + id;
+        window.location.href = url;
+    }
+
     function UserManager() {
         return {
             InitManagement: function () {
@@ -18,80 +24,19 @@
             InitHandlers: function () {
                 const self = this;
 
-                $('.k-grid').on('click', '.btnEdit', function () {
-                    let $el = $(this),
-                        $tr = $el.closest("tr"),
-                        $grid = $el.closest(".k-grid").data("kendoGrid"),
-                        dataItem = $grid.dataItem($tr),
-                        $modal = $.helper.getJqueryObject($el.data("modal")),
-                        $form = $modal.find("form");
-
-                    dataItem.RoleID = dataItem.RoleID ? dataItem.RoleID.toLowerCase() : null;
-
-                    $('.nav-tabs a[href="#tab_user"]').tab('show');
-                    $.helper.form.clear($form);
-                    $.helper.form.fill($form, dataItem);
-
-                    if (dataItem.RoleID) {
-                        const rolesid = dataItem.RoleID.split(',');
-                        rolesid.forEach(role => {
-                            $('#UserRoleGrid tbody tr td input[type="checkbox"][value="' + role.toLowerCase() + '"]').prop('checked', true);
-                        });
-                    }
-
-                    $modal.modal("show");
-                    $(".form-select2").select2();
-                });
-
-                $('.k-grid').on('click', '.btnResetPw', function () {
-                    let $el = $(this),
-                        $tr = $el.closest("tr"),
-                        $grid = $el.closest(".k-grid").data("kendoGrid"),
-                        dataItem = $grid.dataItem($tr),
-                        $modal = $.helper.getJqueryObject($el.data("modal")),
-                        $form = $modal.find("form");
-
-                    $.helper.form.clear($form);
-                    $("#IdResetPW").val(dataItem.ID);
-                    $modal.modal("show");
-                });
-
-                $('.k-grid').on('click', '.btnDelete', function () {
-                    const id = $(this).data("id");
-
-                    swal({
-                        title: "Confirmation",
-                        text: "Are you sure you want to delete this data?",
-                        icon: "warning",
-                        buttons: ['No', 'Yes'],
-                        dangerMode: true
-                    }).then(function (isConfirm) {
-                        if (isConfirm) {
-                            $.postv2("@Url.Content("~/core/user/deleteuser")", { "ID": id }, function () {
-                                $.helper.grid.refresh("vendorDBGrid");
-                                swal("Info", "Success delete user", "success");
-                            }).fail(function (error) {
-                                swal("Error", error.responseJSON.Message, "error");
-                            });
-                        }
-                    });
-                });
-
                 $("#btnRequestPositive").on('click', function () {
                     const $el = $(this),
-                        $modal = $el.closest(".modal"),
-                        $form = $modal.find("form");
+                        $modal = $el.closest(".modal");
 
-                    const formData = $.helper.form.serializeObject($form);
                     let errMsg = "";
-
+                    debugger;
                     $el.prop("disabled", true);
 
-                    $.postv2("@Url.Content("~/VendorDatabase/DownloadVendorDatabase/AddRequest")", { user: formData }, function (d) {
+                    $.postv2("@Url.Content("~/VendorDatabase/DownloadVendorDatabase/AddRequest")", { }, function (d) {
                         if (d == "") {
                             $.helper.grid.refresh("vendorDBGrid");
                             $modal.modal("hide");
-                            swal("Info", "Success update user", "success");
+                            swal("Info", "Success create request Vendor Database", "success");
                         } else {
                             swal("Error", d, "error");
                         }

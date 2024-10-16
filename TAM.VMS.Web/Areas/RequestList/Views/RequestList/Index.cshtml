@@ -1,4 +1,7 @@
-﻿
+﻿@{
+    string userRole = ViewBag.UserRole as string;
+}
+
 @section scripts {
     @await Html.PartialAsync("~/Areas/RequestList/Views/RequestList/Script/_RequestList.cshtml")
 }
@@ -11,7 +14,7 @@
     <div class="div-title-menu">
         <div class="page-head">
             <div class="text-title-menu">
-                My Request list
+                My Request list - @(string.IsNullOrEmpty(userRole) ? "Default Role" : userRole)
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 ﻿@(
-Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
+Html.Kendo().Grid<TAM.VMS.Domain.TaskView>()
     .Name("TaskListGrid")
     .Columns(Column =>
     {
@@ -21,7 +21,7 @@ Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
             .HtmlAttributes(new { @class = "text-center" });
 
 
-        Column.Bound(o => o.ModuleName)
+        Column.Bound(o => o.Module)
             .Title("Module Name")
             .Width(150);
 
@@ -46,7 +46,11 @@ Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
             .Width(150)
             .Format("{0:dd/MM/yyyy HH:mm}");
 
-        Column.Bound(o => o.IdDataByModule)
+        Column.Bound(o => o.Status)
+            .Title("Status")
+            .Width(150);
+
+        Column.Bound(o => o.ID)
             .Sortable(false)
             .Title("Action")
             .Width(110)
@@ -54,7 +58,7 @@ Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
             .Filterable(false)
             .ClientTemplate(
                 @"<div class=""btn-group"">
-                    <button type=""button"" class=""btn green btn-primary"" onclick=""viewTask('#= IdDataByModule #')"">
+                    <button type=""button"" class=""btn green btn-primary"" onclick=""viewTask('#= ID #')"">
                         View
                     </button>
                 </div>"

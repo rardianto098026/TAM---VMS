@@ -19,7 +19,7 @@ namespace TAM.VMS.Web.Areas.RequestList.Controllers
         public IActionResult Index()
         {
             var roles = Service<RoleService>().GetRoles();
-
+            
             ViewBag.Roles = roles;
 
             return View();
@@ -27,7 +27,8 @@ namespace TAM.VMS.Web.Areas.RequestList.Controllers
 
         public IActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            var result = Service<RequestListService>().GetDataSourceResult(request);
+            String CreatedBy = SessionManager.Username?.ToString() ?? "";
+            var result = Service<RequestListService>().GetDataSourceResult(request, CreatedBy);
             return Ok(result);
         }
 
@@ -40,6 +41,37 @@ namespace TAM.VMS.Web.Areas.RequestList.Controllers
         public IActionResult SaveTask()
         {
             return Ok();
+        }
+        [HttpGet("RequestList/RequestList/DownloadDatabaseVendor/{id}")]
+        public IActionResult DownloadDatabaseVendor(string id)
+        {
+            var roles = Service<RoleService>().GetRoles();
+
+            ViewBag.Roles = roles;
+            ViewBag.roleFix = roles
+                            .FirstOrDefault(role => role.Name == SessionManager.Roles.FirstOrDefault())?.Description ?? "No Role";
+
+
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest("ID cannot be null or empty.");
+            }
+
+            TempData["IdReq"] = id;
+            ViewBag.idReq = id;
+
+            return View();
+        }
+        public IActionResult LoadDownloadVendorDb([DataSourceRequest] DataSourceRequest request)
+        {
+            string idReq = Convert.ToString(TempData["IdReq"]); // Retrieve ID from TempData
+            TempData.Remove("IdReq");
+            if (string.IsNullOrEmpty(idReq))
+            {
+                return BadRequest("ID cannot be null or empty.");
+            }
+            var result = Service<RequestListService>().GetDataDetailDownloadVendorDB(request, idReq);
+            return Ok(result);
         }
     }
 }

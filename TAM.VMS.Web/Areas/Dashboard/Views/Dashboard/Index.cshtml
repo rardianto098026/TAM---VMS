@@ -1,0 +1,30 @@
+﻿
+@section scripts {
+    @await Html.PartialAsync("~/Areas/RequestList/Views/RequestList/Script/_RequestList.cshtml")
+}
+
+@section modals {
+    @await Html.PartialAsync("~/Areas/RequestList/Views/RequestList/Component/_RequestListForm.cshtml")
+}
+
+<div class="portlet light margin-bottom-0">
+    <div class="div-title-menu">
+        <div class="page-head">
+            <div class="text-title-menu">
+                Home
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content ">
+        <div class="tab-pane active" id="UserAccess">
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12" id="containerGrid">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

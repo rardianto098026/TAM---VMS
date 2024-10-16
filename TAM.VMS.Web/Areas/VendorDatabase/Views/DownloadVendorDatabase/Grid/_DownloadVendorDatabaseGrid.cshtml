@@ -41,7 +41,8 @@
                             class=""btn #= StatusID == 2 ? 'green btn-primary' : 'btn-grey' #""
                             title=""Download""
                             data-modal='RequestModal'
-                            #= StatusID == 2 ? '' : 'disabled' #>
+                            #= StatusID == 2 ? '' : 'disabled' #
+                            onclick=""downloadFile('#= ID #')"" >
                         Download
                     </button>
                 </div>"

@@ -1,0 +1,52 @@
+﻿@section scripts {
+    @await Html.PartialAsync("~/Areas/Home/Views/Home/Script/_Home.cshtml")
+}
+
+@section modals {
+    @await Html.PartialAsync("~/Areas/Home/Views/Home/Component/_HomeForm.cshtml")
+}
+
+<div class="container-fluid">
+    <div class="div-title-menu">
+        <div class="page-head">
+            <div class="text-title-menu">
+                Home
+            </div>
+        </div>
+    </div>
+    <div class="animated fadeIn">
+        <div class="row" style="margin-top: 25px;">
+            <div class="col-sm-6 col-lg-3">
+                <div class="card" style="background-color: #ECECEC !important; border-radius: 15px !important;">
+                    <div class="card-body" style="font-family: 'Inter', sans-serif;">
+                        <div class="text-value" style="font-size: 20px;">My Task</div> 
+                        <div class="d-flex justify-content-between align-items-center mt-3" style="margin-top: 15px;">
+                            <i class="fa fa-list-ul fa-2x" aria-hidden="true"></i>
+                            <div class="ml-auto text-right" style="display: flex; flex-direction: column;">
+                                <strong style="font-size: 24px;">8</strong>
+                                <div style="font-size: 20px;">Pending Task(s)</div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-->
+            <div class="col-sm-6 col-lg-3">
+                <div class="card" style="background-color: #ECECEC !important; border-radius: 15px !important; margin-left: 20px;">
+                    <div class="card-body" style="font-family: 'Inter', sans-serif;">   
+                        <div class="text-value" style="font-size: 20px;">My Request</div> 
+                        <div class="d-flex justify-content-between align-items-center mt-3" style="margin-top: 15px;">
+                            <i class="fa-solid fa-table-list fa-2x"></i>
+                            <div class="ml-auto text-right" style="display: flex; flex-direction: column;">
+                                <strong style="font-size: 24px;">10</strong>
+                                <div style="font-size: 20px;">Pending Request(s)</div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /.row-->
+    </div>
+</div>
+
+

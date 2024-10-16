@@ -109,11 +109,15 @@ body.loading .ajax-loading {
     font-weight: 1000;
     font-style: italic;
     position: relative;
+    box-sizing: border-box;
+    display: block;
 }
 
-.collapsible .toggle-icon {
-    transition: transform 0.3s ease;
-}
+    .collapsible .toggle-icon {
+        transition: transform 0.3s ease;
+        margin: 0;
+        padding: 0;
+    }
 
 .active .toggle-icon {
     transform: rotate(180deg); 
@@ -213,6 +217,7 @@ button {
 .info-icon {
     position: relative;
     display: inline-block;
+    z-index: 10; /* Menambah z-index pada info-icon */
 }
 
 .tooltip {
@@ -224,7 +229,7 @@ button {
     border-radius: 5px;
     padding: 5px;
     position: absolute;
-    z-index: 1;
+    z-index: 9999; /* Meningkatkan z-index */
     bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
@@ -235,6 +240,14 @@ button {
 .info-icon:hover .tooltip {
     visibility: visible;
     opacity: 1;
+}
+
+.info-icon, .tooltip {
+    pointer-events: auto;
+}
+
+.k-header {
+    text-align: center !important;
 }
 
 .k-state-selected {
@@ -254,4 +267,125 @@ button {
 
 .k-header{
     text-align: center !important;
+}
+
+.header-modal-business {
+    background-color: #5C5C5C;
+    color: white;
+    margin: 15px;
+    padding: 15px;
+    font-size: 2rem;
+    font-family: 'SF Pro Display', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.sub-header-modal-business1 {
+    width: 350px;
+    background-color: #5C5C5C;
+    color: white;
+    padding: 15px;
+    font-size: 2rem;
+    font-family: 'SF Pro Display', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 5px;
+    user-select: none;
+}
+
+.sub-header-modal-business2 {
+    width: 530px;
+    background-color: #5C5C5C;
+    color: white;
+    padding: 15px;
+    font-size: 2rem;
+    font-family: 'SF Pro Display', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 5px;
+    user-select: none;
+}
+
+.content-modal-business1 {
+    margin: 0px 15px 0px 15px;
+}
+
+.business_classification {
+    border-top: thin solid lightgray;
+    border-right: thin solid lightgray;
+    border-bottom: thin solid lightgray;
+    border-left: thin solid lightgray;
+    display: inline-block;
+    margin: 0 15px 15px 15px;
+    border-radius: 10px;
+    min-height: 300px;
+    padding-bottom: 10px;
+}
+
+.business_category {
+    border-top: thin solid lightgray;
+    border-right: thin solid lightgray;
+    border-bottom: thin solid lightgray;
+    border-left: thin solid lightgray;
+    display: inline-block;
+    margin: 0 15px 15px 15px;
+    border-radius: 10px;
+    min-height: 300px;
+    padding-bottom: 10px;
+}
+
+.mapping_to {
+    border-top: thin solid lightgray;
+    border-right: thin solid lightgray;
+    border-bottom: thin solid lightgray;
+    border-left: thin solid lightgray;
+    display: inline-block;
+    margin: 0 15px 15px 15px;
+    border-radius: 10px;
+    min-height: 300px;
+    padding-bottom: 10px;
+}
+
+.business-container {
+    display: flex !important; /* Aligns child elements in a row */
+    /*gap: 20px;*/ /* Adds space between the two sections */
+}
+
+.input-group {
+    display: flex !important;
+    align-items: center; /* Aligns items vertically */
+    margin-top: 10px; /* Adds some space between input groups */
+}
+
+.checkbox-container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    grid-column-gap: 55px; /* Space between checkboxes */
+    grid-row-gap: 10px;
+}
+
+.checkbox-container input {
+    margin-right: 8px !important; /* Space between checkbox and text */
+    margin-top: 0px !important;
+}
+
+.checkbox-business-category {
+    width: 20px;
+    height: 20px;
+}
+
+.checkbox-container label {
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 17px; /* Font size */
+    user-select: none; /* Prevent text selection */
+    display: inline-flex; /* Fit width to content while allowing for flexibility */
+    align-items: center; /* Center items vertically */
+}
+
+#btnAddBusinessCategory {
+    margin-bottom: 5px;
+    margin-top: 30px;
+    background-color: #03BFD7;
 }

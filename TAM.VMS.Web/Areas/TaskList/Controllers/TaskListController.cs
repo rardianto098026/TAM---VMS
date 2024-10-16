@@ -31,7 +31,9 @@ namespace TAM.VMS.Web.Areas.TaskList.Controllers
             var roles = Service<RoleService>().GetRoles();
 
             ViewBag.Roles = roles;
-            ViewBag.roleFix = roles.FirstOrDefault()?.Description; 
+            ViewBag.roleFix = roles
+                            .FirstOrDefault(role => role.Name == SessionManager.Roles.FirstOrDefault())?.Description ?? "No Role";
+
 
             if (string.IsNullOrEmpty(id))
             {
@@ -39,13 +41,16 @@ namespace TAM.VMS.Web.Areas.TaskList.Controllers
             }
 
             TempData["IdReq"] = id;
+            ViewBag.idReq = id;
 
             return View();
         }
 
         public IActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            var result = Service<TaskListService>().GetDataSourceResult(request);
+            String roles = SessionManager.Roles.FirstOrDefault() ?? "";
+
+            var result = Service<TaskListService>().GetDataSourceResult(request, roles);
             return Ok(result);
         }
 
@@ -55,10 +60,17 @@ namespace TAM.VMS.Web.Areas.TaskList.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveTask()
+        public IActionResult SaveTask(Domain.TaskList task)
         {
-            return Ok();
+            if (task == null)
+            {
+                return BadRequest("Invalid task data.");
+            }
+
+            var result = Service<TaskListService>().UpdateStatus(task);
+            return Ok(result);
         }
+
 
         public IActionResult LoadDownloadVendorDb([DataSourceRequest] DataSourceRequest request)
         {
@@ -68,7 +80,6 @@ namespace TAM.VMS.Web.Areas.TaskList.Controllers
             {
                 return BadRequest("ID cannot be null or empty.");
             }
-
             var result = Service<TaskListService>().GetDataDetailDownloadVendorDB(request, idReq);
             return Ok(result);
         }

@@ -1,0 +1,134 @@
+﻿<div id="EditModal" class="modal fade bs-modal-lg" data-backdrop="static" abindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="width:70%">
+        <div class="modal-content" style="padding-top:0.5px;">
+            <div class="modal-header header-modal-business">
+                <span>Edit Master Business Category</span>
+            </div>
+            <div style="margin-top:30px;">
+               <div class="business-container">
+                    <div class="business_classification" name="business_classification">
+                        <div class="sub-header-modal-business1">
+                            Business Classification 
+                            @* <span class="fa-add" style="margin-left: 10px; cursor: pointer;" onclick="addInputGroupOnEdit('businessClassification')"></span> *@
+                        </div>
+                        <div class="content-modal-business1" id="classificationContainerEdit">
+                            <div class="input-group">
+                                <input class="checkbox-business-category" type="checkbox" id="checkbox">
+                                <input type="text" placeholder="" class="textbox" style="margin-left: 10px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="business_category" name="business_category">
+                        <div class="sub-header-modal-business1">
+                            Business Category <span class="fa-add" style="margin-left: 10px; cursor: pointer;" onclick="addInputGroupOnEdit('businessCategory')"></span>
+                        </div>
+                        <div class="content-modal-business1" id="categoryContainerEdit">
+                            <div class="input-group">
+                                <input class="checkbox-business-category" type="checkbox" id="categoryCheckbox">
+                                <input type="text" placeholder="" class="textbox" style="margin-left: 10px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mapping_to" name="mapping_to">
+                        <div class="sub-header-modal-business2">
+                            Mapping to
+                        </div>
+                        <div class="content-modal-business1 checkbox-container">
+                            @foreach (var department in ViewBag.Department)
+                            {
+                                <label>
+                                    <input class="checkbox-business-category" type="checkbox" id="check_@department.ID" value="@department.ID"> @department.DepartmentDesc
+                                </label>
+                            }
+                       @*      <label><input class="checkbox-business-category" type="checkbox" id="check1"> Checkbox 1</label>
+                            <label><input class="checkbox-business-category" type="checkbox" id="check2"> Checkbox 2</label>
+                            <label><input class="checkbox-business-category" type="checkbox" id="check3"> Checkbox 3</label>
+                            <label><input class="checkbox-business-category" type="checkbox" id="check4"> Checkbox 4</label>
+                            <label><input class="checkbox-business-category" type="checkbox" id="check5"> Checkbox 5</label>
+                            <label><input class="checkbox-business-category" type="checkbox" id="check6"> Checkbox 6</label>
+                            <label><input class="checkbox-business-category" type="checkbox" id="check7"> Checkbox 7</label>
+                            <label><input class="checkbox-business-category" type="checkbox" id="check8"> Checkbox 8</label>
+                            <label><input class="checkbox-business-category" type="checkbox" id="check9"> Checkbox 9</label>
+                            <label><input class="checkbox-business-category" type="checkbox" id="check10"> Checkbox 10</label> *@
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info green btn-sm" id="btnSaveEditBusinessCategory">Save</button>
+                    <button type="button" class="btn btn-sm btn-outline-brand white btn-square" data-dismiss="modal">Close</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="CreateModal" class="modal fade bs-modal-lg" data-backdrop="static" abindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="width:70%">
+        <div class="modal-content" style="padding-top:0.5px;">
+            <div class="modal-header header-modal-business">
+                <span>Create Master Business Category</span>
+            </div>
+            <div style="margin-top:30px;">
+                <div class="business-container">
+                    <div class="business_classification" name="business_classification">
+                        <div class="sub-header-modal-business1">
+                            Business Classification 
+                            @* <span class="fa-add" style="margin-left: 10px; cursor: pointer;" onclick="addInputGroupOnCreate('businessClassification')"></span> *@
+                        </div>
+                        <div class="content-modal-business1" id="classificationContainerCreate">
+                            <div class="input-group">
+                                <input class="checkbox-business-category" type="checkbox" id="checkbox">
+                                <input type="text" placeholder="" class="textbox" style="margin-left: 10px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="business_category" name="business_category">
+                        <div class="sub-header-modal-business1">
+                            Business Category <span class="fa-add" style="margin-left: 10px; cursor: pointer;" onclick="addInputGroupOnCreate('businessCategory')"></span>
+                        </div>
+                        <div class="content-modal-business1" id="categoryContainerCreate">
+                            <div class="input-group">
+                                <input class="checkbox-business-category" type="checkbox" id="categoryCheckbox">
+                                <input type="text" placeholder="" class="textbox" style="margin-left: 10px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mapping_to" name="mapping_to">
+                        <div class="sub-header-modal-business2">
+                            Mapping to
+                        </div>
+                        <div class="content-modal-business1 checkbox-container">
+                            @foreach (var department in ViewBag.Department)
+                            {
+                                <label>
+                                    <input class="checkbox-business-category" type="checkbox" id="check_@department.ID" value="@department.ID"> @department.DepartmentDesc
+                                </label>
+                            }
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info green btn-sm" id="btnSaveCreateBusinessCategory">Save</button>
+                    <button type="button" class="btn btn-sm btn-outline-brand white btn-square" data-dismiss="modal">Close</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

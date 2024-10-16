@@ -38,6 +38,7 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Folder Include="Areas\Dashboard\Controllers\" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 

@@ -41,23 +41,6 @@ namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
             return Ok(result);
         }
 
-        [HttpPost]
-        public IActionResult ResetPasswordUser(ResetPassword user)
-        {
-            user.ResetNewPW = MD5Helper.Encode(user.ResetNewPW);
-            user.ResetConfirmNewPW = MD5Helper.Encode(user.ResetConfirmNewPW);
-            string result = string.Empty;
-            if (user.ResetNewPW != user.ResetConfirmNewPW)
-            {
-                result = "New password and Confirm password doesn't matched";
-            }
-            else
-            {
-                result = Service<DownloadVendorDatabaseService>().ResetPassword(user);
-            }
-
-            return Ok(result);
-        }
 
         [HttpPost]
         public IActionResult ChangePasswordUser(ChangePassword user)

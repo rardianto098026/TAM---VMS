@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col-12" style="margin-top: 10px">
+        <div class="col-12" style="margin-top: 10px; width: 100%;">
             <button type="button" class="collapsible col-12">
                 General Information 
                 <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
@@ -25,17 +25,17 @@
                     <div class="vendor-info">
                         <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="vendor-code" style="width: 250px;">Vendor Code</label>
-                                <input type="text" id="vendor-code" style="flex-grow: 1;">
+                                <label for="vendor-code" style="min-width: 200px;">Vendor Code</label>
+                                <input type="text" id="vendor-code" style="width: 250px">
                             </div>
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="vendor-rating" style="width: 150px;">Vendor Rating</label>
+                                <label for="vendor-rating" style="min-width: 200px;">Vendor Rating</label>
                                 <span id="vendor-rating">0/4 ★</span>
                             </div>
                         </div>
                         <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="transaction-category" style="width: 173px;">Transaction Category</label>
+                                <label for="transaction-category" style="min-width: 200px;">Transaction Category</label>
                                 <div>
                                     <input type="checkbox" id="trade" name="transaction-category" value="Trade">
                                     <label for="trade" style="margin-right: 50px">Trade</label>
@@ -44,45 +44,45 @@
                                 </div>
                             </div>
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="vendor-evaluation" style="width: 200px;">Vendor Evaluation</label>
-                                <input type="text" id="vendor-evaluation">
+                                <label for="vendor-evaluation" style="min-width: 200px;">Vendor Evaluation</label>
+                                <input type="text" id="vendor-evaluation" style="width: 250px">
                             </div>
                         </div>
 
                         <div class="row" style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="pic-vendor" style="flex: 410px;">PIC Vendor Management</label>
-                                <input type="text" id="pic-vendor" style="flex-grow: 1;">
-                                <input type="text" id="pic-vendor-2" style="flex-grow: 1;">
+                                <label for="pic-vendor" style="min-width: 200px;">PIC Vendor Management</label>
+                                <input type="text" id="pic-vendor" style="width: 250px;">
+                                <input type="text" id="pic-vendor-2" style="width: 250px;">
                             </div>
                         </div>
 
                         <div class="row" style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="vendor-code" style="width: 200px;">Business Area</label>
-                                <input type="text" id="" style="flex-grow: 1;">
+                                <label for="business-area" style="min-width: 200px;">Business Area</label>
+                                <input type="text" id="business-area" style="width: 250px;">
                             </div>
                         </div>
 
                         <div class="row" style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="sap-status" style="width: 400px;">SAP Status</label>
-                                <input type="text" id="" style="flex-grow: 1;">
-                                <input type="text" id="" style="flex-grow: 1;">
+                                <label for="sap-status" style="min-width: 200px;">SAP Status</label>
+                                <input type="text" id="" style="width: 250px;">
+                                <input type="text" id="" style="width: 250px;">
                             </div>
                         </div>
 
                         <div class="row" style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="vms-status" style="width: 400px;">VMS Status</label>
-                                <input type="text" id="" style="flex-grow: 1;">
-                                <input type="text" id="" style="flex-grow: 1;">
+                                <label for="vms-status" style="min-width: 200px;">VMS Status</label>
+                                <input type="text" id="" style="width: 250px;">
+                                <input type="text" id="" style="width: 250px;">
                             </div>
                         </div>
 
                         <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="vendor-type" style="width: 170px;">Type</label>
+                                <label for="vendor-type" style="min-width: 200px;">Type</label>
                                 <div>
                                     <input type="radio" id="company" name="vendor-type" value="Company">
                                     <label for="company" style="margin-right: 50px;">Company</label>
@@ -95,23 +95,21 @@
                         <!-- Additional Fields -->
                         <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="vendor-name" style="width: 200px;">Vendor Name</label>
-                                <input type="text" id="vendor-name" value="PT.">
+                                <label for="vendor-name" style="min-width: 200px;">Vendor Name</label>
+                                <input type="text" id="vendor-name" value="PT." style="width: 400px">
                             </div>                          
                         </div>
                         <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="trading-name" style="width: 200px;">Trading Name</label>
-                                <input type="text" id="trading-name" style="width: 300px;">
+                                <label for="trading-name" style="min-width: 200px;">Trading Name</label>
+                                <input type="text" id="trading-name" style="width: 400px;">
 
                                 <!-- Ikon informasi -->
                                 <div class="info-icon" style="position: relative; display: inline-block;">
                                     <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
             
                                     <!-- Tooltip yang akan muncul saat di-hover -->
-                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
-                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
-                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                    <div class="tooltip">
                                         This is the name used for trading purposes.
                                     </div>
                                 </div>
@@ -119,18 +117,48 @@
                         </div>
                          <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="special-vendor" style="width: 200px;">Special Vendor</label>
-                                <select id="special-vendor">
+                                <label for="special-vendor" style="min-width: 200px;">Special Vendor</label>
+                                <select id="special-vendor" style="width: 250px">
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option>
                                 </select>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
                             </div>
                          </div>
                     </div>
 
-                    <div class="contact-person-pic">
-                        <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 10px;">CONTACT PERSON / PIC</h4>
-                        <table>
+                    <div class="contact-person-pic" style="margin-top: 80px;">
+                        <!-- Flex container for the title and button -->
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; justify-content: center; align-items: center; background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 10px; width: 600px;">
+                                <h4 style="margin: 0; text-align: center; flex-grow: 1; font-family: 'SF Pro Display', sans-serif;">CONTACT PERSON / PIC</h4>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block; margin-left: 10px;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tombol Add Row di luar kotak -->
+                            <button class="add-row-btn" data-table-id="cp-table" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <!-- Tabel Business -->
+                        <table id="cp-table" class="dynamic-table" style="margin-top: 10px;">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -140,6 +168,7 @@
                                     <th>Email Address</th>
                                     <th>NIK</th>
                                     <th>Username</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -151,12 +180,58 @@
                                     <td><input type="text"></td>
                                     <td><input type="text"></td>
                                     <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                                 <!-- Add more rows as needed -->
                             </tbody>
                         </table>
                     </div>
-
                     <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
                                 <label for="company-phone-number-1" style="width: 200px;">Company Phone Number 1</label>
@@ -167,9 +242,7 @@
                                     <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
             
                                     <!-- Tooltip yang akan muncul saat di-hover -->
-                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
-                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
-                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                    <div class="tooltip">
                                         This is the name used for trading purposes.
                                     </div>
                                 </div>
@@ -186,18 +259,22 @@
                                     <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
             
                                     <!-- Tooltip yang akan muncul saat di-hover -->
-                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
-                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
-                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                    <div class="tooltip">
                                         This is the name used for trading purposes.
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                    <div class="business-category">
-                        <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 10px;">BUSINESS CATEGORY</h4>
-                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <div class="business-category" style="margin-top: 50px">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; justify-content: center; align-items: center; background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 10px; width: 600px;">
+                                <h4 style="margin: 0; text-align: center; flex-grow: 1; font-family: 'SF Pro Display', sans-serif;">BUSINESS CATEGORY</h4>
+
+                                
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px; margin-top: 10px">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
                                 <label for="scope-of-work" style="width: 200px;">Scope Of Work</label>
                                 <input type="text" id="scope-of-work" style="width: 400px;">
@@ -206,9 +283,7 @@
                                     <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
             
                                     <!-- Tooltip yang akan muncul saat di-hover -->
-                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
-                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
-                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                    <div class="tooltip">
                                         This is the name used for trading purposes.
                                     </div>
                                 </div>
@@ -223,9 +298,7 @@
                                     <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
             
                                     <!-- Tooltip yang akan muncul saat di-hover -->
-                                    <div class="tooltip" style="visibility: hidden; width: 200px; background-color: #333; color: #fff; text-align: center;
-                                                                border-radius: 5px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; 
-                                                                transform: translateX(-50%); opacity: 0; transition: opacity 0.3s;">
+                                    <div class="tooltip">
                                         This is the name used for trading purposes.
                                     </div>
                                 </div>
@@ -239,6 +312,15 @@
                                     <label for="inscope" style="margin-right: 50px;">Inscope Due Diligence</label>
                                     <input type="radio" id="outscope" name="outscope" value="Outscope">
                                     <label for="outscope">Outscope Due Diligence</label>
+                                    <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -247,31 +329,58 @@
                                 <label for="compliance-flow" style="width: 200px;">Compliance Flow</label>
                                 <div>
                                     <input type="radio" id="sdl" name="compliance-flow" value="SDL">
-                                    <label for="sdl" style="margin-right: 50px;">SDL</label>
+                                    <label for="sdl" style="margin-right: 162px;">SDL</label>
                                     <input type="radio" id="non-sdl" name="compliance-flow" value="Non SDL">
                                     <label for="non-sdl">Non SDL</label>
+                                    <!-- Ikon informasi -->
+                                    <div class="info-icon" style="position: relative; display: inline-block;">
+                                        <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                        <!-- Tooltip yang akan muncul saat di-hover -->
+                                        <div class="tooltip">
+                                            This is the name used for trading purposes.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <table id="business-table" class="dynamic-table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Business Classification</th>
-                                    <th>Business Category</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;"><i class="fa-solid fa-trash"></i></button></td>
-                                </tr>
-                                <!-- Add more rows as needed -->
-                            </tbody>
-                        </table>
+                            <div style="position: relative; width: 100%; max-width: 750px;">
+                                <!-- Tabel -->
+                                <table id="business-table" class="dynamic-table" style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%;">No</th>
+                                            <th style="width: 30%;">Business Classification</th>
+                                            <th style="width: 30%;">Business Category</th>
+                                            <th style="width: 20%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td><input type="text" style="width: 100%;"></td>
+                                            <td><input type="text" style="width: 100%;"></td>
+                                            <td><button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;"><i class="fa-solid fa-trash"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td><input type="text" style="width: 100%;"></td>
+                                            <td><input type="text" style="width: 100%;"></td>
+                                            <td><button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;"><i class="fa-solid fa-trash"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <!-- Ikon informasi di luar tabel tetapi di posisi absolut -->
+                                <div class="info-icon" style="position: absolute; right: -30px; top: 50%; transform: translateY(-50%);">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+        
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
                         <button class="add-row-btn" data-table-id="business-table" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
                             <i class="fa-solid fa-plus"></i> Add Row
                         </button>
@@ -287,24 +396,37 @@
                 <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
             </button>
             <div class="content">
-               <div class="business-category">
-                        <h4 style="text-align: center; background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 10px; width: 600px">COMPANY DOMICILE</h4>
-                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="address" style="width: 200px;">Address</label>
-                                <input type="text" id="address" style="width: 400px;">
+               <div class="company-legality">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; margin-bottom: 10px">
+                            <div style="display: flex; justify-content: center; align-items: center; background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 10px; width: 750px;">
+                                <h4 style="margin: 0; text-align: center; flex-grow: 1; font-family: 'SF Pro Display', sans-serif;">COMPANY DOMICILE</h4>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block; margin-left: 10px;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="city" style="width: 200px;">City</label>
-                                <input type="text" id="city" style="width: 400px;">
+                                <label for="address" style="min-width: 200px;">Address</label>
+                                <input type="text" id="address" style="width: 600px;">
                             </div>
                         </div>
                         <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="country" style="width: 200px;">Country</label>
-                                <select id="country" style="width: 400px;">
+                                <label for="city" style="min-width: 200px;">City</label>
+                                <input type="text" id="city" style="width: 600px;">
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="country" style="min-width: 200px;">Country</label>
+                                <select id="country" style="width: 600px;">
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option>
                                 </select>
@@ -312,34 +434,55 @@
                         </div>
                         <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <div class="col" style="display: flex; align-items: center; gap: 10px;">
-                                <label for="postalcode" style="width: 200px;">Postal Code</label>
-                                <input type="text" id="postalcode" style="width: 400px;">
+                                <label for="postalcode" style="min-width: 200px;">Postal Code</label>
+                                <input type="text" id="postalcode" style="width: 600px;">
                             </div>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 650px; margin-top: 50px">
                             <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center; flex-grow: 1;">
                                 FUNCTIONARY OF COMPANY
                             </h4>
-                            <button data-table-id="functionary-company-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                            <button data-table-id="functionary-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
+                            <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block; margin-left: 10px">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
                         </div>
-                        <table id="functionary-company-table" class="dynamic-table">
+
+                        <table id="functionary-table" class="dynamic-table" style="width: 100%; max-width: 650px; border-collapse: collapse;">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Email Address</th>
-                                    <th>Action</th>
+                                    <th style="width: 5%;">No</th>
+                                    <th style="width: 30%;">Name</th>
+                                    <th style="width: 30%;">Position</th>
+                                    <th style="width: 30%;">Email Address</th>
+                                    <th style="width: 20%;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
                                     <td>
                                         <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
                                             <i class="fa-solid fa-trash"></i>
@@ -355,34 +498,649 @@
                                 <input type="text" id="remarks" style="width: 400px;">
                             </div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="position: relative;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center; flex-grow: 1;">
+            SUPPORTING DOCUMENT
+        </h4>
+        <button data-table-id="supp-doc-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>
+
+    <div style="position: relative;">
+
+        <!-- Tabel -->
+        <table id="supp-doc-table" class="dynamic-table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Company Document</th>
+                    <th>Document Number & Remarks</th>
+                    <th>Validity Date</th>
+                    <th>File (Attachment)</th>
+                    <th>Check List</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="position: relative;">
+                    <td>1</td>
+                    <td>Akta Pendirian</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Baris lainnya tetap sama seperti ini -->
+                <tr style="position: relative;">
+                    <td>2</td>
+                    <td>Akta UUPT</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Baris lainnya -->
+                <tr style="position: relative;">
+                    <td>3</td>
+                    <td>Akta & SK Keputusan RUPS Terakhir - Susunan Direksi</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td>4</td>
+                    <td>Nomor Induk Berusaha/ Perizinan Berbasis Resiko (RBA)</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td>5</td>
+                    <td>Izin Usaha/ Perizinan Berbasis Resiko (RBA)</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td>6</td>
+                    <td>Sertifikat Standart (RBA)</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td>7</td>
+                    <td>Surat Keterangan Domisili (SKD)/ Izin Lokasi / Perizinan Berbasis Resiko (RBA)</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td>8</td>
+                    <td>Pakta Integritas</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td>9</td>
+                    <td>Pakta Kerahasiaan</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td>10</td>
+                    <td>Company Profile</td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td><input type="text" style="width: 100%;"></td>
+                    <td>
+                        <div class="file-upload" style="position: relative; display: inline-block; width: 200px;">
+                            <input type="file" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                <span>Upload Attachment</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="text"></td>
+                    <td>
+                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                    <!-- Ikon informasi di luar tabel -->
+                    <td style="position: relative;">
+                        <div class="info-icon" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 100;">
+                            <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+
+                            <!-- Tooltip yang akan muncul saat di-hover -->
+                            <div class="tooltip">
+                                This is the name used for trading purposes.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12" style="margin-top: 10px; margin-left: 15px; margin-right: 15px;">
+            <button type="button" class="collapsible col-12">
+                Tax Information 
+                <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
+            </button>
+            <div class="content">
+                <div class="tax-information">
+                    <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center; flex-grow: 1; width: 700px">
+                        TAX INFORMATION
+                    </h4>
+                    <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="country" style="width: 200px;">NPWP</label>
+                                <select id="country" style="width: 400px;">
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                    
+                                </select>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="npwpNum" style="width: 200px;">NPWP Number</label>
+                                <input type="text" id="npwpNum" style="width: 400px;" maxlength="20" placeholder="99.999.999.9-999.999">
+                                 <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        Format: 99.999.999.9-999.999
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="npwpName" style="width: 200px;">NPWP Name</label>
+                                <input type="text" id="npwpName" style="width: 400px;">
+                                 <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="address" style="width: 200px;">Address</label>
+                                <input type="text" id="address" style="width: 400px;">
+                                 <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="city" style="width: 200px;">City</label>
+                                <input type="text" id="city" style="width: 400px;">
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="country" style="width: 200px;">Country</label>
+                               <select id="country" style="width: 400px;">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="postal-code" style="width: 200px;">Postal Code</label>
+                                <input type="text" id="postal-code" style="width: 400px;">
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="npwp-upload" style="width: 200px;">Copy of NPWP</label>
+                                <div class="file-upload" style="position: relative; display: inline-block; width: 400px;">
+                                    <input type="file" id="npwp-upload" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                        <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                        <span id="npwp-filename">Upload Attachment</span>
+                                    </div>
+                                </div>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+                                    <div class="tooltip">
+                                        This is the file for NPWP copy in PDF format.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="skt-upload" style="width: 200px;">SKT</label>
+                                <div class="file-upload" style="position: relative; display: inline-block; width: 400px;">
+                                    <input type="file" id="skt-upload" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                        <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                        <span id="skt-filename">Upload Attachment</span>
+                                    </div>
+                                </div>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+                                    <div class="tooltip">
+                                        This is the file for SKT in PDF format.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="country" style="width: 200px;">E-Faktur</label>
+                               <select id="country" style="width: 400px;">
+                                    <option value="yes">Yes</option> 
+                                    <option value="no">No</option>
+                                </select>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+                                    <div class="tooltip">
+                                        This is the file for NPWP copy in PDF format.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="country" style="width: 200px;">Pengusaha Kena Pajak (PKP)</label>
+                               <select id="country" style="width: 400px;">
+                                   <option value="yes">Yes</option> 
+                                   <option value="no">No</option>                                    
+                                </select>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+                                    <div class="tooltip">
+                                        This is the file for NPWP copy in PDF format.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="sppkp-upload" style="width: 200px;">SPPKP</label>
+                                <div class="file-upload" style="position: relative; display: inline-block; width: 400px;">
+                                    <input type="file" id="sppkp-upload" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                        <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                        <span id="sppkp-filename">Upload Attachment</span>
+                                    </div>
+                                </div>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+                                    <div class="tooltip">
+                                        This is the file for SKT in PDF format.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="sppkpNum" style="width: 200px;">SPPKP Number</label>
+                                <input type="text" id="sppkpNum" style="width: 400px;">
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+                                    <div class="tooltip">
+                                        This is the file for SKT in PDF format.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="evidence-upload" style="width: 200px;">Evidence Non PKP</label>
+                                <div class="file-upload" style="position: relative; display: inline-block; width: 400px;">
+                                    <input type="file" id="evidence-upload" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                        <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                        <span id="evidence-filename">Upload Attachment</span>
+                                    </div>
+                                </div>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+                                    <div class="tooltip">
+                                        This is the file for SKT in PDF format.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="skb" style="width: 200px;">Has SKB</label>
+                               <select id="skb" style="width: 400px;">
+                                   <option value="yes">Yes</option> 
+                                   <option value="no">No</option>                                    
+                                </select>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+                                    <div class="tooltip">
+                                        This is the file for NPWP copy in PDF format.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div class="col" style="display: flex; align-items: center; gap: 10px;">
+                                <label for="skbDoc-upload" style="width: 200px;">SKB</label>
+                                <div class="file-upload" style="position: relative; display: inline-block; width: 400px;">
+                                    <input type="file" id="skbDoc-upload" accept=".pdf" style="opacity: 0; width: 100%; height: 100%; position: absolute; z-index: 1; cursor: pointer;">
+                                    <div style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f7f7f7;">
+                                        <i class="fas fa-upload" style="color: #03BFD7;"></i>
+                                        <span id="skbDoc-filename">Upload Attachment</span>
+                                    </div>
+                                </div>
+                                <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block;">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+                                    <div class="tooltip">
+                                        This is the file for SKT in PDF format.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 650px; margin-top: 50px">
                             <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center; flex-grow: 1;">
-                                SUPPORTING DOCUMENT
+                                VAT (PPN)
                             </h4>
-                            <button data-table-id="sup-doc-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                            <button data-table-id="vat-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
+                            <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block; margin-left: 10px">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
                         </div>
-                        <table id="supp-doc-table" class="dynamic-table">
+
+                        <table id="vat-table" class="dynamic-table" style="width: 100%; max-width: 650px; border-collapse: collapse;">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Company Document</th>
-                                    <th>Document Number & Remarks</th>
-                                    <th>Validity Date</th>
-                                    <th>File (Attachment)</th>
-                                    <th>Check List</th>
-                                    <th>Action</th>
+                                    <th style="width: 5%;">No</th>
+                                    <th style="width: 30%;">VAT Type</th>
+                                    <th style="width: 30%;">Transaction Type</th>
+                                    <th style="width: 15%;">Rate</th>
+                                    <th style="width: 20%;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Akta Pendirian</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
                                     <td>
                                         <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
                                             <i class="fa-solid fa-trash"></i>
@@ -391,115 +1149,9 @@
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>Akta UUPT</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Akta & SK Keputusan RUPS Terakhir - Susunan Direksi</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Nomor Induk Berusaha / Perizinan Berbasis Resiko (RBA)</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Izin Usaha / Perizinan Berbasis Resiko (RBA) </td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Sertifikat Standart (RBA)</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Surat Keterangan Domisili (SKD) / Izin Lokasi / Perizinan Berbasis Resiko (RBA)</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Pakta Integritas</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>Pakta Kerahasiaan</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Company Profile</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
                                     <td>
                                         <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
                                             <i class="fa-solid fa-trash"></i>
@@ -508,23 +1160,65 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 650px;">
+                            <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center; flex-grow: 1;">
+                                WHT (PPH)
+                            </h4>
+                            <button data-table-id="wht-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block; margin-left: 10px">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
+                        </div>
+
+                        <table id="wht-table" class="dynamic-table" style="width: 100%; max-width: 650px; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;">No</th>
+                                    <th style="width: 30%;">WHT Type</th>
+                                    <th style="width: 30%;">Transaction Type</th>
+                                    <th style="width: 15%;">Rate</th>
+                                    <th style="width: 20%;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td><input type="text" style="width: 100%;"></td>
+                                    <td>
+                                        <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
             </div>
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col-12" style="margin-top: 10px">
-            <button type="button" class="collapsible col-12">
-                Tax Information 
-                <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
-            </button>
-            <div class="content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-12" style="margin-top: 10px">
+        <div class="col-12" style="margin-top: 10px; margin-left: 15px; margin-right: 15px;">
             <button type="button" class="collapsible col-12">
                 Payment Information
                 <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
@@ -537,6 +1231,15 @@
                     <button data-table-id="bank-account-table" class="add-row-btn" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
                         <i class="fa-solid fa-plus"></i>
                     </button>
+                    <!-- Ikon informasi -->
+                                <div class="info-icon" style="position: relative; display: inline-block; margin-left: 10px">
+                                    <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
+            
+                                    <!-- Tooltip yang akan muncul saat di-hover -->
+                                    <div class="tooltip">
+                                        This is the name used for trading purposes.
+                                    </div>
+                                </div>
                 </div>
 
                 <table id="bank-account-table" class="dynamic-table">
@@ -573,6 +1276,40 @@
                                 </button>
                             </td>
                         </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td>
+                                <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td>
+                                <button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -580,76 +1317,107 @@
     </div>
 
     <div class="row mb-3">
-        <div class="col-12" style="margin-top: 10px">
+        <div class="col-12" style="margin-top: 10px; margin-left: 15px; margin-right: 15px;">
             <button type="button" class="collapsible col-12">
                 Vendor Category 
                 <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>
             </button>
             <div class="content">
-                <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center;">VENDOR CATEGORY</h4>
-                    <p style="font-family: 'SF Pro Display', sans-serif; font-size: 16px;"><strong>Trade</strong></p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="background-color: #5C5C5C; font-family: 'SF Pro Display', sans-serif; color: white; padding: 7px; text-align: center; flex-grow: 1;">
+                        VENDOR CATEGORY
+                    </h4>
+                    <!-- Ikon informasi -->
+                    <div class="info-icon" style="position: relative; display: inline-block; margin-left: 10px">
+                        <i class="fas fa-info-circle" style="color: #03BFD7; cursor: pointer; font-size: 18px;"></i>
 
-                    <table id="trade-vendor-table" class="dynamic-table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Vendor Category</th>
-                                <th>Description</th>
-                                <th>GL Account</th>
-                                <th>Grouping</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><input type="text"></td>
-                                <td><input type="text"></td>
-                                <td>GL Account</td>
-                                <td><input type="text"></td>
-                                <td><button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;"><i class="fa-solid fa-trash"></i></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <!-- Tooltip yang akan muncul saat di-hover -->
+                        <div class="tooltip">
+                            This is the name used for trading purposes.
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- Tombol tambah baris di bawah tabel -->
-                    <button class="add-row-btn" data-table-id="trade-vendor-table" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
-                        <i class="fa-solid fa-plus"></i> Add Row
-                    </button>
+                <!-- Section Trade -->
+                <p style="font-family: 'SF Pro Display', sans-serif; font-size: 16px;"><strong>Trade</strong></p>
 
-                    <p style="font-family: 'SF Pro Display', sans-serif; font-size: 16px;   "><strong>Non Trade</strong></p>
+                <table id="trade-vendor-table" class="dynamic-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Vendor Category</th>
+                            <th>Description</th>
+                            <th>GL Account</th>
+                            <th>Grouping</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td>GL Account</td>
+                            <td><input type="text"></td>
+                            <td><button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <table id="non-trade-vendor-table" class="dynamic-table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Vendor Category</th>
-                                <th>Description</th>
-                                <th>GL Account</th>
-                                <th>Grouping</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><input type="text"></td>
-                                <td><input type="text"></td>
-                                <td>GL Account</td>
-                                <td><input type="text"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- Tombol tambah baris di bawah tabel -->
+                <button class="add-row-btn" data-table-id="trade-vendor-table" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                    <i class="fa-solid fa-plus"></i> Add Row
+                </button>
 
-                    <!-- Tombol tambah baris di bawah tabel -->
-                    <button class="add-row-btn" data-table-id="non-trade-vendor-table" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
-                        <i class="fa-solid fa-plus"></i> Add Row
-                    </button>
+                <!-- Input Search Term untuk Trade -->
+                <div style="margin-top: 10px;">
+                    <label for="trade-search-term" style="font-family: 'SF Pro Display', sans-serif; font-size: 16px;">Search Term:</label>
+                    <input type="text" id="trade-search-term" style="padding: 5px; width: 100%; max-width: 400px; margin-top: 5px; margin-left: 30px">
+                </div>
+
+                <!-- Section Non Trade -->
+                <p style="font-family: 'SF Pro Display', sans-serif; font-size: 16px;"><strong>Non Trade</strong></p>
+
+                <table id="non-trade-vendor-table" class="dynamic-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Vendor Category</th>
+                            <th>Description</th>
+                            <th>GL Account</th>
+                            <th>Grouping</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td>GL Account</td>
+                            <td><input type="text"></td>
+                            <td><button class="delete-row" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;"><i class="fa-solid fa-trash"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Tombol tambah baris di bawah tabel -->
+                <button class="add-row-btn" data-table-id="non-trade-vendor-table" style="background-color: #03BFD7; color: white; padding: 7px 15px; border: none; border-radius: 4px; cursor: pointer;">
+                    <i class="fa-solid fa-plus"></i> Add Row
+                </button>
+
+                <!-- Input Search Term untuk Non Trade -->
+                <div style="margin-top: 10px;">
+                    <label for="non-trade-search-term" style="font-family: 'SF Pro Display', sans-serif; font-size: 16px;">Search Term:</label>
+                    <input type="text" id="non-trade-search-term" style="padding: 5px; width: 100%; max-width: 400px; margin-top: 5px;  margin-left: 30px">
+                </div>
+
             </div>
+
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col-12" style="margin-top: 10px">
+        <div class="col-12" style="margin-top: 10px; margin-left: 15px; margin-right: 15px;">
             <button type="button" class="collapsible col-12">
                 Compliance Enhancements 
                 <i class="fa fa-chevron-down toggle-icon" style="float: right;"></i>

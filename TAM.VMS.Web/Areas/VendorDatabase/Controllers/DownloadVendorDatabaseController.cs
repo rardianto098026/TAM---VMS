@@ -34,11 +34,35 @@ namespace TAM.VMS.Web.Areas.VendorDatabase.Controller
         }
 
         [HttpPost]
-        public IActionResult AddRequest(DownloadVendorDatabase vendorDB)
+        public IActionResult AddRequest()
         {
-            var result = Service<DownloadVendorDatabaseService>().AddRequest(vendorDB);
+            var result = Service<DownloadVendorDatabaseService>().AddRequest();
 
             return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadFile(string id)
+        {
+            // URL of the file to download
+            string fileUrl = "https://www.hq.nasa.gov/alsj/a17/A17_FlightPlan.pdf"; 
+
+            using (HttpClient client = new HttpClient())
+            {
+                // Fetch the file content
+                var response = await client.GetAsync(fileUrl);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return NotFound("File not found.");
+                }
+
+                // Read the file content
+                var content = await response.Content.ReadAsByteArrayAsync();
+
+                // Return the file as a download
+                string fileName = $"{id}.pdf"; // Use the provided ID for the file name
+                return File(content, "application/pdf", fileName);
+            }
         }
     }
 }

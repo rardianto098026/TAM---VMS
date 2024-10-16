@@ -29,7 +29,7 @@ namespace TAM.VMS.Domain
 
             var query = string.Format("INSERT INTO {0} ({1}) OUTPUT inserted.ID VALUES (@{2})",
                                     tableName,
-                                    string.Join(",", allcolumns),
+                                    string.Join(",", allcolumns.Select(c => $"[{c}]")),
                                     string.Join(",@", allcolumns));
             return query;
         }

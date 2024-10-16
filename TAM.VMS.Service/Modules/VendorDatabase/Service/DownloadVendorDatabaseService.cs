@@ -236,33 +236,170 @@ namespace TAM.VMS.Service
         //    return result;
         //}
 
-        public string AddRequest(DownloadVendorDatabase vendorDB)
+        public string AddRequest()
         {
             string result = string.Empty;
 
-            using (DbHelper db = new DbHelper(true))
+            using (var db = new DbHelper(true))
             {
-                vendorDB.FileName = "Database Vendor " + SessionManager.Department;
-                vendorDB.ReqDate = DateTime.Now;
-                vendorDB.DepartmentId = SessionManager.DepartmentID;
-                vendorDB.StatusId = "1"; // 1 = "Requested"
-                vendorDB.CreatedBy = SessionManager.Current;
-                vendorDB.CreatedOn = DateTime.Now;
-
-                vendorDB = db.DownloadVendorDatabaseRepository.Add(vendorDB, new string[]
+                try
                 {
-                    "FileName",
-                    "ReqDate",
-                    "DepartmentId",
-                    "StatusId",
-                    "CreatedOn",
-                    "CreatedBy",
-                });
-                db.Commit();
+                    Guid idModule = GetIdModule();
+                    Guid idModuleProcess = GetIdModuleProcess(idModule);
+
+                    var vendorDB = new DownloadVendorDatabase
+                    {
+                        FileName = "Database Vendor " + SessionManager.Department,
+                        ReqDate = DateTime.Now,
+                        DepartmentId = SessionManager.DepartmentID,
+                        StatusId = "1", // 1 = "Requested"
+                        CreatedBy = SessionManager.Current,
+                        CreatedOn = DateTime.Now,
+                        IdModuleProcess = idModuleProcess
+                    };
+
+                    vendorDB = db.DownloadVendorDatabaseRepository.Add(vendorDB, new[]
+                    {
+                        "FileName",
+                        "ReqDate",
+                        "DepartmentId",
+                        "StatusId",
+                        "CreatedOn",
+                        "CreatedBy",
+                        "IdModuleProcess",
+                    });
+
+                    var task = new TaskList
+                    {
+                        VendorName = "ini vendor static", // This should be replaced with dynamic input
+                        IdModule = idModule,
+                        IdDataByModule = vendorDB.ID,
+                        IdModuleProcess = idModuleProcess,
+                        StatusID = 1,
+                        CreatedBy = SessionManager.Current,
+                        CreatedOn = DateTime.Now
+                    };
+
+                    task = db.TaskListRepository.Add(task, new[]
+                    {
+                        "VendorName",
+                        "IdModule",
+                        "IdDataByModule",
+                        "IdModuleProcess",
+                        "StatusID",
+                        "CreatedBy",
+                        "CreatedOn"
+                    });
+
+                    db.Commit();
+                }
+                catch (Exception ex)
+                {
+                    // Handle exception (e.g., log the error)
+                    result = "Error: " + ex.Message;
+                }
             }
+
             return result;
         }
 
+        public Guid GetIdModule()
+        {
+            using (var dbContext = new DbHelper(true))
+            {
+                // Check if the module exists
+                var existingModule = dbContext.MasterModuleRepository.Find(new {Module = "DownloadVendorDatabase"}).FirstOrDefault();
+
+                if (existingModule != null)
+                {
+                    // Module exists, return its ID
+                    return existingModule.ID; // Assuming Id is of type Guid
+                }
+                else
+                {
+                    // Module does not exist, create a new one
+                    var newModule = new MasterModule // Assuming your entity class is named Module
+                    {
+                        Module = "DownloadVendorDatabase",
+                        Desc = "Download Vendor Database",
+                        CreatedBy = "System",
+                        CreatedDate = DateTime.Now
+                    };
+
+                    dbContext.MasterModuleRepository.Add(newModule);
+                    dbContext.Commit(); // Save changes to the database
+
+                    // Return the new module's ID
+                    return newModule.ID; // Assuming Id is of type Guid
+                }
+            }
+        }
+
+        public Guid GetIdModuleProcess(Guid idmodule)
+        {
+            using (var dbContext = new DbHelper(true))
+            {
+                // Check if the module exists
+                var existingModule = dbContext.MasterLevelModuleProcessRepository.Find(new { IDModule = idmodule, Level = 1 }).FirstOrDefault();
+
+                if (existingModule != null)
+                {
+                    // Module exists, return its ID
+                    return existingModule.ID; // Assuming Id is of type Guid
+                }
+                else
+                {
+                    // Module does not exist, create a new one
+                    var newModule = new MasterLevelModuleProcess // Assuming your entity class is named Module
+                    {
+                        IDModule = idmodule,
+                        Level = 1,
+                        IdRole = GetIdRole(),
+                        Desc = "-",
+                        CreatedBy = "System",
+                        CreatedOn = DateTime.Now
+                    };
+
+                    dbContext.MasterLevelModuleProcessRepository.Add(newModule);
+                    dbContext.Commit(); // Save changes to the database
+
+                    // Return the new module's ID
+                    return newModule.ID; // Assuming Id is of type Guid
+                }
+            }
+        }
+
+        public Guid GetIdRole()
+        {
+            using (var dbContext = new DbHelper(true))
+            {
+                // Check if the module exists
+                var existingModule = dbContext.RoleRepository.Find(new { Name = "VM_Staff" }).FirstOrDefault();
+
+                if (existingModule != null)
+                {
+                    // Module exists, return its ID
+                    return existingModule.ID; // Assuming Id is of type Guid
+                }
+                else
+                {
+                    // Module does not exist, create a new one
+                    var newModule = new Role // Assuming your entity class is named Module
+                    {
+                        Name = "VM_Staff",
+                        Description = "VM Staff",
+                        CreatedBy = "System",
+                        CreatedOn = DateTime.Now
+                    };
+
+                    dbContext.RoleRepository.Add(newModule);
+                    dbContext.Commit(); // Save changes to the database
+
+                    // Return the new module's ID
+                    return newModule.ID; // Assuming Id is of type Guid
+                }
+            }
+        }
 
         public void Delete(Guid id)
         {

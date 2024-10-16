@@ -1,0 +1,44 @@
+﻿@(
+Html.Kendo().Grid<TAM.VMS.Domain.TaskList>()
+    .Name("RequestListGrid")
+    .Columns(Column =>
+    {
+        Column.Template("<span class='row-number'></span>").Title("No").Width(50).HtmlAttributes(new { @class = "text-center" });
+        Column.Bound(o => o.ModuleName).Title("Module Name").Width(150);
+        Column.Bound(o => o.VendorName).Title("Vendor Name").Width(150);
+        Column.Bound(o => o.Complience).Title("Complience").Width(150);
+        Column.Bound(o => o.TransactionCategory).Title("Transaction Category").Width(150);
+        Column.Bound(o => o.ModifiedBy).Title("Modified By").Width(150);
+        Column.Bound(o => o.ModifiedDate).Title("Modified Date").Width(150).Format("{0:dd/MM/yyyy HH:mm}");
+        Column.Bound(o => o.ID).Sortable(false).Title("Action").Width(110)
+            .HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" })
+            .Filterable(false)
+            .ClientTemplate(
+                @"<div class=""btn-group"">
+                    <button type=""button"" class=""btn green btn-primary"" onclick=""viewTask(#= ID #)"">
+                        View
+                    </button>
+                </div>"
+            );
+    })
+    .NoRecords(conf => conf.Template("No Request list to display"))
+    .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
+    .Filterable(ftb => ftb
+        .Extra(false)
+        .Mode(GridFilterMode.Row)
+    )
+    .Sortable(sortable => sortable.SortMode(GridSortMode.SingleColumn))
+    .Scrollable(s => s.Height("auto"))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(true)
+        .Read(read => read.Url(Url.Content("~/requestlist/requestlist/read")))
+        .PageSize(10)
+        .Sort(sort => sort.Add("ID").Descending())
+        .Model(model =>
+        {
+            model.Id(p => p.ID);
+            model.Field(p => p.ID).Editable(false);
+        })
+    )
+)

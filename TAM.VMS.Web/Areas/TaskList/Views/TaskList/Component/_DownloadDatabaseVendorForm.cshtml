@@ -1,120 +1,53 @@
-﻿@model TAM.VMS.Domain.User
+﻿@model TAM.VMS.Domain.TaskList
 
-<div id="UserModal" class="modal fade bs-modal-lg" data-backdrop="static" abindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Manage User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+<div id="ApproveModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:20%">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 280px; width: 100%;">
+        <div class="modal-content" style="border-radius: 20px;">
+            <div class="modal-body text-center">
+                <b>Are you sure to Approve this item?</b>
             </div>
-            <div class="modal-body">
-                <form id="UserForm">
-                    @Html.HiddenFor(x => x.ID)
-                    <div class="tab-container tabbable-line">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item active" id="user_tab_header">
-                                <a href="#tab_user" data-toggle="tab">User</a>
-                            </li>
-                            <li>
-                                <a href="#tab_role" data-toggle="tab">Role</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" style="padding-top: 20px;">
-                            <div class="tab-pane active" id="tab_user">
-                                <div class="form-group">
-                                    <label>Username<span class="required">*</span></label>
-                                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control", maxlength = 50 })
-                                </div>
-                                <div class="form-group">
-                                    <label>Name<span class="required">*</span></label>
-                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", maxlength = 150 })
-                                </div>
-                                <div class="form-group">
-                                    <label>Surname</label>
-                                    @Html.TextBoxFor(x => x.Surname, new { @class = "form-control", maxlength = 20 })
-                                </div>
-                                <div class="form-group">
-                                    <label>Email<span class="required">*</span></label>
-                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", maxlength = 150 })
-                                </div>
-                                <div class="form-group">
-                                    <label>NIP<span class="required">*</span></label>
-                                    @Html.TextBoxFor(x => x.NIP, new { @class = "form-control", maxlength = 15 })
-                                </div>
-                                @*<div class="form-group">
-                                <label>Role</label>
-                                @Html.DropDownList("RoleID", new SelectList(ViewBag.Roles, "ID", "Name"), new
-                                {
-                                @class = "form-control form-select2",
-                                @style = "width: 100 %;"
-                                })
-                                </div>*@
-                            </div>
-                            <div class="tab-pane" id="tab_role">
-                                @(Html.Kendo().Grid((IEnumerable<TAM.VMS.Domain.Role>)ViewBag.Roles)
-                                    .Name("UserRoleGrid")
-                                    .Columns(columns =>
-                                    {
-                                        columns.Bound(c => c.ID).Width(50).Sortable(false).Filterable(false).ClientHeaderTemplate("<div class='text-center'><input id='allcbrole' class='cball' type='checkbox'/></div>").ClientTemplate("<input id='#:ID#' value='#:ID#' name='RoleID' type='checkbox' />").HtmlAttributes(new { @class = "text-center" });
-                                        columns.Bound(c => c.Name);
-                                        columns.Bound(c => c.Description);
-                                    })
-                                    .Sortable()
-                                    .DataSource(dataSource => dataSource
-                                    .Ajax()
-                                    .ServerOperation(false)
-                                    )
-                                    )
-                            </div>
-
-                        </div>
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-outline-brand btn-square" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info btn-sm" id="btnSaveUser">Save</button>
-                </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between; width: 100%;">
+                <button type="button" class="btn btn-primary green btn-sm" id="btnRequestPositive">Yes</button>
+                <button type="button" class="btn btn-sm white btn-outline-secondary" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- begin: Modal Change Password-->
-<div id="ResetPWModal" class="modal fade bs-modal-lg" data-backdrop="static" abindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Reset Password</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+<div id="RejectModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:20%">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 280px; width: 100%;">
+        <div class="modal-content" style="border-radius: 20px;">
+            <div class="modal-body text-center">
+                <b>Are you sure to Reject this item?</b>
             </div>
-            <div class="modal-body">
-                <form id="ResetPWForm">
-                    <input type="text" id="IdResetPW" name="IdResetPW" class="form-control" style="display:none;" />
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>New Password<span class="required">*</span></label>
-                                    <input type="password" id="ResetNewPW" name="ResetNewPW" class="form-control" required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Confirm New Password<span class="required">*</span></label>
-                                    <input type="password" id="ResetConfirmNewPW" name="ResetConfirmNewPW" class="form-control" required />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-sm" id="btnSaveResetPW">Save</button>
-                    <button type="button" class="btn btn-sm btn-outline-brand btn-square" data-dismiss="modal">Close</button>
-                </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between; width: 100%;">
+                <button type="button" class="btn btn-primary green btn-sm" id="btnRequestNegative">Yes</button>
+                <button type="button" class="btn btn-sm white btn-outline-secondary" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
 </div>
-<!-- end: Modal Change Password-->
+
+<div id="ApproveSuccessModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top: 20%;">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 280px; width: 100%;">
+        <div class="modal-content" style="border-radius: 20px;">
+            <div class="modal-body text-center">
+                <span class="k-icon k-i-check" style="font-size: 50px; color: green;"></span>
+                <br />
+                <b>Success Approve</b>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="RejectSuccessModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top: 20%;">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 280px; width: 100%;">
+        <div class="modal-content" style="border-radius: 20px;">
+            <div class="modal-body text-center">
+                <span class="k-icon k-i-check" style="font-size: 50px; color: green;"></span>
+                <br />
+                <b>Success Reject</b>
+            </div>
+        </div>
+    </div>
+</div>

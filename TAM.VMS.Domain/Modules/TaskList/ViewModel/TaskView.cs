@@ -9,8 +9,9 @@ namespace TAM.VMS.Domain
     public class TaskView
     {
         public Guid ID { get; set; }
+        public Guid IdModule { get; set; }
 
-        public string ModuleName { get; set; }
+        public string Module { get; set; }
 
         public string VendorName { get; set; }
 
@@ -23,5 +24,10 @@ namespace TAM.VMS.Domain
         public DateTime? ModifiedDate { get; set; }
 
         public string Status { get; set; }
+        public string StatusID { get; set; }
+        public string Role { get; set; }
+        public string Level { get; set; }
+        public Guid IdModuleProcess { get; set; }
+        public Guid IdDataByModule { get; set; }
     }
 }

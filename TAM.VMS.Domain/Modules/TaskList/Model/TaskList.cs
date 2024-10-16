@@ -16,11 +16,14 @@ namespace TAM.VMS.Domain
         public string Complience { get; set; }
 
         public string TransactionCategory { get; set; }
-
         public string ModifiedBy { get; set; }
-
         public DateTime? ModifiedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public Guid IdModule { get; set; }
         public Guid IdDataByModule { get; set; }
+        public Guid IdModuleProcess { get; set; }
+        public int StatusID { get; set; }
+        public int Action {  get; set; }
     }
 }
