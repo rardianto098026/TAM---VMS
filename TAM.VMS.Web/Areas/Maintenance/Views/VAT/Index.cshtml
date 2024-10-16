@@ -1,16 +1,16 @@
 ﻿@section scripts {
-    @await Html.PartialAsync("~/Areas/Maintenance/Views/BusinessCategory/Script/_BusinessCategory.cshtml")
+    @await Html.PartialAsync("~/Areas/Maintenance/Views/VAT/Script/_VAT.cshtml")
 }
 
 @section modals {
-    @await Html.PartialAsync("~/Areas/Maintenance/Views/BusinessCategory/Component/_BusinessCategoryForm.cshtml")
+    @await Html.PartialAsync("~/Areas/Maintenance/Views/VAT/Component/_VATForm.cshtml")
 }
 
 <div class="portlet light margin-bottom-0">
     <div class="div-title-menu">
         <div class="page-head">
             <div class="text-title-menu">
-                Master - Business Category
+                Master - VAT
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-12" id="containerGrid">
-                        @await Html.PartialAsync("~/Areas/Maintenance/Views/BusinessCategory/Grid/_BusinessCategoryGrid.cshtml")
+                        @await Html.PartialAsync("~/Areas/Maintenance/Views/VAT/Grid/_VATGrid.cshtml")
                     </div>
                 </div>
             </div>

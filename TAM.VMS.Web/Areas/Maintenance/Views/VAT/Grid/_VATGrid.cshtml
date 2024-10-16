@@ -1,5 +1,5 @@
-﻿@(Html.Kendo().Grid<TAM.VMS.Domain.BusinessCategoryDisplayView>()
-    .Name("BusinessCategoryGrid")
+﻿@(Html.Kendo().Grid<TAM.VMS.Domain.VATDisplayView>()
+    .Name("VATGrid")
     .Columns(columns =>
     {
         columns.Bound(o => o.ClassificationID).Title("Action").Sortable(false).Width(110).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
@@ -9,10 +9,31 @@
         </button>
         </div>"
         ).Width(50);
-        columns.Bound(o => o.BusinessClassification).Title("Business Clasification").Width(150);
-        columns.Bound(o => o.BusinessCategory).Title("Business Category").Width(150);
-        columns.Bound(o => o.MappingTo).Title("Mapping To").Width(150);
+        columns.Bound(o => o.RowStatus).Title("No").Width(50);
+        columns.Bound(o => o.RowStatus).Title("Tax Type").Width(100);
+        columns.Bound(o => o.RowStatus).Title("Tax Article").Width(100);
+        columns.Bound(o => o.BusinessClassification).Title("KJSMAP Code").Width(150);
+        columns.Bound(o => o.BusinessClassification).Title("Transaction Type Code").Width(200);
+        columns.Bound(o => o.BusinessCategory).Title("Transaction Type Description").Width(300);
+        columns.Bound(o => o.MappingTo).Title("Tax Object Code").Width(150);
+        columns.Bound(o => o.BusinessCategory).Title("Due Date Payment").Width(300);
+        columns.Bound(o => o.BusinessCategory).Title("Due Date Reporting").Width(300);
+        columns.Bound(o => o.BusinessCategory).Title("Tarif NPWP").Width(150);
+        columns.Bound(o => o.BusinessCategory).Title("Tarif Non NPWP").Width(150);
+        columns.Bound(o => o.BusinessCategory).Title("Rate").Width(100);
+        columns.Bound(o => o.BusinessCategory).Title("GL Account").Width(150);
+        columns.Bound(o => o.BusinessCategory).Title("GL Description").Width(150);
+        columns.Bound(o => o.BusinessCategory).Title("WH T21 Type").Width(150);
+        columns.Bound(o => o.BusinessCategory).Title("ESPT Type").Width(150);
+        columns.Bound(o => o.BusinessCategory).Title("ESPT Code").Width(150);
+        columns.Bound(o => o.BusinessCategory).Title("Additional Info Type").Width(300);
+        columns.Bound(o => o.BusinessCategory).Title("Additional Info Description").Width(300);
+        columns.Bound(o => o.BusinessCategory).Title("Additional Info Length").Width(300);
+        columns.Bound(o => o.BusinessCategory).Title("Additional Info Value Display").Width(300);
         columns.Bound(o => o.RowStatus).Title("Status").Width(150);
+        columns.Bound(o => o.RowStatus).Title("Status CSV").Width(150);
+        columns.Bound(o => o.RowStatus).Title("Eproc Code").Width(150);
+        columns.Bound(o => o.RowStatus).Title("SAP Tax Code").Width(150);
     })
     .NoRecords(conf => conf.Template("No User list to display"))
     .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
@@ -25,7 +46,7 @@
     .DataSource(dataSource => dataSource
         .Ajax()
         .ServerOperation(true)
-        .Read(read => read.Url(Url.Content("~/maintenance/businesscategory/read")))
+        .Read(read => read.Url(Url.Content("~/maintenance/vat/read")))
         .PageSize(10)
         .Sort(sort => sort.Add("BusinessClassification").Ascending())
         .Model(model =>
