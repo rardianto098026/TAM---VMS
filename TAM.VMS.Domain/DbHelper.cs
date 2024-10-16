@@ -35,6 +35,8 @@ namespace TAM.VMS.Domain
         IMasterBusinessCategoriesRepository MasterBusinessCategoriesRepository { get; }
         IBusinessCategoryDisplayViewRepository BusinessCategoryDisplayViewRepository { get; }
         IMasterDepartmentRepository MasterDepartmentRepository { get; }
+        IMasterVATRepository MasterVATRepository { get; }
+        IVATDisplayViewRepository VATDisplayViewRepository { get; }
 
     }
     public class DbHelper : DbContext, IDbHelper
@@ -80,6 +82,8 @@ namespace TAM.VMS.Domain
         private IMasterBusinessCategoriesRepository _MasterBusinessCategoriesRepository;
         private IBusinessCategoryDisplayViewRepository _BusinessCategoryDisplayViewRepository;
         private IMasterDepartmentRepository _MasterDepartmentRepository;
+        private IMasterVATRepository _MasterVATRepository;
+        private IVATDisplayViewRepository _VATDisplayViewRepository;
 
         public IUserRepository UserRepository
         {
@@ -164,6 +168,15 @@ namespace TAM.VMS.Domain
         {
             get { return _MasterDepartmentRepository ?? (_MasterDepartmentRepository = new MasterDepartmentRepository(_connection, _transaction)); }
         }
+        public IMasterVATRepository MasterVATRepository
+        {
+            get { return _MasterVATRepository ?? (_MasterVATRepository = new MasterVATRepository(_connection, _transaction)); }
+        }
+        public IVATDisplayViewRepository VATDisplayViewRepository
+        {
+            get { return _VATDisplayViewRepository ?? (_VATDisplayViewRepository = new VATDisplayViewRepository(_connection, _transaction)); }
+        }
+
 
 
         public override void resetRepositories()
@@ -187,6 +200,8 @@ namespace TAM.VMS.Domain
             _MasterBusinessCategoriesRepository = null;
             _BusinessCategoryDisplayViewRepository = null;
             _MasterDepartmentRepository = null;
+            _MasterVATRepository = null;
+            _VATDisplayViewRepository = null;
         }
     }
 }

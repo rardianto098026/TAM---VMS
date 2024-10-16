@@ -1,0 +1,37 @@
+﻿@(Html.Kendo().Grid<TAM.VMS.Domain.BusinessCategoryDisplayView>()
+    .Name("BusinessCategoryGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(o => o.ClassificationID).Title("Action").Sortable(false).Width(110).HtmlAttributes(new { @class = "text-center", style = "overflow: visible;" }).Filterable(false).ClientTemplate(
+        @"<div class=""btn-group"">
+        <button type=""button"" class=""btn btn-primary green k-grid-edit btnEdit"" title=""Edit"" data-modal='EditModal'>
+            <i class=""fa fa-edit""></i> </span>
+        </button>
+        </div>"
+        ).Width(50);
+        columns.Bound(o => o.BusinessClassification).Title("Business Clasification").Width(150);
+        columns.Bound(o => o.BusinessCategory).Title("Business Category").Width(150);
+        columns.Bound(o => o.MappingTo).Title("Mapping To").Width(150);
+        columns.Bound(o => o.RowStatus).Title("Status").Width(150);
+    })
+    .NoRecords(conf => conf.Template("No User list to display"))
+    .Pageable(pageable => pageable.PageSizes(new[] { 5, 10, 20, 100, 200 }).ButtonCount(5))
+    .Filterable(ftb => ftb
+        .Extra(false)
+        .Mode(GridFilterMode.Row)
+    )
+    .Sortable(sortable => sortable.SortMode(GridSortMode.SingleColumn))
+    .Scrollable(s => s.Height("auto"))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(true)
+        .Read(read => read.Url(Url.Content("~/maintenance/businesscategory/read")))
+        .PageSize(10)
+        .Sort(sort => sort.Add("BusinessClassification").Ascending())
+        .Model(model =>
+        {
+            model.Id(p => p.ClassificationID);
+            model.Field(p => p.ClassificationID).Editable(false);
+        })
+    )
+)

@@ -1,0 +1,215 @@
+﻿<style type="text/css">
+    .select2-container {
+        z-index: 1000000000;
+    }
+</style>
+<script type="text/javascript">
+
+    function onDataBound(e) {
+        ShowOriginalKendoToolTip();
+    }
+
+    function addInputGroupOnCreate(type) {
+        const inputContainer = type === 'businessClassification' ? document.getElementById('classificationContainerCreate') : document.getElementById('categoryContainerCreate');
+        const newInputGroup = document.createElement('div');
+        newInputGroup.className = 'input-group';
+        newInputGroup.innerHTML = `
+            <input type="checkbox" class="checkbox-business-category">
+            <input type="text" placeholder="" class="textbox" style="margin-left: 10px;">
+        `;
+        inputContainer.appendChild(newInputGroup);
+    }
+
+    function addInputGroupOnEdit(type) {
+        const inputContainer = type === 'businessClassification' ? document.getElementById('classificationContainerEdit') : document.getElementById('categoryContainerEdit');
+        const newInputGroup = document.createElement('div');
+        newInputGroup.className = 'input-group';
+        newInputGroup.innerHTML = `
+                <input type="checkbox" class="checkbox-business-category">
+                <input type="text" placeholder="" class="textbox" style="margin-left: 10px;">
+            `;
+        inputContainer.appendChild(newInputGroup);
+    }
+
+    function BusinessCategoryManager() {
+
+        return {
+
+            InitManagement: function () {
+                this.InitHandlers();
+                this.InitValidation();
+                onDataBound();
+            },
+            InitHandlers: function () {
+                $("#btnAddBusinessCategory").on('click', function (e) {
+                    var $modal = $('#CreateModal'),
+                        $form = $modal.find("form");
+
+                    $('#classificationContainerCreate').html(`
+                        <div class="input-group">
+                            <input class="checkbox-business-category" type="checkbox" id="categoryCheckbox">
+                            <input type="text" placeholder="" class="textbox" style="margin-left: 10px;">
+                        </div>
+                    `);
+
+                    $('#categoryContainerCreate').html(`
+                        <div class="input-group">
+                            <input class="checkbox-business-category" type="checkbox" id="categoryCheckbox">
+                            <input type="text" placeholder="" class="textbox" style="margin-left: 10px;">
+                        </div>
+                    `);
+
+                    if ($.helper && $.helper.form && $.helper.form.clear) {
+                        $.helper.form.clear($form);
+                    }
+
+                    $modal.modal("show");
+                    $(".form-select2").select2();
+                });
+
+
+                $('.k-grid').on('click', '.btnEdit', function (e) {
+                    let $el = $(this),
+					    $tr = $el.closest("tr"),
+					    $grid = $el.closest(".k-grid").data("kendoGrid"),
+                        dataItem = $grid.dataItem($tr),
+					    $modal = $.helper.getJqueryObject($el.data("modal")),
+                        $form = $modal.find("form");
+                    dataItem.RoleID = dataItem.RoleID != null ? dataItem.RoleID.toLowerCase() : null;
+
+                    $('.nav-tabs a[href="#tab_user"]').tab('show');
+                    $.helper.form.clear($form);
+                    $.helper.form.fill($form, dataItem);
+
+
+                    if (dataItem.RoleID) {
+                        rolesid = dataItem.RoleID.split(',');
+                        for (i = 0; i < rolesid.length; i++) {
+                            $('#UserRoleGrid tbody tr td input[type="checkbox"][value="' + rolesid[i].toLowerCase() + '"]').prop('checked', true);
+                        }
+                    }
+
+                    $modal.modal("show");
+                    $(".form-select2").select2();
+
+                });
+
+                $("#btnSaveCreateBusinessCategory").on('click', function (event) {
+                    event.preventDefault(); // Prevent default button behavior
+
+                    // Clear previous error messages
+                    $(".error-message").remove(); // Remove existing error messages
+
+                    // Initialize error message flag
+                    let hasError = false;
+
+                    // Validate Business Classification
+                    const classifications = $("#classificationContainerCreate .textbox").filter((i, el) => $(el).val().trim() !== "");
+                    if (classifications.length === 0) {
+                        hasError = true;
+                        $("#classificationContainerCreate").append('<div class="error-message" style="color: red; font-style: italic;">Please enter at least one business classification.</div>');
+                    }
+
+                    // Validate Business Category
+                    const categories = $("#categoryContainerCreate .textbox").filter((i, el) => $(el).val().trim() !== "");
+                    if (categories.length === 0) {
+                        hasError = true;
+                        $("#categoryContainerCreate").append('<div class="error-message" style="color: red; font-style: italic;">Please enter at least one business category.</div>');
+                    }
+
+                    // Validate Mapping To
+                    const checkedMappings = $(".mapping_to .checkbox-container input[type='checkbox']:checked");
+                    if (checkedMappings.length === 0) {
+                        hasError = true;
+                        $(".mapping_to").append('<div class="error-message" style="color: red; font-style: italic; padding-left:15px">Please select at least one mapping option.</div>');
+                    }
+
+                    // If there are errors, stop the process
+                    if (hasError) {
+                        return; // Stop the function if there are errors
+                    }
+
+                    // Confirmation dialog
+                    swal({
+                        title: "Confirmation",
+                        text: "Are you sure you want to create this business category?",
+                        icon: "info",
+                        buttons: {
+                            cancel: {
+                                text: 'No',
+                                value: null,
+                                visible: true,
+                                className: "btn" 
+                            },
+                            confirm: {
+                                text: 'Yes',
+                                value: true,
+                                visible: true,
+                                className: "btn green",
+                                closeModal: true
+                            }
+                        },
+                        dangerMode: false,
+                        onOpen: function () {
+                            $('.swal-button--confirm').focus();
+                        }
+                    }).then((isConfirm) => {
+                        if (isConfirm) {
+                            debugger;
+                            var $modal = $(this).closest(".modal"),
+                                formData = {
+                                    classificationsArray: classifications.map((i, el) => $(el).val()).get(),
+                                    categoriesArray: categories.map((i, el) => $(el).val()).get(),
+                                    mappingsArray: checkedMappings.map((i, el) => $(el).val()).get()
+                                };
+
+                            $(this).prop("disabled", true);
+
+                            $.postv2("@Url.Content("~/Maintenance/BusinessCategory/Create")", formData)
+                                .done(function (response) {
+                                    if (response && response.success) {
+                                        $.helper.grid.refresh("BusinessCategoryGrid");
+                                        $modal.modal("hide");
+                                        swal("Success", "Business category created successfully!", "success");
+                                    } else {
+                                        swal("Error", response.message || "An error occurred while creating the business category.", "error");
+                                    }
+                                })
+                                .fail(function () {
+                                    swal("Error", "Error while saving the business category.", "error");
+                                })
+                                .always(function () {
+                                    // Re-enable the button
+                                    $(this).prop("disabled", false);
+                                }.bind(this));
+                        }
+                    });
+                });
+
+
+                $('.cball').change(function (e) {
+                    var table = $(e.target).closest('table');
+                    $('td input:checkbox', table).prop('checked', this.checked);
+                });
+
+                var grid = $("#RequestListGrid").data("kendoGrid");
+
+                grid.bind("dataBound", function () {
+                    var items = grid.items();
+                    var rowNumber = grid.dataSource.page() * grid.dataSource.pageSize() - grid.dataSource.pageSize() + 1;
+
+                    items.each(function () {
+                        $(this).find("td:nth-child(1)").html(rowNumber++); // Update the row number cell
+                    });
+                });
+            },
+        };
+    }
+
+    // On document ready
+    $(document).ready(function () {
+	    BusinessCategoryManager = new BusinessCategoryManager();
+        BusinessCategoryManager.InitManagement();
+    });
+
+</script>
